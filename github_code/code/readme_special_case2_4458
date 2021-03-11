@@ -1,0 +1,46 @@
+
+
+Subject 4458 in condition Ketamine has an additional tone trigger event in the EEG data:
+
+type: 'STATUS'
+value: 3
+duration: []
+time: 0.0020
+offset: 0
+
+along with the regular first trigger events signalling the start of the session:
+
+type: 'Epoch'
+value: []
+duration: []
+time: 0.0020
+offset: 0
+
+type: 'CM_in_range'
+value: []
+duration: []
+time: 0.0020
+offset: 0
+
+type: 'Epoch'
+value: []
+duration: []
+time: 0.0020
+offset: 0
+
+We assume that this is an 'overspill' of a previous Matlab experiment and does not constitute an 
+actual trial. We assume the first actual trial is marked as the 4th trigger event in the EEG:
+
+type: 'STATUS'
+value: 1
+duration: []
+time: 3.2129
+offset: 0
+
+This is also in line with the textfile containing the tone sequence for this session. 
+
+Therefore, we remove this incorrect trial from the EEG data set during the preprocessing using the
+function: mnket_remove_incorrect_first_trial.m.
+
+We end up with an initial number of trials of 1842 in the EEG, corresponding to 1842 tones in the 
+textfile, and 1841 transitions (i.e., trials in the modelbased regressors).

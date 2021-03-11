@@ -1,0 +1,34 @@
+
+
+Subject 4534 in condition Ketamine was exposed to the tone sequence saved in 
+workdir/tones/textfiles/ketamine/sub4534.txt, this sequence was extracted into 
+workdir/subjects/ketamine/MMN_4534/tones/tones.mat and regressor trajectories were constructed 
+simulating the Bayes optimal agent. Simulation is saved in sim struct and the final regressors in 
+design.mat, all in the subject's model folder. 
+
+EEG recording for this subject was started too late, i.e., starting at the 29th tone (therefore only
+ 1812 event triggers in EEG, as compared to 1840 in the tone sequence files).
+
+We can verify that it is the FIRST 28 trials by comparing the tone sequence saved in the sub4534.txt
+ file and the sequence of event triggers in the initial (unprocessed) EEG file. 
+
+Additionally, the first event can not be extracted because the baseline of 100ms would start before 
+the EEG recording. We therefore end up with 1811 trials in the EEG, which is 29 less than in the 
+behavior.
+
+We assume the subject nevertheless heard all tones and therefore simulated the belief trajectories 
+using the full sequence. For EEG analysis, however, the regressors have to be shortened to fit the 
+EEG data.
+
+We remove:
+
+1) the first 29 entries from the tones vector which is used in the redefinition of trials according 
+to our standard/deviant definition in the classical ERP analysis. The final tones vector will be 
+saved as eegtones.mat.
+
+2) the first 28 entries from the PE traces from the simulation which are saved in the design files 
+for each and are used for the modelbased GLMs of EEG on the first level. We only need to remove 28 
+entries, because the modelbased regressors have one trial less (the first tone) than the EEG files 
+anyway. Here, we remove the entries from the [designOption]_design.mat file. In the final 
+[designOption]_design_eeg.mat, which we use in the GLM, we have also removed the trials that got 
+lost in the EEG due to artefact rejection during preprocessing.
