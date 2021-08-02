@@ -23,6 +23,8 @@ options.condition   = 'placebo'; % 'placebo', 'ketamine', 'drugdiff'
 options.conditions  = {'placebo', 'ketamine'};
 
 %-- subject IDs ----------------------------------------------------------%
+
+%------MNKET Study Subjects-----------------------------------------------%
 options.subjects.pilots     = {'4422', '4478'};
 options.subjects.excluded   = {'4459', '4507'}; % in Andreeas DCM analysis
 options.subjects.valid      = {'4431', '4446', '4447', '4458', ...
@@ -34,10 +36,27 @@ options.subjects.all        = {'4431', '4446', '4447', '4458', ...
                                '4494', '4499', '4500', '4520', ...
                                '4532', '4497', '4534', '4459', ...
                                '4507', '4422', '4478'};    
+
+%------COMPI MMN Study Subjects-------------------------------------------%
+% options.subjects.pilots     = {'4422', '4478'};
+% options.subjects.excluded   = {'4459', '4507'}; % in Andreeas DCM analysis
+% options.subjects.valid      = {'4431', '4446', '4447', '4458', ...
+%                                '4482', '4487', '4488', '4548', ...
+%                                '4494', '4499', '4500', '4520', ...
+%                                '4532', '4497', '4534'};
+% 
+% options.subjects.all        = {'0143','0101', '0102', '0103', '0104', ...
+%                                '0105', '0106', '0107', '0108', ...
+%                                '0109', '0110', '0111','0112','0113', ...
+%                                '0114', '0115', '0116', '0117', ...
+%                                '0118', '0119', '0120','0121','0122','0123',...
+%                                '0124','0125','0126','0127','0128','0129','0130','0131','0132',...
+%                                '0133','0134','0135','0136','0137','0138','0139','0140'...
+%                                '0141','0142'};                               
                         
 %-- preparation ----------------------------------------------------------%
 options.prepare.subjectIDs  = options.subjects.all; % data preparation (tone sequences)
-options.prepare.overwrite   = 1; % whether to overwrite any previous prep
+options.prepare.overwrite   = 0; % whether to overwrite any previous prep
                            
 %-- modeling -------------------------------------------------------------%
 options.model.subjectIDs    = options.subjects.all; % modeling with the HGF
@@ -141,7 +160,7 @@ switch options.stats.design
     case 'epsilon'
         options.stats.regressors = {'epsi2', 'epsi3'};
     case 'prediction'
-        options.stats.regressors = {'muhat1', 'muhat3','sahat'};
+        options.stats.regressors = {'muhat2', 'muhat3','pihat'};
 end
 options.stats.pValueMode    = 'clusterFWE';
 options.stats.exampleID     = '4447';
@@ -167,8 +186,8 @@ options.dcm.D          = 1;     % downsampling
 options.dcm.Nmax       = 300;   % maximal number of EM iterations
 options.dcm.trials     = [2 3]; % index of ERPs within ERP/ERF file: trials with high and low PE, and not other
 options.dcm.sources.name ...
-                       = {'left A1', 'right A1', 'left STG', 'right STG', 'right IFG'};
-options.dcm.sources.mni=[[-42; -22; 7] [46; -14; 8] [-61; -32; 8] [59; -25; 8] [46; 20; 8]];
+                       = {'left A1', 'right A1', 'left STG', 'right STG', 'right IFG', 'left IFG'};
+options.dcm.sources.mni=[[-42; -22; 7] [46; -14; 8] [-61; -32; 8] [59; -25; 8] [46; 20; 8] [-46; 20; 8]];
 options.dcm.contrast.code...
                        =[-1; 1];
 options.dcm.contrast.type...

@@ -14,50 +14,43 @@ for optionsCell = {'placebo', 'ketamine'}
     fprintf('\n\n --------- Working on: %s session ---------\n\n', upper(options.condition));
     
     %% Preparation and Modeling
-    mnket_data_preparation(id, options);
-    mnket_model(id, options);
+     mnket_data_preparation(id, options);
+     mnket_model(id, options);
     
     %% Pre-processing: reject eyeblinks
     options.preproc.eyeblinktreatment = 'reject';
     fprintf('\n\n --- Subject analysis using: %s method ---\n\n', upper(options.preproc.eyeblinktreatment));
-    mnket_preprocessing_reject(id, options);
-    
+       mnket_preprocessing_reject(id, options);
+     
     %% ERP analysis: tone definition
     options.erp.type = 'tone';
     mnket_erp(id, options);
     
-    options.erp.type = 'lowhighMuhat1';
+    options.erp.type = 'lowhighMuhat2';
     mnket_erp(id, options);
 
     options.erp.type = 'lowhighMuhat3';
     mnket_erp(id, options);
     
-    options.erp.type = 'lowhighSahat';
+    options.erp.type = 'lowhighPihat';
     mnket_erp(id, options);
-    
-    options.erp.type = 'lowhighEpsi2';
-    mnket_erp(id, options);
-    
-    options.erp.type = 'lowhighEpsi3';
-    mnket_erp(id, options);
-    
-    %{
+  
     %%%%% This part is not needed for the paper. %%%%%
     
-    % ERP analysis (up until conversion): roving definition
-    options.erp.type = 'roving';
-    mnket_erp(id, options);
+%     % ERP analysis (up until conversion): roving definition
+%     options.erp.type = 'roving';
+%     mnket_erp(id, options);
+%     
+%     options.conversion.mode = 'diffWaves';
+%     mnket_conversion(id, options);
+%     
+%     % ERP analysis (up until conversion): MMN definition
+%     options.erp.type = 'mmnad';
+%     mnket_erp(id, options);
+%     
+%     options.conversion.mode = 'diffWaves';
+%     mnket_conversion(id, options);
     
-    options.conversion.mode = 'diffWaves';
-    mnket_conversion(id, options);
-    
-    % ERP analysis (up until conversion): MMN definition
-    options.erp.type = 'mmnad';
-    mnket_erp(id, options);
-    
-    options.conversion.mode = 'diffWaves';
-    mnket_conversion(id, options);
-    %}
     
     %% Modelbased analysis (up until 1st level)
     options.conversion.mode = 'modelbased';
@@ -66,16 +59,7 @@ for optionsCell = {'placebo', 'ketamine'}
     options.stats.mode = 'modelbased';
     options.stats.design = 'prediction';
     mnket_1stlevel(id, options);
-   
-%     %DCM analysis 
-%     options.erp.type = 'lowhighEpsi2';
-%     mnket_dcm(id,options);
-%     
-%     options.erp.type = 'lowhighEpsi3';
-%     mnket_dcm(id,options);
-
-
-    
+     
 end
     
     

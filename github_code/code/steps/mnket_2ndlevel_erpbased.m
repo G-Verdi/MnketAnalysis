@@ -18,20 +18,9 @@ for optionsCell = {'placebo','ketamine'}
     % tones definition
     options.erp.type = 'tone';
     mnket_2ndlevel_erpanalysis_percondition(options);
-    
-    % lowhighEpsi2 definition
-    options.erp.type = 'lowhighEpsi2';
-    mnket_2ndlevel_erpanalysis_percondition(options);
-    mnket_2ndlevel_erpstats_percondition_highlowERP(options);
-    mnket_2ndlevel_erpstats_percondition_diffERP(options);
-    % lowhighEpsi3 definition
-    options.erp.type = 'lowhighEpsi3';
-    mnket_2ndlevel_erpanalysis_percondition(options);
-    mnket_2ndlevel_erpstats_percondition_highlowERP(options);
-    mnket_2ndlevel_erpstats_percondition_diffERP(options);
-    
-    % lowhighMuhat1 definition
-    options.erp.type = 'lowhighMuhat1';
+   
+    % lowhighMuhat2 definition
+    options.erp.type = 'lowhighMuhat2';
     mnket_2ndlevel_erpanalysis_percondition(options);
     mnket_2ndlevel_erpstats_percondition_highlowERP(options);
     mnket_2ndlevel_erpstats_percondition_diffERP(options);
@@ -42,8 +31,8 @@ for optionsCell = {'placebo','ketamine'}
     mnket_2ndlevel_erpstats_percondition_highlowERP(options);
     mnket_2ndlevel_erpstats_percondition_diffERP(options);
     
-    % lowhighPrcsn definition
-    options.erp.type = 'lowhighSahat';
+    % lowhighPihat definition
+    options.erp.type = 'lowhighPihat';
     mnket_2ndlevel_erpanalysis_percondition(options);
     mnket_2ndlevel_erpstats_percondition_highlowERP(options);
     mnket_2ndlevel_erpstats_percondition_diffERP(options);
@@ -53,28 +42,20 @@ end
 options.erp.type = 'tone';
 mnket_2ndlevel_erpanalysis_drugdiff(options);
 
-%lowhighepsi2
-options.erp.type = 'lowhighEpsi2';
+
+%lowhighMuhat2
+options.erp.type = 'lowhighMuhat2';
 mnket_2ndlevel_erpanalysis_drugdiff(options);
 mnket_2ndlevel_erpstats_drugdiff(options);
 
-%lowhighepsi3
-options.erp.type = 'lowhighEpsi3';
-mnket_2ndlevel_erpanalysis_drugdiff(options);
-mnket_2ndlevel_erpstats_drugdiff(options);
-
-%lowhighMuhat1
-options.erp.type = 'lowhighMuhat1';
-mnket_2ndlevel_erpanalysis_drugdiff(options);
-mnket_2ndlevel_erpstats_drugdiff(options);
 
 %lowhighMuhat3
 options.erp.type = 'lowhighMuhat3';
 mnket_2ndlevel_erpanalysis_drugdiff(options);
 mnket_2ndlevel_erpstats_drugdiff(options);
 
-%lowhighPrcsn
-options.erp.type = 'lowhighSahat';
+%lowhighPihat
+options.erp.type = 'lowhighPihat';
 mnket_2ndlevel_erpanalysis_drugdiff(options);
 mnket_2ndlevel_erpstats_drugdiff(options);
 

@@ -13,10 +13,8 @@ function ga = tnueeg_grandmean_with_error(erpfiles, electrode, keepdata)
 %   OUT:    ga          - grand average struct with a field per
 %                       condition/trial and subfields containing the mean
 %                       and variance estimates
-
 numSubjects = numel(erpfiles);
 D = spm_eeg_load(erpfiles{1});
-
 % collect information on dimensions, using the first file
 conlist = condlist(D);
 numConditions = numel(conlist);
@@ -36,17 +34,25 @@ for iCon = 1: numConditions
         indEl = indchannel(D, electrode);
         data(iSub, :) = squeeze(D(indEl, :, iCon));
     end
-    
+   
     % do the actual averaging
     ga.(conlabel).mean = mean(data);
     ga.(conlabel).sd = std(data);
     ga.(conlabel).error = std(data)/sqrt(numSubjects);
-    ga.(conlabel).time  = time(D).*1000;
+    ga.(conlabel).time = time(D).*1000;
     ga.(conlabel).electrode = electrode;
     if keepdata
         ga.(conlabel).data = data;
     end
-    
 end
-
-end
+if numConditions > 2   
+    % calculate the high low wave difference and do averaging
+    diffwaves = ga.high.data - ga.low.data;
+    nsubjects = size(ga.low.data, 1);
+    ga.diff.data = diffwaves;
+    ga.diff.mean = mean(diffwaves);
+    ga.diff.sd  = std(diffwaves);
+    ga.diff.error  = std(diffwaves)/sqrt(nsubjects);
+    ga.diff.time = ga.high.time;
+    ga.diff.electrode = ga.high.electrode;
+end 

@@ -1,4 +1,4 @@
-function mnket_2ndlevel_erpstats_percondition(options)
+function mnket_2ndlevel_erpstats_percondition_diffERP(options)
 %MNKET_2NDLEVEL_ERPSTATS_PERCONDITION Computes the second level contrast
 %images for ERP effects in one condition in the MNKET study.
 %   IN:     options - the struct that holds all analysis options
@@ -38,6 +38,16 @@ catch
         options.erp.contrastName);
     if ~exist(scndlvlroot, 'dir')
         mkdir(scndlvlroot);
+    end
+    
+    %%% ADDED BY COLLEEN %%%
+    % create images for conversion.mode = 'diffWaves'
+    % previously images made for conversion.mode = 'modelbased' in
+    % mnket_analyze_subject function
+    for idCell = options.subjects.all
+        id = char(idCell);
+
+        mnket_conversion(id, options);
     end
     
     % smoothed images of averaged ERP data in one condition in each subject

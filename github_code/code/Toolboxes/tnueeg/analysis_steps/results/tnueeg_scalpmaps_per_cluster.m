@@ -52,6 +52,7 @@ for iClus = 1: con.nClusters.sig
         '_to_' num2str(round(con.clusters(iClus).timewin(2))) 'ms'...
         '.png'];
     print(F, fileName, '-dpng', '-r600');
+    saveas(F,'scalpmap.fig')
 end
 
 spm_figure('Close',F);

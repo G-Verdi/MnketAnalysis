@@ -34,9 +34,10 @@ switch designType
         design.shannon = sim.reg.shannon;
         
     case 'prediction'
-        design.muhat1 = sim.reg.muhat1;
+        design.muhat2 = sim.reg.muhat2;
         design.muhat3 = sim.reg.muhat3;
-        design.sahat = sim.reg.sahat;
+        design.pihat = sim.reg.pihat;
+    
 end
 
 

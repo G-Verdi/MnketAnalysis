@@ -2,7 +2,7 @@ function mnket_copy_raw_eeg_data_into_analysis_folder( options )
 %MNKET_COPY_RAW_EEG_DATA_INTO_ANALYSIS_FOLDER Copies raw EEG data from raw directory to current 
 %analysis folder
 
-conditions      = {'placebo', 'ketamine'};
+conditions      = {'placebo', 'psilocybin'};
 
 % source: where are the raw data currently
 rawdatasource   = fullfile(options.rawdir);

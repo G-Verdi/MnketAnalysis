@@ -22,8 +22,8 @@ switch id
         switch options.condition
             case 'placebo'
                 data = paradigm.Placebo;
-            case 'ketamine'
-                data = paradigm.Ketamine;
+            case 'psilocybin'
+                data = paradigm.Psilocybin;
         end
         MATtones = mnket_read_tones_from_matfile(id, data);
     
@@ -48,8 +48,8 @@ function tones = mnket_read_tones_from_txtfile( fileName )
 tones = [];
 nTon = 0;
 
-fileID = fopen(fileName, 'r', 'n', 'UTF-8');
-A = fscanf(fileID, '%s');
+fileID = fscanf(fileName, 'r', 'n', 'UTF-8');
+A = fopen(fileID, '%s');
 fclose(fileID);
 
 A(1: 11) = [];

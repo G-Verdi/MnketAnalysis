@@ -1,4 +1,4 @@
-function [BmatrixParameters]=  mnket_dcm(id, options)
+function [BmatrixParameters,dcmInverted]=mnket_dcm(id, options)
 %mmn_dcm Computes DCMs for one subject from the mmn study.
 %   IN:     id                  - subject identifier, e.g '0001'
 %   OUT:    D                   - DCM structure file
@@ -69,38 +69,41 @@ dcmModel = spm_dcm_erp_dipfit(dcmNetwork);
 %--------------------------------------------------------------------------
 % Forward connections
 dcmModel.A{1,1} = ...
-    [0 0 0 0 0
-    0 0 0 0 0
-    1 0 0 0 0
-    0 1 0 0 0
-    0 0 0 1 0];
-
+    [0 0 0 0 0 0
+    0 0 0 0 0 0
+    1 0 0 0 0 0
+    0 1 0 0 0 0
+    0 0 0 1 0 0
+    0 0 1 0 0 0];
 % Backward connections
 dcmModel.A{1,2} = ...
-    [0 0 1 0 0
-    0 0 0 1 0
-    0 0 0 0 0
-    0 0 0 0 1
-    0 0 0 0 0];
+    [0 0 1 0 0 0
+    0 0 0 1 0 0
+    0 0 0 0 0 1
+    0 0 0 0 1 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0];
 
 % Lateral connections
 dcmModel.A{1,3} = ...
-    [0 1 0 0 0
-    1 0 0 0 0
-    0 0 0 1 0
-    0 0 1 0 0
-    0 0 0 0 0];
+    [0 1 0 0 0 0
+    1 0 0 0 0 0
+    0 0 0 1 0 0
+    0 0 1 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0];
 
 % PE modulation
 dcmModel.B{1,1} = ...
-    [0 0 1 0 0
-    0 0 0 1 0
-    1 0 0 0 0
-    0 1 0 0 1
-    0 0 0 1 0];
+    [1 0 1 0 0 0
+    0 1 0 1 0 0
+    1 0 0 0 0 1
+    0 1 0 0 1 0
+    0 0 0 1 1 0
+    0 0 1 0 0 1];
 
 % Input
-dcmModel.C = [1; 1; 0; 0; 0];
+dcmModel.C = [1; 1; 0; 0; 0; 0];
 
 
 %--------------------------------------------------------------------------
@@ -108,7 +111,7 @@ dcmModel.C = [1; 1; 0; 0; 0];
 %--------------------------------------------------------------------------
 dcmModel.xU.X    = options.dcm.contrast.code;
 dcmModel.xU.name = options.dcm.contrast.type;
-
+% dcmModel.options.model='CMC';
 
 %--------------------------------------------------------------------------
 % Invert
@@ -121,7 +124,7 @@ dcmInverted = spm_dcm_erp(dcmModel);
 %--------------------------------------------------------------------------
 figure;
 BmatrixParameters = exp(dcmInverted.Ep.B{1}); 
-nParameters       = 5;
+nParameters       = 6;
 imagesc(BmatrixParameters);
 colormap(jet);
 colorbar;

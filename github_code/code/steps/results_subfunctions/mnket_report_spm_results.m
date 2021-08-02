@@ -111,7 +111,7 @@ catch
         if ~isempty(locs)
             % extract all plotting-relevant contrast info 
             con = tnueeg_extract_contrast_results(xSPM, ...
-                [options.condition ':']);
+                [options.condition ':',nVoxMin]);
             
             save(fullfile(con.swd, ...
                 ['con_' con.stat '_' options.stats.pValueMode '.mat']), ...
@@ -130,7 +130,7 @@ catch
             % reduce blobs in xSPM to the significant ones
             sigIdx = [];
             for iSigClus = 1: con.nClusters.sig
-                [~, iA] = intersect(xSPM.XYZ, con.clusters(iSigClus).allvox, 'rows');
+                [~, iA] = intersect(xSPM.XYZ', con.clusters(iSigClus).allVox', 'rows');
                 sigIdx = [sigIdx; iA];
             end
             xSPM.XYZ = xSPM.XYZ(:, sigIdx);

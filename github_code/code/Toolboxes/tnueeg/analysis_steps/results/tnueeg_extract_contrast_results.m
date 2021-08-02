@@ -112,7 +112,7 @@ iClus = 0;
              con.clusters(iClus).timewin = clusterTimeWindow;
              con.clusters(iClus).pvalue  = Pk;
              con.clusters(iClus).extent  = numVoxels(maxIdx);
-             con.clusters(iClus).allvox  = allVox;
+             con.clusters(iClus).allVox = allVox;
          end
      else
          switch con.peak.correction
@@ -131,7 +131,7 @@ iClus = 0;
          con.clusters(iClus).timewin = clusterTimeWindow;
          con.clusters(iClus).pvalue  = P;
          con.clusters(iClus).extent  = numVoxels(maxIdx);
-         con.clusters(iClus).allvox = allVox; 
+         con.clusters(iClus).allVox = allVox;
      end         
 
      % Remove voxels of this cluster from the list

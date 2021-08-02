@@ -41,7 +41,7 @@ conf.D = spm_eeg_load(details.prepfile);
 conf.img = con.imgFile;
 
 % configure FT scalpmap plot
-map = colormap('parula');
+map = colormap('jet');
 conf.cfg.colormap = map;
 conf.cfg.colorbar = 'yes';
 
@@ -87,12 +87,12 @@ conf.spm.plotpos = false;
 conf.spm.noButtons = true;
 
 % configure colorbars
-col = colormap('parula');
+col = colormap('jet');
 col(1:7, :) = [];
 conf.colmap.colmap = col;
 conf.colmap.limits = conf.cfg.zlim;
 
-conf.colmap.fontsize = 20;
+conf.colmap.fontsize = 40;
 conf.colmap.fontweight = 'bold';
 conf.colmap.ticklength = 0.03;
 conf.colmap.linewidth = 2;

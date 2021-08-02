@@ -13,6 +13,10 @@ switch options.preproc.trialdef
         trialdef.labels = {'deviant', 'standard'};
         trialdef.types = repmat({'STATUS'}, [1 2]);
         trialdef.values = [1 6];
+   case 'mnket_compi'
+        trialdef.labels = repmat({'tone'}, [1 2]);
+        trialdef.types = repmat({'STATUS'}, [1 2]);
+        trialdef.values = 1: 0; 
 end
 
 save(paths.trialdef, 'trialdef');

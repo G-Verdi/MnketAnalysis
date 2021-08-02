@@ -58,7 +58,7 @@ catch
     switch options.erp.type
        case {'lowhighEpsi2', 'lowhighEpsi3'}
            D = spm_eeg_load(details.prepfile_modelbased);
-        case {'lowhighMuhat1', 'lowhighMuhat3', 'lowhighSahat'}
+        case {'lowhighMuhat2', 'lowhighMuhat3', 'lowhighPihat'}
            D = spm_eeg_load(details.prepfile_modelbased);
        otherwise
             D = spm_eeg_load(details.prepfile);
@@ -97,11 +97,11 @@ catch
                 % special case for subject 4534 in ketamine condition
                 condlist(1) = [];
             end
-        case 'lowhighMuhat1'
+        case 'lowhighMuhat2'
             load(details.design);
-            condlist = mnket_lowhighPE_conditions(design.muhat1, ...
-                '\muhat1', options);
-            savefig([details.lowhighPEfigs '_muhat1.fig']);  
+            condlist = mnket_lowhighPE_conditions(design.muhat2, ...
+                '\muhat2', options);
+            savefig([details.lowhighPEfigs '_muhat2.fig']);  
             if strcmp(id, '4534') && strcmp(options.condition, 'ketamine') 
                 % special case for subject 4534 in ketamine condition
                 condlist(1) = [];
@@ -115,14 +115,15 @@ catch
                 % special case for subject 4534 in ketamine condition
                 condlist(1) = [];
             end
-         case 'lowhighSahat'
+         case 'lowhighPihat'
             load(details.design);
-            condlist = mnket_lowhighPE_conditions(design.sahat, ...
-                'sahat', options);
-            savefig([details.lowhighPEfigs '_sahat.fig']);
+            condlist = mnket_lowhighPE_conditions(design.pihat, ...
+                'Pihat', options);
+            savefig([details.lowhighPEfigs '_Pihat.fig']);
             if strcmp(id, '4534') && strcmp(options.condition, 'ketamine') 
                 % special case for subject 4534 in ketamine condition
-                condlist(1) = [];   
+                condlist(1) = []; 
+            end
     end
 
     switch options.preproc.eyeblinktreatment
@@ -169,7 +170,7 @@ catch
         case 'tone'
             triallist = {'tone', 'All tone events', [0 0 1]};
             
-        case {'lowhighMuhat1', 'lowhighMuhat3','lowhighSahat'}
+        case {'lowhighMuhat2', 'lowhighMuhat3','lowhighPihat'}
             triallist = {'low', 'Lowest 20 %', [0 0 1]; ...
                         'high', 'Highest 20 %', [1 0 0]};
     end
@@ -229,7 +230,7 @@ catch
             copy(D, details.difffile);
             disp(['Computed the difference wave for subject ' id]);    
     
-        case {'lowhighMuhat1', 'lowhighMuhat3','lowhighSahat'}
+        case {'lowhighMuhat2', 'lowhighMuhat3','lowhighPihat'}
             % preparation for computing the difference wave
             % determine condition order within the D object
             idxLow = indtrial(D, 'low');

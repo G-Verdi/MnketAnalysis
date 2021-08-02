@@ -1,4 +1,4 @@
-function D = tnueeg_redefine_conditions( D, condlist )
+function D = tnueeg_redefine_conditions( D, condlist,id)
 %TNUEEG_REDEFINE_CONDITIONS Updates the condition list before averaging
 %   IN:     D           - preprocessed data set
 %           condlist    - list with new condition names

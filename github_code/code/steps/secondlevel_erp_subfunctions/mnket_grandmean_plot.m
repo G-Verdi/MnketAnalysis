@@ -22,8 +22,10 @@ switch flag
         
         % Gather plotting info
         switch options.erp.type
-            case {'mmnad', 'roving', 'lowhighEpsi2', 'lowhighEpsi3','lowhighMuhat1','lowhighMuhat3','lowhighSahat1'}
+            case {'mmnad', 'roving', 'lowhighEpsi2', 'lowhighEpsi3','lowhighMuhat2', 'lowhighMuhat3','lowhighPihat'}
                 titleStr = [options.erp.type ' difference waves at ' chanName];
+                lineColors = [cols.darkgreen; cols.lightgreen];
+                lineWidth = 2;
             case 'tone'
                 titleStr = [options.erp.type ' ERPs at ' chanName];
         end
@@ -43,14 +45,14 @@ switch flag
                 condNames = {'standard', 'deviant'};
                 lineColors = [cols.medgray; cols.lightred];
                 lineWidth = 2;
-            case {'lowhighEpsi2', 'lowhighEpsi3','diffWaves'}
+            case {'lowhighEpsi2', 'lowhighEpsi3'}
                 condNames = {'low', 'high'};
                 lineColors = [cols.medgray; cols.lightred; cols.lightgreen];
-                lineWidth = 3;  
-            case {'lowhighMuhat1','lowhighMuhat3','lowhighSahat','diffWaves'}
-                condNames = {'low', 'high'};
+                lineWidth = 3;   
+            case {'lowhighMuhat2', 'lowhighMuhat3','lowhighPihat'}
+                condNames = {'low', 'high','diff'};
                 lineColors = [cols.medgray; cols.lightred; cols.lightgreen];
-                lineWidth = 3;  
+                lineWidth = 3;              
             case 'tone'
                 condNames = {'tone'};
                 lineColors = [cols.darkgray];

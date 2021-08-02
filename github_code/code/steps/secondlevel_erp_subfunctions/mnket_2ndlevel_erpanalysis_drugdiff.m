@@ -50,25 +50,45 @@ catch
         ket = load(paths.erpgafiles{iCh});
 
         % compute the difference waves condition-wise
-        diff.time = pla.ga.time;
-        diff.electrode = pla.ga.electrode;
+%         diff.time = pla.ga.time;
+%         diff.electrode = pla.ga.electrode;
         switch options.erp.type
             case {'roving', 'mmnad'}
                 diff.nsubjects = size(pla.ga.standard.data, 1);
                 diffwavesPla = pla.ga.deviant.data - pla.ga.standard.data;
                 diffwavesKet = ket.ga.deviant.data - ket.ga.standard.data;
+                % Added by Colleen
+                diff.placebo.time = pla.ga.deviant.time;
+                diff.placebo.electrode = pla.ga.deviant.electrode;
+                diff.ketamine.time = pla.ga.deviant.time;
+                diff.ketamine.electrode = pla.ga.deviant.electrode;
             case {'lowhighEpsi2', 'lowhighEpsi3'}
                 diff.nsubjects = size(pla.ga.low.data, 1);
                 diffwavesPla = pla.ga.high.data - pla.ga.low.data;
                 diffwavesKet = ket.ga.high.data - ket.ga.low.data;
-            case{'lowhighMuhat1','lowhighMuhat3','lowhighSahat1'}
+                % Added by Colleen
+                diff.placebo.time = pla.ga.high.time;
+                diff.placebo.electrode = pla.ga.high.electrode;
+                diff.ketamine.time = pla.ga.high.time;
+                diff.ketamine.electrode = pla.ga.high.electrode;
+            case {'lowhighMuhat2', 'lowhighMuhat3','lowhighPihat'}
                 diff.nsubjects = size(pla.ga.low.data, 1);
                 diffwavesPla = pla.ga.high.data - pla.ga.low.data;
                 diffwavesKet = ket.ga.high.data - ket.ga.low.data;
+                % Added by Colleen
+                diff.placebo.time = pla.ga.high.time;
+                diff.placebo.electrode = pla.ga.high.electrode;
+                diff.ketamine.time = pla.ga.high.time;
+                diff.ketamine.electrode = pla.ga.high.electrode;
             case 'tone'
                 diff.nsubjects = size(pla.ga.tone.data, 1);
                 diffwavesPla = pla.ga.tone.data;
                 diffwavesKet = ket.ga.tone.data;
+                % Added by Colleen
+                diff.placebo.time = pla.ga.tone.time;
+                diff.placebo.electrode = pla.ga.tone.electrode;
+                diff.ketamine.time = pla.ga.tone.time;
+                diff.ketamine.electrode = pla.ga.tone.electrode;
         end        
         
         diff.placebo.mean = mean(diffwavesPla);
@@ -83,7 +103,7 @@ catch
 
         save(paths.diffgafiles{iCh}, 'diff');
         
-        mnket_grandmean_plot(diff, diff.electrode, options, 'drugdiff');
+        mnket_grandmean_plot(diff, diff.placebo.electrode, options, 'drugdiff');
     end
 
     disp(['Computed drug differences in ' options.erp.type ' ERPs.']);

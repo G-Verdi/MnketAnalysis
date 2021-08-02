@@ -5,16 +5,9 @@ function mnket_dcm_stats_report(options)
 %Load regressor matrices from DCM folder and place into the structure mat.all
 
 [~, paths] = mnket_subjects(options);
-cd 'C:\Users\Gabrielle\Desktop\Cognemo\mnket\ketdata\prj\test_mnket\dcm'
-load('pla_params_muhat1')
-load('pla_params_muhat3')
-load('pla_params_sahat')
-load('ket_params_muhat1')
-load('ket_params_muhat3')
-load('ket_params_sahat')
 
 % mat.all= {pla_params_epsi2,pla_params_epsi3, ket_params_epsi2, ket_params_epsi3};
-mat.all= {pla_params_muhat1,pla_params_muhat3,pla_params_sahat,ket_params_muhat1, ket_params_muhat3,ket_params_sahat};
+
 
 %% Kolmogorov Smirnov test for normalacy  
 %The result H is 1 if the test rejects
@@ -58,63 +51,64 @@ mat.all= {pla_params_muhat1,pla_params_muhat3,pla_params_sahat,ket_params_muhat1
 % end
 
 
-i=size(pla_params_muhat1,2);
-H_pla_muhat1=zeros(6,1);
+% i=size(pla_params_muhat1,2);
+% H_pla_muhat1=zeros(6,1);
+% 
+%  for k=1:1:i
+%      col=(pla_params_muhat1(:,k)- mean(pla_params_muhat1(:,k)))/std(pla_params_muhat1(:,k));
+%      colval=kstest(col);
+%      H_pla_muhat1(k,:) = colval;
+%  end
+
+% i=size(pla_params_muhat3,2);
+% H_pla_muhat3=zeros(6,1);
+% 
+%  for k=1:1:i
+%      col=(pla_params_muhat3(:,k)- mean(pla_params_muhat3(:,k)))/std(pla_params_muhat3(:,k));
+%      colval=kstest(col);
+%      H_pla_muhat3(k,:) = colval;
+%  end
+
+i=size(mat_pla,2);
+H_pla_pihat=zeros(12,1);
 
  for k=1:1:i
-     col=pla_params_muhat1(:,k);
+     col=(mat_pla(:,k)- mean(mat_pla(:,k)))/std(mat_pla(:,k));
      colval=kstest(col);
-     H_pla_muhat1(k,:) = colval;
+     H_pla_pihat(k,:) = colval;
  end
 
-i=size(pla_params_muhat3,2);
-H_pla_muhat3=zeros(6,1);
-
- for k=1:1:i
-     col=pla_params_muhat3(:,k);
-     colval=kstest(col);
-     H_pla_muhat3(k,:) = colval;
- end
-i=size(pla_params_sahat,2);
-H_pla_sahat=zeros(6,1);
-
- for k=1:1:i
-     col=pla_params_sahat(:,k);
-     colval=kstest(col);
-     H_pla_sahat(k,:) = colval;
- end
-
-i=size(ket_params_muhat1,2);
-H_ket_muhat1=zeros(6,1);
-
- for k=1:1:i
-     col=ket_params_muhat1(:,k);
-     colval=kstest(col);
-     H_ket_muhat1(k,:) = colval;
- end
+% i=size(ket_params_muhat1,2);
+% H_ket_muhat1=zeros(6,1);
+% 
+%  for k=1:1:i
+%      col=(ket_params_muhat1(:,k)- mean(ket_params_muhat1(:,k)))/std(ket_params_muhat1(:,k));
+%      colval=kstest(col);
+%      H_ket_muhat1(k,:) = colval;
+%  end
  
-i=size(ket_params_muhat3,2);
-H_ket_muhat3=zeros(6,1);
+% i=size(ket_params_muhat3,2);
+% H_ket_muhat3=zeros(6,1);
+% 
+%  for k=1:1:i
+%      col=(ket_params_muhat3(:,k)- mean(ket_params_muhat3(:,k)))/std(ket_params_muhat3(:,k));
+%      colval=kstest(col);
+%      H_ket_muhat3(k,:) = colval;
+%  end
+%  
+i=size(mat_ket,2);
+H_ket_pihat=zeros(12,1);
 
  for k=1:1:i
-     col=ket_params_muhat3(:,k);
+     col=(mat_ket(:,k)- mean(mat_ket(:,k)))/std(mat_ket(:,k));
      colval=kstest(col);
-     H_ket_muhat3(k,:) = colval;
- end
- 
-i=size(ket_params_sahat,2);
-H_ket_sahat=zeros(6,1);
-
- for k=1:1:i
-     col=ket_params_sahat(:,k);
-     colval=kstest(col);
-     H_ket_sahat(k,:) = colval;
+     H_ket_pihat(k,:) = colval;
  end
  
 %-----Output table of H values------------------%
 
-Parameter_ks=[1;2;3;4;5;6];
-H_values=table(Parameter_ks,H_pla_muhat1,H_pla_muhat3,H_pla_sahat,H_ket_muhat1,H_ket_muhat3,H_ket_sahat)
+Parameter_ks=[1;2;3;4;5;6;7;8;9;10;11;12];
+H_values=table(Parameter_ks,H_pla_pihat,H_ket_pihat)
 
 %% Hotellings One sample t-test with boneferroni correction(alpha=0.008 for mnket dataset)
 num_mat= length(mat.all);
@@ -137,10 +131,10 @@ end
 
 t_pla_muhat1=[];
 t_pla_muhat3=[];
-t_pla_sahat=[];
+t_pla_pihat=[];
 t_ket_muhat1=[];
 t_ket_muhat3=[];
-t_ket_sahat=[];
+t_ket_pihat=[];
 
 
 num_mat= length(mat.all);
@@ -152,33 +146,23 @@ for imat=1:1:num_mat
         col=adj_mat(:,icol);
         [h,p]=ttest(col,0.008);
         if imat == 1;
-            t_pla_muhat1(icol,:)= p;
+            t_pla_pihat(icol,:)= p;
         elseif imat== 2;
-            t_pla_muhat3(icol,:)=p;
-        elseif imat== 3;
-            t_pla_sahat(icol,:)=p;    
-        elseif imat == 4;
-            t_ket_muhat1(icol,:)=p;
-        elseif imat== 5;
-            t_ket_muhat3(icol,:)= p;
-        elseif imat== 6;
-            t_ket_sahat(icol,:)= p; 
+            t_ket_pihat(icol,:)=p;
+
         end
-
-       
     end
-
 end
 
 %-----Output table of p values-------%
-Parameter_t=[1;2;3;4;5;6]; 
-Matrix_p_values = table(Parameter_t,t_pla_muhat1,t_pla_muhat3,t_pla_sahat,t_ket_muhat1,t_ket_muhat3,t_ket_sahat)
-%% Hotellings Paired t-tests with boneferroni correction(alpha=0.008 for mnket dataset)
+Parameter_t=[1;2;3;4;5;6;7;8;9]; 
+Matrix_p_values = table(Parameter_t,t_pla_pihat,t_ket_pihat);
+%% Hotellings Paired t-tests with boneferroni correction(alpha=0.008)
 
-col=6; % change for parameter of interest 
+col=1; % change for parameter of interest 
 
-pla_col= pla_params_sahat(:,col);
-ket_col=ket_params_sahat(:,col);
+pla_col= mat_pla(:,col);
+ket_col=mat_ket(:,col);
 
 % Re-format coloumn data from each matrix 
 X=[1 pla_col(1);1 pla_col(2);1 pla_col(3);1 pla_col(4);1 pla_col(5);1 ...
@@ -200,8 +184,8 @@ HotellingT2(X,0.008)
 
 col=1; % change for parameter of interest 
 
-pla_col= pla_params_muhat1(:,col);
-ket_col=ket_params_muhat1(:,col);
+pla_col= mat_pla(:,col);
+ket_col=mat_ket(:,col);
 
 [h,p,ci,stats]= ttest(pla_col,ket_col,'Alpha', 0.008)
 

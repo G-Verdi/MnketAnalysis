@@ -8,15 +8,28 @@ options = mnket_set_analysis_options;
 
 options.stats.mode = 'erpbased';
 options.stats.design = 'prediction';    
-options.stats.pValueMode = 'peakFWE';
+options.stats.pValueMode = 'clusterFWE';
 
 for optionsCell = {'placebo', 'ketamine'}
     options.condition = char(optionsCell);
-
-    mnket_report_spm_results(options, options.condition);
+    
+    options.erp.type = 'lowhighMuhat2';
+    mnket_report_erpbased_spm_results(options, options.condition);
+    
+    options.erp.type = 'lowhighMuhat3';
+    mnket_report_erpbased_spm_results(options, options.condition);
+    
+    options.erp.type = 'lowhighPihat';
+    mnket_report_erpbased_spm_results(options, options.condition);
+    
 end
+options.erp.type = 'lowhighMuhat2';
+mnket_report_erpbased_spm_results(options, 'drugdiff');
 
-mnket_report_spm_results(options, 'drugdiff');
+options.erp.type = 'lowhighMuhat3';
+mnket_report_erpbased_spm_results(options, 'drugdiff');
+
+options.erp.type = 'lowhighPihat';
+mnket_report_erpbased_spm_results(options, 'drugdiff');
 
 end
-

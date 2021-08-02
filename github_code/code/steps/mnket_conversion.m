@@ -51,7 +51,7 @@ catch
                 % recorded in the EEG, therefore we don't need to correct the EEG for the 1st trial. 
                 D = spm_eeg_load(details.prepfile);
                 D = copy(D, details.prepfile_modelbased);
-                clear D;
+%                 clear D;
                 prepfile = details.prepfile_modelbased;
             else
                 prepfile = mnket_remove_first_EEG_trial(details, options);

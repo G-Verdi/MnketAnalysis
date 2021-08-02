@@ -151,8 +151,12 @@ catch
     disp('   ');
     disp('*----------------------------------------------------*');
     disp('   ');
+   
     
+%------tone sequence extraction---------------------------------------%
+%      mnCHR_binary_trialDef(D,details);
 end
+
 
 cd(options.workdir);
 close all
