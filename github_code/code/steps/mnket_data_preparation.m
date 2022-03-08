@@ -8,11 +8,11 @@ function mnket_data_preparation( id, options )
 
 % general analysis options
 if nargin < 2
-    options = mnket_set_analysis_options;
+    options = mn_set_analysis_options;
 end
 
 % paths and files
-[details, paths] = mnket_subjects(id, options);
+[details, paths] = mn_subjects(id, options);
 
 % record what we're doing
 diary(details.logfile);

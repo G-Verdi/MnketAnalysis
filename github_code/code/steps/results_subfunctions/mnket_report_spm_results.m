@@ -7,12 +7,12 @@ function [] = mnket_report_spm_results( options, flag )
 
 % general analysis options
 if nargin < 1
-    options = mnket_set_analysis_options;
+    options = mn_set_analysis_options;
     flag = options.condition;
 end
 if ischar(options)
     flag = options;
-    options = mnket_set_analysis_options;
+    options = mn_set_analysis_options;
 end
 % sanity check
 if ismember(flag, options.conditions) && ~strcmp(flag, options.condition)
@@ -24,7 +24,7 @@ end
 spm('Defaults', 'EEG');
 
 % paths and files
-[~, paths] = mnket_subjects(options);
+[~, paths] = mn_subjects(options);
 
 % record what we're doing
 diary(paths.logfile);
@@ -45,7 +45,7 @@ switch flag
     case 'drugdiff'
         spmRoot = paths.statdifffold;
         pngFiles = fullfile(spmRoot, regressorNames{2}, 'scalpmaps_*.png');
-        contrastTitle = 'Pla > Ket in ';
+        contrastTitle = 'Pla > Psi in ';
         contrastIdx = 1;
         nVoxMin = 1;
 end

@@ -1,4 +1,4 @@
-function [ details, paths ] = mnket_subjects( id, options )
+function [ details, paths ] = mnpsi_subjects( id, options )
 %MNKET_SUBJECTS Function that sets all filenames and paths
 %   IN:     EITHER (for quering both general and subject-specific paths:
 %           id                  - the subject number as a string, e.g. '0001'
@@ -15,7 +15,7 @@ if isstruct(id)
     options = id;
     id = 'dummy';
 elseif ischar(id) && nargin < 2
-    options = mnket_set_analysis_options;
+    options = mnpsi_set_analysis_options;
 end
 
 %-- general paths and files -----------------------------------------------------------------------%
@@ -24,8 +24,8 @@ paths.tonesroot     = fullfile(options.workdir, 'tones');
 paths.erproot       = fullfile(options.workdir, 'erp');
 paths.statroot      = fullfile(options.workdir, 'stats_model');
 paths.erpstatroot   = fullfile(options.workdir, 'stats_erp');
-paths.dcmroot  = fullfile(options.workdir, 'dcm', options.condition);
-
+paths.dcmroot  =   fullfile(options.workdir, 'dcm', options.condition);
+paths.grouproot =  fullfile(options.workdir, 'Group analysis', options.condition);
 % config files
 paths.paradigm      = fullfile(paths.tonesroot, 'paradigm.mat');
 paths.elec          = fullfile(paths.confroot, 'mnket_sensors.sfp');
@@ -53,6 +53,9 @@ paths.dcmfile   = fullfile(paths.dcmroot, ['dcm_' options.erp.type '.mat']);
 % model stats folders
 paths.statfold      = fullfile(paths.statroot, options.condition);
 paths.statdifffold  = fullfile(paths.statroot, 'drugdiff');
+
+% Groupxcond stats folders
+paths.groupfold = fullfile(paths.grouproot, options.condition);
 
 % erp stats folders
 paths.erpstatfold      = fullfile(paths.erpstatroot, options.erp.type, options.condition);
@@ -94,7 +97,7 @@ switch options.condition
             otherwise
                 details.swapchannels = false;
         end
-    case 'ketamine'
+    case 'psilocybin'
         switch id
             case {'4422', '4488', '4520'}
                 details.swapchannels = true;
@@ -108,7 +111,7 @@ switch id
     case {'4497', '4447', '4478'}
         details.eyeblinkthreshold = 2;
     case {'4499', '4532'}
-        details.eyeblinkthreshold = 5;
+        details.eyeblinkthreshold = 5;   
     otherwise
         details.eyeblinkthreshold = options.preproc.eyeblinkthreshold;
 end
@@ -122,7 +125,7 @@ switch options.condition
             otherwise
                 details.windowForEyeblinkdetection = 3;
         end
-    case 'ketamine'
+    case 'psilocybin'
         switch id
             case {'4446', '4459', '4478', '4482', '4487', '4494', '4499', '4507'}
                 details.windowForEyeblinkdetection = 4;
@@ -140,7 +143,7 @@ switch options.condition
             otherwise
                 details.preclean.badchannels = [];
         end
-    case 'ketamine'
+    case 'psilocybin'
         switch id
             case '4422'
                 details.preclean.badchannels = [28 59]; % Iz, P6
@@ -154,9 +157,9 @@ end
 % raw file names
 switch options.condition
     case 'placebo'
-        rawsuffix = '_1_pla';
-    case 'ketamine'
-        rawsuffix = '_1_psi';
+        rawsuffix = '_2_pla';
+    case 'psilocybin'
+        rawsuffix = '_2_psi';
 end
 
 % names
@@ -205,6 +208,7 @@ details.eegdesign   = fullfile(details.modelroot, ...
                     [options.stats.design '_design_eeg_' options.preproc.eyeblinktreatment '.mat']);
 
 details.rawfile     = fullfile(details.rawroot, [details.rawfilename '.bdf']);
+details.rawfile_edf = fullfile(details.rawroot, [details.rawfilename '.edf']);
 details.prepfile    = fullfile(details.preproot, [details.prepfilename '.mat']);
 details.prepfile_modelbased = fullfile(details.preproot, [details.prepfilename '_modelbased.mat']);
 details.ebfile      = fullfile(details.preproot, ['fEBbfdfMspmeeg_' details.rawfilename '.mat']);
@@ -239,8 +243,8 @@ switch options.conversion.mode
     case 'mERPs'
         details.convCon{1} = 'deviantplacebo';
         details.convCon{2} = 'standardplacebo';
-        details.convCon{3} = 'deviantketamine';
-        details.convCon{4} = 'standardketamine';
+        details.convCon{3} = 'deviantpsilocybin';
+        details.convCon{4} = 'standarpsilocybin';
 end
 
 for i = 1: length(details.convCon)
@@ -249,6 +253,9 @@ for i = 1: length(details.convCon)
 end
 
 details.spmfile = fullfile(details.statroot, 'SPM.mat');
+
+details.eeg.firstLevel.sensor.pathStats = details.smoofile ;
+
 
 % fiducials
 details.fid.labels  = {'NAS'; 'LPA'; 'RPA'};

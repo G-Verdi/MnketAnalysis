@@ -7,13 +7,13 @@ function D = mnket_preprocessing_reject(id, options)
 
 % general analysis options
 if nargin < 2
-    options = mnket_set_analysis_options;
+    options = mn_set_analysis_options;
 end
 
 options.preproc.eyeblinktreatment = 'reject';
 
 % paths and files
-[details, paths] = mnket_subjects(id, options);
+[details, paths] = mn_subjects(id, options);
 
 % record what we're doing
 diary(details.logfile);
@@ -43,7 +43,7 @@ catch
     spm('defaults', 'eeg');
     spm_jobman('initcfg');
 
-    % convert bdf 
+    % convert bdf
     D = tnueeg_convert(details.rawfile);
     fprintf('\nConversion done.\n\n');
     
@@ -93,7 +93,7 @@ catch
                     D = mnket_remove_incorrect_first_trial(D);
             end
     end
-    
+        
     %-- eye blink detection -----------------------------------------------------------------------%
     % subject-specific EB detection thresholds (are always applied to both sessions of the same 
     % participant to ensure compatibility).

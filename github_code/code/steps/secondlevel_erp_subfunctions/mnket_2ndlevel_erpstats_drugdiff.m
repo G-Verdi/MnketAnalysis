@@ -7,11 +7,11 @@ function mnket_2ndlevel_erpstats_drugdiff(options)
 
 % general analysis options
 if nargin < 1
-    options = mnket_set_analysis_options;
+    options = mnpsi_set_analysis_options;
 end
 
 % paths and files
-[~, paths] = mnket_subjects(options);
+[~, paths] = mnpsi_subjects(options);
 
 % record what we're doing
 diary(paths.logfile);
@@ -49,18 +49,18 @@ catch
     % smoothed images of averaged ERP data in each subject and each 
     % condition serve as input to 2nd level statistics, but here, we only 
     % indicate the subject-specific directories of the images
-    sessions = {'placebo', 'ketamine'};
+    sessions = {'placebo', 'psilocybin'};
     nSubjects = numel(options.erp.subjectIDs);
     imagePaths = cell(nSubjects, 2);
     for sub = 1: nSubjects
         subID = char(options.erp.subjectIDs{sub});
         
         options.condition = 'placebo';
-        details = mnket_subjects(subID, options);
+        details = mnpsi_subjects(subID, options);
         imagePaths{sub, 1} = details.convroot;
         
-        options.condition = 'ketamine';
-        details = mnket_subjects(subID, options);
+        options.condition = 'psilocybin';
+        details = mnpsi_subjects(subID, options);
         imagePaths{sub, 2} = details.convroot;
     end
     

@@ -47,7 +47,7 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%
 
 legend(plotHandles, condNames{:});
-ylim([-1.5 1.5]);
+ylim([-2 1.5]);
 ylabel('Field intensity (in \muV)');
 xlim([timeAxis(1) timeAxis(end)]);
 xlabel('Time (ms after tone onset)');

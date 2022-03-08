@@ -11,7 +11,11 @@ function tones = mnket_create_subject_tone_sequence( id, options, details, paths
 
 switch id
     % we only have textfiles for these subjects:
-    case {'4534', '4507', '4459', '4422', '4478'} 
+    case {'4534', '4507', '4459', '4422', '4478','3621',  ...
+        '4415','4418','4419','4420','4421',...
+        '4426','4332',...
+        '4433','4460','4476',...
+        '4502','4515','4518','4591','4592'} 
         TXTtones = mnket_read_tones_from_txtfile(details.tonestxt);
     
     % we have a text file and the paradigm struct for the rest:    
@@ -22,8 +26,8 @@ switch id
         switch options.condition
             case 'placebo'
                 data = paradigm.Placebo;
-            case 'psilocybin'
-                data = paradigm.Psilocybin;
+            case 'ketamine'
+                data = paradigm.Ketamine;
         end
         MATtones = mnket_read_tones_from_matfile(id, data);
     
@@ -48,8 +52,8 @@ function tones = mnket_read_tones_from_txtfile( fileName )
 tones = [];
 nTon = 0;
 
-fileID = fscanf(fileName, 'r', 'n', 'UTF-8');
-A = fopen(fileID, '%s');
+fileID = fopen(fileName, 'r', 'n');
+A = fscanf(fileID, '%s');
 fclose(fileID);
 
 A(1: 11) = [];

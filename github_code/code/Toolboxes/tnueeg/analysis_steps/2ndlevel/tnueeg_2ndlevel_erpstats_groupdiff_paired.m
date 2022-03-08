@@ -30,6 +30,6 @@ group2 = char(grouplabels{2});
 
 % create and run the job - one test per regressor
 job = tnueeg_getjob_2ndlevel_paired_ttest(scndlvlroot, pairs, factorName, group1, group2);
-spm_jobman('interactive', job);
+spm_jobman('run', job);
 
 end

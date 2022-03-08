@@ -4,7 +4,7 @@ function [ data ] = mnket_figure_4( options, savePath )
 %   IN:     options     - the struct that holds all analysis options
 %           savePath    - where to save the images and data
 
-[~, paths] = mnket_subjects(options);
+[~, paths] = mnpsi_subjects(options);
 
 figPath = fullfile(savePath, 'figure_4');
 mkdir(figPath);
@@ -51,11 +51,11 @@ figDir = fullfile(figPath, 'epsi3');
 mkdir(figDir);
 
 % for epsilon3, we're showing 1 significant cluster (out of 1)
-copyfile(fullfile(resultsDir, 'conT_sections', 'sections_T_plevel_FWE_p0.05_cluster1_k14.png'), ...
+copyfile(fullfile(resultsDir, 'conT_sections', 'sections_T_plevel_FWE_p0.05_cluster1_k59.png'), ...
     figDir);
-copyfile(fullfile(resultsDir, 'conT_contours', 'sections_T_plevel_FWE_p0.05_cluster1_k14.png'), ...
+copyfile(fullfile(resultsDir, 'conT_contours', 'sections_T_plevel_FWE_p0.05_cluster1_k59.png'), ...
     figDir);
-copyfile(fullfile(resultsDir, 'conT_scalpmaps', 'scalpmaps_spmT_0001_ft_cluster1_tw_223ms_to_223ms.png'), ...
+copyfile(fullfile(resultsDir, 'conT_scalpmaps', 'scalpmaps_spmT_0001_ft_cluster1_tw_160ms_to_160ms.png'), ...
     figDir);
 %copyfile(fullfile(resultsDir, 'conT_scalpmaps', 'colmap_scalpmaps_spmT_0001_clevel_ft_cluster1_at_223ms.png'), ...
     %figDir);

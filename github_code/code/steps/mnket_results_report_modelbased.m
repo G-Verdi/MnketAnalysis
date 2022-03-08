@@ -4,13 +4,13 @@ function mnket_results_report_modelbased
 %   IN:     --
 %   OUT:    --
 
-options = mnket_set_analysis_options;
+options = mn_set_analysis_options;
 
 options.stats.mode = 'erpbased';
 options.stats.design = 'prediction';    
-options.stats.pValueMode = 'peakFWE';
+options.stats.pValueMode = 'clusterFWE';
 
-for optionsCell = {'placebo', 'ketamine'}
+for optionsCell = {'placebo', 'psilocybin'}
     options.condition = char(optionsCell);
 
     mnket_report_spm_results(options, options.condition);

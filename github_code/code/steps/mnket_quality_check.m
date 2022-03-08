@@ -5,10 +5,10 @@ function mnket_quality_check( options )
 %   OUT:    -
 
 if nargin < 1
-    options = mnket_set_analysis_options;
+    options = mnpsi_set_analysis_options;
 end
 
-[~, paths] = mnket_subjects(options);
+[~, paths] = mnpsi_subjects(options);
 
 if ~exist(paths.qualityroot, 'dir')
     mkdir(paths.qualityroot);

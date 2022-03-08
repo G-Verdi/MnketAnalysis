@@ -34,7 +34,7 @@ end
 
 % choose on subject ID for plotting electrode locations
 id = options.stats.exampleID;
-details = mnket_subjects(id, options);
+details = mn_subjects(id, options);
 conf.D = spm_eeg_load(details.prepfile);
 
 % use the T/F-statistic image of the contrast for the scalpmap

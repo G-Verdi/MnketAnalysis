@@ -1,10 +1,10 @@
 % --- Analysis script for MMN ketamine EEG dataset --- %
-
-% % set up Matlab environment
+%% 
+%--------------set up Matlab environment------------------------%
 % mnket_setup_paths;
 
 % set all analysis options and provide the path to the data
-options = mnket_set_analysis_options;
+options = mnpsi_set_analysis_options;
 
 % create the folder structure needed for the full analysis, and fill with necessary raw data
 mnket_setup_analysis_folder(options);
@@ -31,8 +31,8 @@ mnket_results_report_erpbased;
 mnket_dcm_gather_parameters(options);
 mnket_dcm_stats_report;
 
-
-
+%Group by condition 
+perez_2ndlevel_singletrial_groupxcond('prediction', options);
 
 
 

@@ -2,17 +2,22 @@ function mnket_copy_raw_eeg_data_into_analysis_folder( options )
 %MNKET_COPY_RAW_EEG_DATA_INTO_ANALYSIS_FOLDER Copies raw EEG data from raw directory to current 
 %analysis folder
 
-conditions      = {'placebo', 'psilocybin'};
+conditions      = options.conditions;
 
 % source: where are the raw data currently
 rawdatasource   = fullfile(options.rawdir);
-srcprefix       = 'TNU_MNKET_';
+srcprefix       = 'TNU_MMN_';
 srcsubfolder    = 'eegdata';
 
 % destination: where should I put them
-rawdatadest     = fullfile(options.workdir, 'subjects');
+rawdatadest     = fullfile(options.roots.results, 'subjects');
 destprefix      = 'MMN_';
 destsubfolder   = 'eeg';
+
+
+%------------------------------------------------------------------%
+% For group analysis only
+%------------------------------------------------------------------%
 
 % loop over conditions and subjects
 for condCell    = conditions
@@ -35,5 +40,4 @@ for condCell    = conditions
     end
 end
 
-end
 

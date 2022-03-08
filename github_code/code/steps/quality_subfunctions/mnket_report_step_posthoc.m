@@ -5,9 +5,9 @@ function mnket_report_step_posthoc( stepStr, options )
 %           options - the struct that holds all analysis options
 %   OUT:    -
 
-for iSub = 1: numel(options.subjects.all)
-    id = char(options.subjects.all{iSub});
-    details = mnket_subjects(id, options);
+for iSub = 1: numel(options.subjects.valid)
+    id = char(options.subjects.valid{iSub});
+    details = mnpsi_subjects(id, options);
 
     switch lower(stepStr)
         case {'ebcorr', 'ebcorrection', 'eyeblinkcorrection'}

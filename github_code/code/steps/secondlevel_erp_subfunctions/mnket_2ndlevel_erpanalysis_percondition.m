@@ -6,11 +6,11 @@ function mnket_2ndlevel_erpanalysis_percondition(options)
 
 % general analysis options
 if nargin < 1
-    options = mnket_set_analysis_options;
+    options = mn_set_analysis_options;
 end
 
 % paths and files
-[~, paths] = mnket_subjects(options);
+[~, paths] = mn_subjects(options);
 
 % record what we're doing
 diary(paths.logfile);
@@ -44,7 +44,7 @@ catch
     erpfiles = cell(nSubjects, 1);
     for sub = 1: nSubjects
         subID = char(options.erp.subjectIDs{sub});
-        details = mnket_subjects(subID, options);
+        details = mn_subjects(subID, options);
         erpfiles{sub, 1} = details.erpfile;
     end
     

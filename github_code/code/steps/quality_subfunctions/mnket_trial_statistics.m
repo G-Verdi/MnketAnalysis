@@ -7,10 +7,10 @@ function trialStatsTable = mnket_trial_statistics( options )
 %   OUT:    tableArtefacts  - overview table size 10 x nSubjects
 
 if nargin < 1
-    options = mnket_set_analysis_options;
+    options = mn_set_analysis_options;
 end
 
-[~, paths] = mnket_subjects(options);
+[~, paths] = mn_subjects(options);
 
 if ~exist(paths.qualityroot, 'dir')
     mkdir(paths.qualityroot);
@@ -30,7 +30,7 @@ for condCell = options.conditions
         id = char(idCell);
         iSub = iSub +1;
 
-        [details, paths] = mnket_subjects( id, options );
+        [details, paths] = mn_subjects( id, options );
         load(details.trialstats);
 
         nTrialsInitial(iSub) = trialStats.nTrialsInitial;

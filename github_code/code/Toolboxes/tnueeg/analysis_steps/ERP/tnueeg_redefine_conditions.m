@@ -1,4 +1,4 @@
-function D = tnueeg_redefine_conditions( D, condlist,id)
+function D = tnueeg_redefine_conditions( D, condlist)
 %TNUEEG_REDEFINE_CONDITIONS Updates the condition list before averaging
 %   IN:     D           - preprocessed data set
 %           condlist    - list with new condition names
@@ -9,7 +9,7 @@ if isempty(condlist)
 else
     nTrials = numel(condlist);
     if numel(D.conditions) ~= nTrials
-        error(['Unequal number of trials for subject ' id]);
+        error(['Unequal number of trials for subject ']);
     end
     D = conditions(D, 1: nTrials, condlist);
 end

@@ -5,13 +5,13 @@ function mnket_2ndlevel_modelbased(options)
 %   OUT:    --
 
 if nargin < 1
-    options = mnket_set_analysis_options;
+    options = mn_set_analysis_options;
 end
 
 options.stats.mode = 'modelbased';
-options.stats.design = 'prediction';% previously 'epsilon'     
+options.stats.design = 'epsilon';     
 
-for optionsCell = {'placebo', 'ketamine'}
+for optionsCell = {'placebo','ketamine'}
     options.condition = char(optionsCell);
 
     mnket_2ndlevel_singletrial_percondition(options);

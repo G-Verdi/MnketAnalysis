@@ -7,11 +7,11 @@ function mnket_2ndlevel_singletrial_drugdiff(options)
 
 % general analysis options
 if nargin < 1
-    options = mnket_set_analysis_options;
+    options = mn_set_analysis_options;
 end
 
 % paths and files
-[~, paths] = mnket_subjects(options);
+[~, paths] = mn_subjects(options);
 
 % record what we're doing
 diary(paths.logfile);
@@ -50,18 +50,18 @@ catch
     % subject and each condition serve as input to 2nd level statistics, 
     % but here, we only indicate the subject-specific directories of the 
     % beta images
-    conditions = {'placebo', 'ketamine'};
+    conditions = {'placebo','psilocybin'};
     nSubjects = numel(options.stats.subjectIDs);
     imagePaths = cell(nSubjects, 2);
     for sub = 1: nSubjects
         subID = char(options.stats.subjectIDs{sub});
         
         options.condition = 'placebo';
-        details = mnket_subjects(subID, options);
+        details = mn_subjects(subID, options);
         imagePaths{sub, 1} = details.statroot;
         
-        options.condition = 'ketamine';
-        details = mnket_subjects(subID, options);
+        options.condition = 'psilocybin';
+        details = mn_subjects(subID, options);
         imagePaths{sub, 2} = details.statroot;
     end
     

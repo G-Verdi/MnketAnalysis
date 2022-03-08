@@ -5,7 +5,7 @@ function mnket_summarize_step( stepStr, options )
 %           options - the struct that holds all analysis options
 %   OUT:    -
 
-[~, paths] = mnket_subjects(options);
+[~, paths] = mnpsi_subjects(options);
 
 qualityRoot = paths.qualityfold;
 stepRoot    = fullfile(qualityRoot, stepStr);
@@ -16,9 +16,9 @@ if ~exist(stepRoot, 'dir')
     mkdir(stepRoot)
 end
 
-for iSub = 1: numel(options.subjects.all)
-    id = char(options.subjects.all{iSub});
-    details = mnket_subjects(id, options);
+for iSub = 1: numel(options.subjects.valid)
+    id = char(options.subjects.valid{iSub});
+    details = mnpsi_subjects(id, options);
 
     figureTitle = ['MNKET subject ' id];
     switch lower(stepStr)

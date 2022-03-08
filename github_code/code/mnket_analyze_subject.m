@@ -5,17 +5,17 @@ function mnket_analyze_subject( id, options )
 %   OUT:    --
 
 if nargin < 2
-    options = mnket_set_analysis_options;
+    options = mn_set_analysis_options;
 end
 
 % loop over both sessions for this subject
-for optionsCell = {'placebo', 'ketamine'}
+for optionsCell = options.conditions
     options.condition = char(optionsCell);
     fprintf('\n\n --------- Working on: %s session ---------\n\n', upper(options.condition));
     
     %% Preparation and Modeling
-     mnket_data_preparation(id, options);
-     mnket_model(id, options);
+      mnket_data_preparation(id, options);
+      mnket_model(id, options);
     
     %% Pre-processing: reject eyeblinks
     options.preproc.eyeblinktreatment = 'reject';
@@ -23,21 +23,27 @@ for optionsCell = {'placebo', 'ketamine'}
        mnket_preprocessing_reject(id, options);
      
     %% ERP analysis: tone definition
-    options.erp.type = 'tone';
-    mnket_erp(id, options);
+%     options.erp.type = 'tone';
+%     mnket_erp(id, options);
     
-    options.erp.type = 'lowhighMuhat2';
+%     options.erp.type = 'lowhighMuhat2';
+%     mnket_erp(id, options);
+% 
+%     options.erp.type = 'lowhighMuhat3';
+%     mnket_erp(id, options);
+%   
+%     options.erp.type = 'lowhighPihat';
+%     mnket_erp(id, options);
+%     
+    options.erp.type = 'lowhighEpsi2';
     mnket_erp(id, options);
 
-    options.erp.type = 'lowhighMuhat3';
+    options.erp.type = 'lowhighEpsi3';
     mnket_erp(id, options);
-    
-    options.erp.type = 'lowhighPihat';
-    mnket_erp(id, options);
-  
+     
     %%%%% This part is not needed for the paper. %%%%%
     
-%     % ERP analysis (up until conversion): roving definition
+    % ERP analysis (up until conversion): roving definition
 %     options.erp.type = 'roving';
 %     mnket_erp(id, options);
 %     
@@ -57,7 +63,7 @@ for optionsCell = {'placebo', 'ketamine'}
     mnket_conversion(id, options);
     
     options.stats.mode = 'modelbased';
-    options.stats.design = 'prediction';
+    options.stats.design = 'epsilon';
     mnket_1stlevel(id, options);
      
 end

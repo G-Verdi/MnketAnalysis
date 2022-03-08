@@ -10,10 +10,10 @@ if nargin < 4
 end
 
 if nargin < 3
-    options = mnket_set_analysis_options;
+    options = mn_set_analysis_options;
 end
 
-[~, paths] = mnket_subjects(options);
+[~, paths] = mn_subjects(options);
 
 cols = mnket_define_colors;
 
@@ -30,7 +30,7 @@ switch flag
                 titleStr = [options.erp.type ' ERPs at ' chanName];
         end
 
-        condNames = {'placebo', 'ketamine'};
+        condNames = {'placebo', 'psilocybin'};
         lineColors = [cols.darkgray; cols.medgray];
         lineWidth = 2;
         saveName = fullfile(paths.erpdiffold, ['ga_sem_' options.erp.type '_' chanName '.fig']);

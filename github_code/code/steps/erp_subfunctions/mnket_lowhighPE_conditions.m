@@ -29,8 +29,6 @@ highIdcs    = sortIdx(end-nHigh: end);
 conditions(lowIdcs+1)    = {'low'};
 conditions(highIdcs+1)   = {'high'};
 
-
-
 % figure
 lowValues   = sortedPE(1: nLow);
 highValues  = sortedPE(end-nHigh: end);

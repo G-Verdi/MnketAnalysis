@@ -1,4 +1,4 @@
-function options = mnket_set_analysis_options
+function options = mn_set_analysis_options
 %MNKET_SET_ANALYSIS_OPTIONS Analysis options function for MNKET project
 %   IN:     -
 %   OUT:    options     - a struct with all analysis parameters for the
@@ -7,64 +7,39 @@ function options = mnket_set_analysis_options
 %-- where to find the data -----------------------------------------------%
 [~, uid] = unix('whoami'); 
 switch uid(1: end-1)     
-    case {'laew', 'law'}
-        options.maindir = getenv('MNKETDATA');
     case 'desktop-f7jj41h\gabrielle'
-        options.maindir = ('C:\Users\Gabrielle\Desktop\Cognemo\mnket\ketdata');
+        options.maindir = 'C:\Users\Gabrielle\Documents\Cognemo\MMN\data\prj';
     otherwise
-        error(['Undefined user. Please specify a user in mnket_set_analysis_options ' ...
+        error(['Undefined user. Please specify a user in mn_set_analysis_options ' ...
             'and provide the path to the data']);
 end
-options.workdir = fullfile(options.maindir, 'prj', 'test_mnket');
+options.workdir = fullfile(options.maindir,'test_mnket');
 options.rawdir  = fullfile(options.maindir, 'raw');
+options.codedir = 'C:\Users\Gabrielle\Documents\Cognemo\code\mnketAnalysis';
+options.analysis = 'MNKET';% analysis type
+%% Specify default option functions --------------------------------------%
+options.funs.details = @mn_subjects; % specify paths
+options.funs.subjects = @mn_set_subject_groups; % specify subject groups 
+options.funs.eeg = @mn_prepare_eeg; %specify eeg options
+%% Evaluate option functions
+options= feval(options.funs.subjects, options); % Get subject list
+options= feval(options.funs.eeg, options);
+
 
 %-- condition info -------------------------------------------------------% 
-options.condition   = 'placebo'; % 'placebo', 'ketamine', 'drugdiff'
-options.conditions  = {'placebo', 'ketamine'};
-
-%-- subject IDs ----------------------------------------------------------%
-
-%------MNKET Study Subjects-----------------------------------------------%
-options.subjects.pilots     = {'4422', '4478'};
-options.subjects.excluded   = {'4459', '4507'}; % in Andreeas DCM analysis
-options.subjects.valid      = {'4431', '4446', '4447', '4458', ...
-                               '4482', '4487', '4488', '4548', ...
-                               '4494', '4499', '4500', '4520', ...
-                               '4532', '4497', '4534'};
-options.subjects.all        = {'4431', '4446', '4447', '4458', ...
-                               '4482', '4487', '4488', '4548', ...
-                               '4494', '4499', '4500', '4520', ...
-                               '4532', '4497', '4534', '4459', ...
-                               '4507', '4422', '4478'};    
-
-%------COMPI MMN Study Subjects-------------------------------------------%
-% options.subjects.pilots     = {'4422', '4478'};
-% options.subjects.excluded   = {'4459', '4507'}; % in Andreeas DCM analysis
-% options.subjects.valid      = {'4431', '4446', '4447', '4458', ...
-%                                '4482', '4487', '4488', '4548', ...
-%                                '4494', '4499', '4500', '4520', ...
-%                                '4532', '4497', '4534'};
-% 
-% options.subjects.all        = {'0143','0101', '0102', '0103', '0104', ...
-%                                '0105', '0106', '0107', '0108', ...
-%                                '0109', '0110', '0111','0112','0113', ...
-%                                '0114', '0115', '0116', '0117', ...
-%                                '0118', '0119', '0120','0121','0122','0123',...
-%                                '0124','0125','0126','0127','0128','0129','0130','0131','0132',...
-%                                '0133','0134','0135','0136','0137','0138','0139','0140'...
-%                                '0141','0142'};                               
-                        
+options.condition   = 'placebo'; % 'placebo', 'ketamine','psilocybin','drugdiff'
+options.conditions  = {'placebo','ketamine'};
 %-- preparation ----------------------------------------------------------%
 options.prepare.subjectIDs  = options.subjects.all; % data preparation (tone sequences)
-options.prepare.overwrite   = 0; % whether to overwrite any previous prep
+options.prepare.overwrite   = 1; % whether to overwrite any previous prep
                            
 %-- modeling -------------------------------------------------------------%
 options.model.subjectIDs    = options.subjects.all; % modeling with the HGF
-options.model.overwrite     = 1; % whether to overwrite any previous model
+options.model.overwrite     = 0; % whether to overwrite any previous model
 
 %-- preprocessing --------------------------------------------------------%
 options.preproc.subjectIDs      = options.subjects.all;
-options.preproc.overwrite       = 1; % whether to overwrite any prev. prepr
+options.preproc.overwrite       = 0; % whether to overwrite any prev. prepr
 options.preproc.keep            = 1;  % whether to keep intermediate data
 
 % swap channel option: this is where we decide what to do about the data sets with apparently
@@ -115,7 +90,7 @@ options.preproc.badtrialthresh  = 80; % in microVolt
 
 %-- erp ------------------------------------------------------------------%
 options.erp.subjectIDs  = options.subjects.all;                        
-options.erp.overwrite   = 1; % whether to overwrite any previous erp
+options.erp.overwrite   = 0; % whether to overwrite any previous erp
 
 options.erp.type        = 'roving';  % roving (sta=6, dev>=5), mmnad (sta=6, dev=1), 
                             % tone (nothing), memory (t6, t8, t10), 
@@ -144,7 +119,7 @@ options.erp.channels            = {'C3', 'C1', 'Cz', ...
 
 %-- conversion2images ----------------------------------------------------%
 options.conversion.subjectIDs   = options.subjects.all;
-options.conversion.overwrite    = 1; % whether to overwrite any prev. conv.
+options.conversion.overwrite    = 0; % whether to overwrite any prev. conv.
 options.conversion.mode         = 'modelbased'; %'ERPs', 'modelbased', 'mERPs', 'diffWaves'
 options.conversion.space        = 'sensor';
 options.conversion.convPrefix   = 'whole'; 
@@ -153,9 +128,9 @@ options.conversion.smooKernel   = [16 16 0];
 
 %-- stats ----------------------------------------------------------------%
 options.stats.subjectIDs    = options.subjects.all;
-options.stats.overwrite     = 1; % whether to overwrite any previous stats
+options.stats.overwrite     = 0; % whether to overwrite any previous stats
 options.stats.mode          = 'modelbased'; %'ERPs', 'modelbased', 'mERPs', 'diffWaves'
-options.stats.design        = 'prediction'; % 'epsilon', 'HGF', 'epsilonS', 'plustime', 'prediction'
+options.stats.design        = 'epsilon'; % 'epsilon', 'HGF', 'epsilonS', 'plustime', 'prediction'
 switch options.stats.design
     case 'epsilon'
         options.stats.regressors = {'epsi2', 'epsi3'};
@@ -192,5 +167,6 @@ options.dcm.contrast.code...
                        =[-1; 1];
 options.dcm.contrast.type...
                         ={'Difference effect'};
+                                        
 end
 

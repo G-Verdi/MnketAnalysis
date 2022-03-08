@@ -6,11 +6,11 @@ function mnket_2ndlevel_erpstats_percondition_highlowERP(options)
 
 % general analysis options
 if nargin < 1
-    options = mnket_set_analysis_options;
+    options = mnpsi_set_analysis_options;
 end
 
 % paths and files
-[~, paths] = mnket_subjects(options);
+[~, paths] = mnpsi_subjects(options);
 
 % record what we're doing
 diary(paths.logfile);
@@ -68,7 +68,7 @@ for condnum = 1:length(conditionName)
         % create images for conversion.mode = 'ERPs'
         % previously images made for conversion.mode = 'modelbased' in
         % mnket_analyze_subject function
-        for idCell = options.subjects.all
+        for idCell = options.subjects.valid
             id = char(idCell);
 
             options.conversion.mode = 'ERPs';
@@ -83,7 +83,7 @@ for condnum = 1:length(conditionName)
         imagePaths = cell(nSubjects, 1);
         for sub = 1: nSubjects
             subID = char(options.erp.subjectIDs{sub});
-            details = mnket_subjects(subID, options);
+            details = mnpsi_subjects(subID, options);
             imagePaths{sub, 1} = details.convroot;
         end
 

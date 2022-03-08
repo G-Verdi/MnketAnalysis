@@ -6,11 +6,11 @@ function mnket_conversion(id, options)
 
 % general analysis options
 if nargin < 2
-    options = mnket_set_analysis_options;
+    options = mn_set_analysis_options;
 end
 
 % paths and files
-[details, ~] = mnket_subjects(id, options);
+[details, ~] = mn_subjects(id, options);
 
 % record what we're doing
 diary(details.logfile);
