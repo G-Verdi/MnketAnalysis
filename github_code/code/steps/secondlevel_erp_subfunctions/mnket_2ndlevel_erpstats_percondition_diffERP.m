@@ -6,11 +6,11 @@ function mnket_2ndlevel_erpstats_percondition_diffERP(options)
 
 % general analysis options
 if nargin < 1
-    options = mnpsi_set_analysis_options;
+    options = mn_set_analysis_options;
 end
 
 % paths and files
-[~, paths] = mnpsi_subjects(options);
+[~, paths] = mn_subjects(options);
 
 % record what we're doing
 diary(paths.logfile);
@@ -44,7 +44,7 @@ catch
     % create images for conversion.mode = 'diffWaves'
     % previously images made for conversion.mode = 'modelbased' in
     % mnket_analyze_subject function
-    for idCell = options.subjects.valid
+    for idCell = options.subjects.all
         id = char(idCell);
 
         mnket_conversion(id, options);
@@ -57,7 +57,7 @@ catch
     imagePaths = cell(nSubjects, 1);
     for sub = 1: nSubjects
         subID = char(options.erp.subjectIDs{sub});
-        details = mnpsi_subjects(subID, options);
+        details = mn_subjects(subID, options);
         imagePaths{sub, 1} = details.convroot;
     end
     

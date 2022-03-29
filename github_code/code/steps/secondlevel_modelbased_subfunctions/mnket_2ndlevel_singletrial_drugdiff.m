@@ -50,7 +50,7 @@ catch
     % subject and each condition serve as input to 2nd level statistics, 
     % but here, we only indicate the subject-specific directories of the 
     % beta images
-    conditions = {'placebo','psilocybin'};
+    conditions = {'placebo','ketamine'};
     nSubjects = numel(options.stats.subjectIDs);
     imagePaths = cell(nSubjects, 2);
     for sub = 1: nSubjects
@@ -60,7 +60,7 @@ catch
         details = mn_subjects(subID, options);
         imagePaths{sub, 1} = details.statroot;
         
-        options.condition = 'psilocybin';
+        options.condition = 'ketamine';
         details = mn_subjects(subID, options);
         imagePaths{sub, 2} = details.statroot;
     end

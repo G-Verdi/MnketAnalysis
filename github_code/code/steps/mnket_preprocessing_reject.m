@@ -89,7 +89,7 @@ catch
     switch id
         case '4458'
             switch options.condition
-                case 'ketamine'
+                case 'psilocybin'
                     D = mnket_remove_incorrect_first_trial(D);
             end
     end
@@ -155,7 +155,6 @@ catch
     
 %------tone sequence extraction---------------------------------------%
 %      mnCHR_binary_trialDef(D,details);
-end
 
 
 cd(options.workdir);

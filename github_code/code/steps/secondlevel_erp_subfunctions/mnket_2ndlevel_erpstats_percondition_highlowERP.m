@@ -6,11 +6,11 @@ function mnket_2ndlevel_erpstats_percondition_highlowERP(options)
 
 % general analysis options
 if nargin < 1
-    options = mnpsi_set_analysis_options;
+    options = mn_set_analysis_options;
 end
 
 % paths and files
-[~, paths] = mnpsi_subjects(options);
+[~, paths] = mn_subjects(options);
 
 % record what we're doing
 diary(paths.logfile);
@@ -26,11 +26,11 @@ switch options.erp.type
         conditionName = {'high', 'low'}
     case 'lowhighEpsi3'
         conditionName = {'high', 'low'}
-    case 'lowhighMuhat2'
+    case 'lowhighPihat2'
         conditionName = {'high', 'low'}
-    case 'lowhighMuhat3'
+    case 'lowhighPihat3'
         conditionName = {'high', 'low'}
-    case 'lowhighPihat'
+    case 'lowhighPihat1'
         conditionName = {'high', 'low'}
     case 'roving'
         conditionName = options.erp.contrastName;
@@ -68,7 +68,7 @@ for condnum = 1:length(conditionName)
         % create images for conversion.mode = 'ERPs'
         % previously images made for conversion.mode = 'modelbased' in
         % mnket_analyze_subject function
-        for idCell = options.subjects.valid
+        for idCell = options.subjects.all
             id = char(idCell);
 
             options.conversion.mode = 'ERPs';
@@ -83,7 +83,7 @@ for condnum = 1:length(conditionName)
         imagePaths = cell(nSubjects, 1);
         for sub = 1: nSubjects
             subID = char(options.erp.subjectIDs{sub});
-            details = mnpsi_subjects(subID, options);
+            details = mn_subjects(subID, options);
             imagePaths{sub, 1} = details.convroot;
         end
 

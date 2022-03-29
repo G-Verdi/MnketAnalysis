@@ -58,7 +58,7 @@ catch
     switch options.erp.type
        case {'lowhighEpsi2', 'lowhighEpsi3'}
            D = spm_eeg_load(details.prepfile_modelbased);
-        case {'lowhighMuhat2', 'lowhighMuhat3', 'lowhighPihat'}
+        case {'lowhighPihat2', 'lowhighPihat3', 'lowhighPihat1'}
            D = spm_eeg_load(details.prepfile_modelbased);
        otherwise
             D = spm_eeg_load(details.prepfile);
@@ -97,30 +97,30 @@ catch
                 % special case for subject 4534 in ketamine condition
                 condlist(1) = [];
             end
-        case 'lowhighMuhat2'
+        case 'lowhighPihat2'
             load(details.design);
-            condlist = mnket_lowhighPE_conditions(design.muhat2, ...
-                '\muhat2', options);
-            savefig([details.lowhighPEfigs '_muhat2.fig']);  
-            if strcmp(id, '4534') && strcmp(options.condition, 'ketamine') 
+            condlist = mnket_lowhighPE_conditions(design.pihat2, ...
+                '\pihat2', options);
+            savefig([details.lowhighPEfigs '_pihat2.fig']);  
+            if strcmp(id, '4534') && strcmp(options.condition, 'psilocybin') 
                 % special case for subject 4534 in ketamine condition
                 condlist(1) = [];
             end
-        case 'lowhighMuhat3'
+        case 'lowhighPihat3'
             load(details.design);
-            condlist = mnket_lowhighPE_conditions(design.muhat3, ...
-                '\muhat3', options);
-            savefig([details.lowhighPEfigs '_muhat3.fig']);
-            if strcmp(id, '4534') && strcmp(options.condition, 'ketamine') 
+            condlist = mnket_lowhighPE_conditions(design.pihat3, ...
+                '\pihat3', options);
+            savefig([details.lowhighPEfigs '_pihat3.fig']);
+            if strcmp(id, '4534') && strcmp(options.condition, 'psilocybin') 
                 % special case for subject 4534 in ketamine condition
                 condlist(1) = [];
             end
-         case 'lowhighPihat'
+         case 'lowhighPihat1'
             load(details.design);
-            condlist = mnket_lowhighPE_conditions(design.pihat, ...
-                'Pihat', options);
-            savefig([details.lowhighPEfigs '_Pihat.fig']);
-            if strcmp(id, '4534') && strcmp(options.condition, 'ketamine') 
+            condlist = mnket_lowhighPE_conditions(design.pihat1, ...
+                '\pihat1', options);
+            savefig([details.lowhighPEfigs '_Pihat1.fig']);
+            if strcmp(id, '4534') && strcmp(options.condition, 'psilocybin') 
                 % special case for subject 4534 in ketamine condition
                 condlist(1) = []; 
             end
@@ -170,7 +170,7 @@ catch
         case 'tone'
             triallist = {'tone', 'All tone events', [0 0 1]};
             
-        case {'lowhighMuhat2', 'lowhighMuhat3','lowhighPihat'}
+        case {'lowhighPihat2', 'lowhighPihat3','lowhighPihat1'}
             triallist = {'low', 'Lowest 20 %', [0 0 1]; ...
                         'high', 'Highest 20 %', [1 0 0]};
     end
@@ -230,7 +230,7 @@ catch
             copy(D, details.difffile);
             disp(['Computed the difference wave for subject ' id]);    
     
-        case {'lowhighMuhat2', 'lowhighMuhat3','lowhighPihat'}
+        case {'lowhighPihat2', 'lowhighPihat3','lowhighPihat1'}
             % preparation for computing the difference wave
             % determine condition order within the D object
             idxLow = indtrial(D, 'low');

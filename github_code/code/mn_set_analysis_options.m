@@ -7,16 +7,16 @@ function options = mn_set_analysis_options
 %-- where to find the data -----------------------------------------------%
 [~, uid] = unix('whoami'); 
 switch uid(1: end-1)     
-    case 'desktop-f7jj41h\gabrielle'
-        options.maindir = 'C:\Users\Gabrielle\Documents\Cognemo\MMN\data\prj';
+    case 'mypc'
+        options.maindir ='/Users/mypc/Dropbox/Cognemo/MMN/data/prj';
     otherwise
         error(['Undefined user. Please specify a user in mn_set_analysis_options ' ...
             'and provide the path to the data']);
 end
-options.workdir = fullfile(options.maindir,'test_mnket');
+options.workdir = fullfile(options.maindir,'test_mnpsi');
 options.rawdir  = fullfile(options.maindir, 'raw');
-options.codedir = 'C:\Users\Gabrielle\Documents\Cognemo\code\mnketAnalysis';
-options.analysis = 'MNKET';% analysis type
+options.codedir = '/Users/mypc/Documents/mnketAnalysis';
+options.analysis = 'MNPSI';% analysis type
 %% Specify default option functions --------------------------------------%
 options.funs.details = @mn_subjects; % specify paths
 options.funs.subjects = @mn_set_subject_groups; % specify subject groups 
@@ -25,21 +25,20 @@ options.funs.eeg = @mn_prepare_eeg; %specify eeg options
 options= feval(options.funs.subjects, options); % Get subject list
 options= feval(options.funs.eeg, options);
 
-
 %-- condition info -------------------------------------------------------% 
 options.condition   = 'placebo'; % 'placebo', 'ketamine','psilocybin','drugdiff'
-options.conditions  = {'placebo','ketamine'};
+options.conditions  = {'placebo','psilocybin'};
 %-- preparation ----------------------------------------------------------%
 options.prepare.subjectIDs  = options.subjects.all; % data preparation (tone sequences)
 options.prepare.overwrite   = 1; % whether to overwrite any previous prep
                            
 %-- modeling -------------------------------------------------------------%
 options.model.subjectIDs    = options.subjects.all; % modeling with the HGF
-options.model.overwrite     = 0; % whether to overwrite any previous model
+options.model.overwrite     = 1; % whether to overwrite any previous model
 
 %-- preprocessing --------------------------------------------------------%
 options.preproc.subjectIDs      = options.subjects.all;
-options.preproc.overwrite       = 0; % whether to overwrite any prev. prepr
+options.preproc.overwrite       = 1; % whether to overwrite any prev. prepr
 options.preproc.keep            = 1;  % whether to keep intermediate data
 
 % swap channel option: this is where we decide what to do about the data sets with apparently
@@ -90,7 +89,7 @@ options.preproc.badtrialthresh  = 80; % in microVolt
 
 %-- erp ------------------------------------------------------------------%
 options.erp.subjectIDs  = options.subjects.all;                        
-options.erp.overwrite   = 0; % whether to overwrite any previous erp
+options.erp.overwrite   = 1; % whether to overwrite any previous erp
 
 options.erp.type        = 'roving';  % roving (sta=6, dev>=5), mmnad (sta=6, dev=1), 
                             % tone (nothing), memory (t6, t8, t10), 
@@ -119,7 +118,7 @@ options.erp.channels            = {'C3', 'C1', 'Cz', ...
 
 %-- conversion2images ----------------------------------------------------%
 options.conversion.subjectIDs   = options.subjects.all;
-options.conversion.overwrite    = 0; % whether to overwrite any prev. conv.
+options.conversion.overwrite    = 1; % whether to overwrite any prev. conv.
 options.conversion.mode         = 'modelbased'; %'ERPs', 'modelbased', 'mERPs', 'diffWaves'
 options.conversion.space        = 'sensor';
 options.conversion.convPrefix   = 'whole'; 
@@ -128,14 +127,17 @@ options.conversion.smooKernel   = [16 16 0];
 
 %-- stats ----------------------------------------------------------------%
 options.stats.subjectIDs    = options.subjects.all;
-options.stats.overwrite     = 0; % whether to overwrite any previous stats
+options.stats.overwrite     = 1; % whether to overwrite any previous stats
 options.stats.mode          = 'modelbased'; %'ERPs', 'modelbased', 'mERPs', 'diffWaves'
-options.stats.design        = 'epsilon'; % 'epsilon', 'HGF', 'epsilonS', 'plustime', 'prediction'
+options.stats.design        = 'precision'; % 'epsilon', 'HGF', 'epsilonS', 'plustime', 'prediction'
 switch options.stats.design
     case 'epsilon'
         options.stats.regressors = {'epsi2', 'epsi3'};
     case 'prediction'
         options.stats.regressors = {'muhat2', 'muhat3','pihat'};
+    case 'precision'
+        options.stats.regressors = {'pihat2', 'pihat3','pihat1'};
+        
 end
 options.stats.pValueMode    = 'clusterFWE';
 options.stats.exampleID     = '4447';

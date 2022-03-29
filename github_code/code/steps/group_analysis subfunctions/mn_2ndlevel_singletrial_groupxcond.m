@@ -14,11 +14,12 @@ tnueeg_display_analysis_step_header('secondlevel singletrial main', ...
     'mn', 'all', options.eeg.stats.secondlevel);
 
 % names of the single-trial regressors
-% regressors = options.eeg.stats.regressors;
+regressors = options.stats.regressors;
 
 % results file of first regressor
-spmFile = fullfile(options.eeg.stats.secondlevel.secondlevelDir.classical{idx_design},...
-    'groupdiff', 'pairedT', 'SPM.mat');
+statspath = options.eeg.stats.secondlevel.secondlevelDir.classical{idx_design};
+spmFile = fullfile(statspath,...
+    'groupdiff', 'pairedT',regressors{1}, 'SPM.mat');
 
 try
     % check for previous statistics
@@ -37,7 +38,7 @@ catch
         options.eeg.stats.design{idx_design}  ' design...']);
     
     % make sure we have a results directory
-    scndlvlroot = fullfile(options.eeg.stats.secondlevel.secondlevelDir.classical{idx_design}, 'groupdiff');
+    scndlvlroot = fullfile(statspath, 'groupdiff');
     if ~exist(scndlvlroot, 'dir')
         mkdir(scndlvlroot);
     end
@@ -62,7 +63,7 @@ catch
             for s = 1:numel(temp)
                 if c == 1  
            
-                    options.workdir = fullfile('C:\Users\Gabrielle\Documents\Cognemo\MMN\data\prj\test_mnket');
+                    options.workdir = fullfile('/Users/mypc/Dropbox/Cognemo/MMN/data/prj/test_mnket');
                     details = mn_subjects(temp{s}, options);
                     % TODO: should be variable when source analysis is used and for ERP analysis
                     icell(idx).scans{s, 1} = fullfile(details.statroot);
@@ -74,7 +75,7 @@ catch
                     end
                     
                 elseif c==2
-                    options.workdir = fullfile('C:\Users\Gabrielle\Documents\Cognemo\MMN\data\prj\test_mnpsi');
+                    options.workdir = fullfile('/Users/mypc/Dropbox/Cognemo/MMN/data/prj/test_mnpsi');
                     details = mn_subjects(temp{s}, options);
                     % TODO: should be variable when source analysis is used and for ERP analysis
                     icell(idx).scans{s, 1} = fullfile(details.statroot);

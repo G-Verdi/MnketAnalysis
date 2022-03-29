@@ -49,9 +49,9 @@ catch
         case {'4421'}
             switch options.condition
                 case {'psilocybin'}
-                    sim.reg.muhat2 = [sim.reg.muhat2(3:end)];
-                    sim.reg.muhat3 = [sim.reg.muhat3(3:end)];
-                    sim.reg.pihat = [sim.reg.pihat(3:end)];
+                    sim.reg.pihat2 = [sim.reg.pihat2(3:end)];
+                    sim.reg.pihat3 = [sim.reg.pihat3(3:end)];
+                    sim.reg.pihat1 = [sim.reg.pihat1(3:end)];
                     sim.reg.epsi2 = [sim.reg.epsi2(3:end)];
                     sim.reg.epsi3 = [sim.reg.epsi3(3:end)];
             end

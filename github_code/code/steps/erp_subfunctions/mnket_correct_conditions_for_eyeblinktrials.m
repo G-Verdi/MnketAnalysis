@@ -7,7 +7,7 @@ function [ condlist ] = mnket_correct_conditions_for_eyeblinktrials( condlist, t
 
 trialStats = getfield(load(trialStatsFile), 'trialStats');
 
-condlist(size(trialStats.idxEyeartefacts.tone)) = [];
+condlist(trialStats.idxEyeartefacts.tone) = [];
 
 end
 

@@ -22,7 +22,7 @@ switch flag
         
         % Gather plotting info
         switch options.erp.type
-            case {'mmnad', 'roving', 'lowhighEpsi2', 'lowhighEpsi3','lowhighMuhat2', 'lowhighMuhat3','lowhighPihat'}
+            case {'mmnad', 'roving', 'lowhighEpsi2', 'lowhighEpsi3','lowhighPihat2', 'lowhighPihat3','lowhighPihat1'}
                 titleStr = [options.erp.type ' difference waves at ' chanName];
                 lineColors = [cols.darkgreen; cols.lightgreen];
                 lineWidth = 2;
@@ -30,7 +30,7 @@ switch flag
                 titleStr = [options.erp.type ' ERPs at ' chanName];
         end
 
-        condNames = {'placebo', 'psilocybin'};
+        condNames = {'placebo', 'ketamine'};
         lineColors = [cols.darkgray; cols.medgray];
         lineWidth = 2;
         saveName = fullfile(paths.erpdiffold, ['ga_sem_' options.erp.type '_' chanName '.fig']);
@@ -49,7 +49,7 @@ switch flag
                 condNames = {'low', 'high'};
                 lineColors = [cols.medgray; cols.lightred; cols.lightgreen];
                 lineWidth = 3;   
-            case {'lowhighMuhat2', 'lowhighMuhat3','lowhighPihat'}
+            case {'lowhighPihat2', 'lowhighPihat3','lowhighPihat1'}
                 condNames = {'low', 'high','diff'};
                 lineColors = [cols.medgray; cols.lightred; cols.lightgreen];
                 lineWidth = 3;              

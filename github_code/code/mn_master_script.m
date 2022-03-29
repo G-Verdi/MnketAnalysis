@@ -23,7 +23,7 @@ mnket_results_report_modelbased;
 % collect all results reported in the paper into a separate folder
 mnket_pull_paper_data(options);
 
-%not needed for paper:
+% run second level seps for erp-based analysis and report the results:
 mnket_2ndlevel_erpbased;
 mnket_results_report_erpbased;
 
@@ -31,7 +31,7 @@ mnket_results_report_erpbased;
 mnket_dcm_gather_parameters(options);
 mnket_dcm_stats_report;
 
-%Group by condition 
+%Group by condition analysis
 mn_2ndlevel_singletrial_groupxcond('epsilon', options);
 
 

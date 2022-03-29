@@ -97,7 +97,7 @@ switch options.condition
             otherwise
                 details.swapchannels = false;
         end
-    case 'ketamine'
+    case 'psilocybin'
         switch id
             case {'4422', '4488', '4520'}
                 details.swapchannels = true;
@@ -125,7 +125,7 @@ switch options.condition
             otherwise
                 details.windowForEyeblinkdetection = 3;
         end
-    case 'ketamine'
+    case 'psilocybin'
         switch id
             case {'4446', '4459', '4478', '4482', '4487', '4494', '4499', '4507'}
                 details.windowForEyeblinkdetection = 4;
@@ -143,7 +143,7 @@ switch options.condition
             otherwise
                 details.preclean.badchannels = [];
         end
-    case 'ketamine'
+    case 'psilocybin'
         switch id
             case '4422'
                 details.preclean.badchannels = [28 59]; % Iz, P6
@@ -159,7 +159,7 @@ switch options.condition
     case 'placebo'
         rawsuffix = '_2_pla';
     case 'ketamine'
-        rawsuffix = '_2_ket';
+        rawsuffix = '_1_ket';
     case 'psilocybin'
         rawsuffix = '_2_psi';
 end

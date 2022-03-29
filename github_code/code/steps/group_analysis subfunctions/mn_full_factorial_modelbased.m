@@ -27,20 +27,26 @@ end
 
 
 %% # Change the following if you want to run multiple analyses for different betas
-% for r = 1:numel(regressors)
-%     %Select regressor
-%     regressor = regressors;
-%     files = icell;
-%     
+for r = 1:numel(regressors)
+    %Select regressor
+    regressor = regressors{r};
+    files = icell;
+    
     switch options.eeg.stats.mode
         case 'modelbased'
-            fname = fullfile('beta_0003.nii'); % Chose regressor +1 (since first regressor is the mean)
-            for i = 1:numel(icell)
-                files(i).scans = fullfile(icell(i).scans, fname);
+            if  regressor == 'epsilon2'
+                fname = fullfile('beta_0003.nii'); % Chose regressor +1 (since first regressor is the mean)
+                for i = 1:numel(icell)
+                    files(i).scans = fullfile(icell(i).scans, fname);
+                end
+            elseif  regressor == 'epsilon3'
+                fname = fullfile('beta_0003.nii'); % Chose regressor +1 (since first regressor is the mean)
+                for i = 1:numel(icell)
+                    files(i).scans = fullfile(icell(i).scans, fname);
+                end
             end
     end
-    
-  
+
     % Initialize
     spm('defaults', 'EEG');
     spm_jobman('initcfg');
@@ -48,7 +54,7 @@ end
     
     switch options.eeg.stats.mode
         case {'modelbased'}
-            outputpath = fullfile(scndlvlroot);
+            outputpath = fullfile(scndlvlroot,regressor);
             mkdir(outputpath);
         case {'erpbased'}
             outputpath=strcat(scndlvlroot);
@@ -56,7 +62,6 @@ end
     end
     cd(outputpath);
     
-regressor= 'epsilon3';
     %% Full Factorial Design
     job{1}.spm.stats.factorial_design.dir = {outputpath};
     
@@ -125,33 +130,38 @@ regressor= 'epsilon3';
     % Follow-up all designs
     %----------------------------------------------------------------------
     % T-test: Increase ket -> psi
-%     job{3}.spm.stats.con.consess{1}.tcon.name = [regressor ': ket > psi'];
-%     job{3}.spm.stats.con.consess{1}.tcon.convec = [1  1 -1 -1];
-%     job{3}.spm.stats.con.consess{1}.tcon.sessrep = 'none';
-%     % T-test: Decrease ket -> psi
-%     job{3}.spm.stats.con.consess{2}.tcon.name = [regressor ': ket < psi'];
-%     job{3}.spm.stats.con.consess{2}.tcon.convec = [-1 -1 1 1];
-%     job{3}.spm.stats.con.consess{2}.tcon.sessrep = 'none';
-%     % T-tests: Pairwise comparisons
-%     job{3}.spm.stats.con.consess{3}.tcon.name = [regressor ': drug > placebo'];
-%     job{3}.spm.stats.con.consess{3}.tcon.convec = [-1 1 -1 1];
-%     job{3}.spm.stats.con.consess{3}.tcon.sessrep = 'none';
-%     job{3}.spm.stats.con.consess{4}.tcon.name = [regressor ': placebo > drug'];
-%     job{3}.spm.stats.con.consess{4}.tcon.convec = [1 -1 1 -1];
-%     job{3}.spm.stats.con.consess{4}.tcon.sessrep = 'none';
-%     job{3}.spm.stats.con.consess{5}.tcon.name = [regressor ': placebo > ket'];
-%     job{3}.spm.stats.con.consess{5}.tcon.convec = [1 -1 0 0];
-%     job{3}.spm.stats.con.consess{5}.tcon.sessrep = 'none';
-%     job{3}.spm.stats.con.consess{6}.tcon.name = [regressor ': placebo > psi'];
-%     job{3}.spm.stats.con.consess{6}.tcon.convec = [0 0  1 -1];
-%     job{3}.spm.stats.con.consess{6}.tcon.sessrep = 'none';
-    job{3}.spm.stats.con.consess{1}.tcon.name = [regressor ': [placebo - ket] > [placebo - psi]'];
-    job{3}.spm.stats.con.consess{1}.tcon.convec = [1 -1 -1 1];
+    job{3}.spm.stats.con.consess{1}.tcon.name = [regressor ': ket > psi'];
+    job{3}.spm.stats.con.consess{1}.tcon.convec = [1  1 -1 -1];
     job{3}.spm.stats.con.consess{1}.tcon.sessrep = 'none';
-    job{3}.spm.stats.con.consess{2}.tcon.name = [regressor ': [ket - placebo] < [psi - placebo]'];
-    job{3}.spm.stats.con.consess{2}.tcon.convec = [-1 1 1 -1];
+    % T-test: Decrease ket -> psi
+    job{3}.spm.stats.con.consess{2}.tcon.name = [regressor ': ket < psi'];
+    job{3}.spm.stats.con.consess{2}.tcon.convec = [-1 -1 1 1];
     job{3}.spm.stats.con.consess{2}.tcon.sessrep = 'none';
-
+    % T-tests: Pairwise comparisons
+    job{3}.spm.stats.con.consess{3}.tcon.name = [regressor ': drug > placebo'];
+    job{3}.spm.stats.con.consess{3}.tcon.convec = [-1 1 -1 1];
+    job{3}.spm.stats.con.consess{3}.tcon.sessrep = 'none';
+    job{3}.spm.stats.con.consess{4}.tcon.name = [regressor ': placebo > drug'];
+    job{3}.spm.stats.con.consess{4}.tcon.convec = [1 -1 1 -1];
+    job{3}.spm.stats.con.consess{4}.tcon.sessrep = 'none';
+    job{3}.spm.stats.con.consess{5}.tcon.name = [regressor ': placebo > ket'];
+    job{3}.spm.stats.con.consess{5}.tcon.convec = [1 -1 0 0];
+    job{3}.spm.stats.con.consess{5}.tcon.sessrep = 'none';
+    job{3}.spm.stats.con.consess{6}.tcon.name = [regressor ': placebo > psi'];
+    job{3}.spm.stats.con.consess{6}.tcon.convec = [0 0  1 -1];
+    job{3}.spm.stats.con.consess{6}.tcon.sessrep = 'none';
+    job{3}.spm.stats.con.consess{7}.tcon.name = [regressor ': [placebo - ket] > [placebo - psi]'];
+    job{3}.spm.stats.con.consess{7}.tcon.convec = [1 -1 -1 1];
+    job{3}.spm.stats.con.consess{7}.tcon.sessrep = 'none';
+    job{3}.spm.stats.con.consess{8}.tcon.name = [regressor ': [ket - placebo] < [psi - placebo]'];
+    job{3}.spm.stats.con.consess{8}.tcon.convec = [-1 1 1 -1];
+    job{3}.spm.stats.con.consess{8}.tcon.sessrep = 'none';
+    job{3}.spm.stats.con.consess{9}.tcon.name = [regressor ': psilocybin > placebo'];
+    job{3}.spm.stats.con.consess{9}.tcon.convec = [0 0 -1 1];
+    job{3}.spm.stats.con.consess{9}.tcon.sessrep = 'none';
+    job{3}.spm.stats.con.consess{10}.tcon.name = [regressor ': psilocybin < placebo'];
+    job{3}.spm.stats.con.consess{10}.tcon.convec = [-1 1 0 0];
+    job{3}.spm.stats.con.consess{10}.tcon.sessrep = 'none';
     
     %job{4}.spm.stats.con.spmmat(1) = cfg_dep('Model estimation: SPM.mat File', substruct('.','val', '{}',{2}, '.','val', '{}',{1}), substruct('.','spmmat'));
     job{4}.spm.stats.results.spmmat(1) = cfg_dep('Contrast Manager: SPM.mat File', substruct('.','val', '{}',{3}, '.','val', '{}',{1}), substruct('.','spmmat'));
@@ -167,11 +177,16 @@ regressor= 'epsilon3';
     job{4}.spm.stats.results.write.none = 1;
     
     % Which modules really to include?
-%     actual_job = {job{1},job{2},job{3},job{4}};
-    actual_job = {job{1},job{2},job{3}};
+     actual_job = {job{1},job{2},job{3},job{4}};
     
     % Execute actual_job
-    spm_jobman('interactive', actual_job);
-%     spm_jobman('run', actual_job);
+    spm_jobman('run', actual_job);
+
+ %----------------------------------------------------------------------%
+ %      Merge pdfs into one
+ %----------------------------------------------------------------------%
+   % Select pdfs from folder and select output directory 
+    pdfmerge 
+    
 end
 

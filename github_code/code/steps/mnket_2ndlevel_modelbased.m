@@ -9,7 +9,7 @@ if nargin < 1
 end
 
 options.stats.mode = 'modelbased';
-options.stats.design = 'epsilon';     
+options.stats.design = 'precision';     
 
 for optionsCell = {'placebo','ketamine'}
     options.condition = char(optionsCell);

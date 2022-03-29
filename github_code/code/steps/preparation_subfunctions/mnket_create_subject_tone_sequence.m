@@ -52,7 +52,7 @@ function tones = mnket_read_tones_from_txtfile( fileName )
 tones = [];
 nTon = 0;
 
-fileID = fopen(fileName, 'r', 'n');
+fileID = fopen(fileName, 'r','n','UTF-8');
 A = fscanf(fileID, '%s');
 fclose(fileID);
 

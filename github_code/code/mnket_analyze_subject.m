@@ -26,20 +26,20 @@ for optionsCell = options.conditions
 %     options.erp.type = 'tone';
 %     mnket_erp(id, options);
     
-%     options.erp.type = 'lowhighMuhat2';
-%     mnket_erp(id, options);
-% 
-%     options.erp.type = 'lowhighMuhat3';
-%     mnket_erp(id, options);
-%   
-%     options.erp.type = 'lowhighPihat';
-%     mnket_erp(id, options);
-%     
-    options.erp.type = 'lowhighEpsi2';
+    options.erp.type = 'lowhighPihat2';
     mnket_erp(id, options);
 
-    options.erp.type = 'lowhighEpsi3';
+    options.erp.type = 'lowhighPihat3';
     mnket_erp(id, options);
+  
+    options.erp.type = 'lowhighPihat1';
+    mnket_erp(id, options);
+%     
+%     options.erp.type = 'lowhighEpsi2';
+%     mnket_erp(id, options);
+% 
+%     options.erp.type = 'lowhighEpsi3';
+%     mnket_erp(id, options);
      
     %%%%% This part is not needed for the paper. %%%%%
     
@@ -63,7 +63,7 @@ for optionsCell = options.conditions
     mnket_conversion(id, options);
     
     options.stats.mode = 'modelbased';
-    options.stats.design = 'epsilon';
+    options.stats.design = 'precision';
     mnket_1stlevel(id, options);
      
 end
