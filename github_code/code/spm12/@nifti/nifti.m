@@ -17,7 +17,7 @@ case 1
     if isa(varargin{1},'nifti')
         h = varargin{1};
         
-    pdf elseif ischar(varargin{1})
+     elseif ischar(varargin{1})
         if size(varargin{1},1)>1
             h = nifti(cellstr(varargin{1}));
             return;

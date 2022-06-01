@@ -10,17 +10,17 @@ options.stats.mode = 'erpbased';
 options.stats.design = 'precision';    
 options.stats.pValueMode = 'peakFWE';
 
-for optionsCell = {'placebo', 'ketamine'}
+for optionsCell = {'placebo', 'psilocybin'}
     options.condition = char(optionsCell);
     
     options.erp.type = 'lowhighPihat2';
     mnket_report_erpbased_spm_results(options, options.condition);
     
-    options.erp.type = 'lowhighPihat3';
-    mnket_report_erpbased_spm_results(options, options.condition);
-    
-     options.erp.type = 'lowhighPihat1';
-     mnket_report_erpbased_spm_results(options, options.condition);
+%     options.erp.type = 'lowhighPihat3';
+%     mnket_report_erpbased_spm_results(options, options.condition);
+%     
+%      options.erp.type = 'lowhighPihat1';
+%      mnket_report_erpbased_spm_results(options, options.condition);
     
 end
 % options.erp.type = 'lowhighMuhat2';
@@ -29,10 +29,10 @@ end
 options.erp.type = 'lowhighPihat2';
 mnket_report_erpbased_spm_results(options, 'drugdiff');
 
-options.erp.type = 'lowhighPihat3';
-mnket_report_erpbased_spm_results(options, 'drugdiff');
-
-options.erp.type = 'lowhighPihat1';
-mnket_report_erpbased_spm_results(options, 'drugdiff');
+% options.erp.type = 'lowhighPihat3';
+% mnket_report_erpbased_spm_results(options, 'drugdiff');
+% 
+% options.erp.type = 'lowhighPihat1';
+% mnket_report_erpbased_spm_results(options, 'drugdiff');
 
 end

@@ -33,6 +33,7 @@ mnket_display_analysis_step_header(['results report: ' flag], ...
 
 % names of the single-trial regressors
 regressorNames = options.stats.regressors;
+% regressorNames = options.eeg.stats.regressors{2};
 
 % scalpmap images of first regressor
 switch flag
@@ -48,6 +49,13 @@ switch flag
         contrastTitle = 'Pla > Psi in ';
         contrastIdx = 1;
         nVoxMin = 1;
+%     case 'groupdiff'
+%         spmRoot = paths.grouproot;
+%         pngFiles = fullfile(spmRoot, regressorNames, 'scalpmaps_*.png');
+%         contrastTitle = 'Positive Interaction: group x condition_1';
+%         contrastIdx = 8;
+%         nVoxMin = 1;
+        
 end
 
 try
@@ -83,7 +91,7 @@ catch
     end
 
     % go through all regressors
-    for iReg = 1: numel(regressorNames)
+     for iReg = 1: numel(regressorNames)
 
         xSPM = struct;
         xSPM.swd      = fullfile(spmRoot, regressorNames{iReg});

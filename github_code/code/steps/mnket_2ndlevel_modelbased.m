@@ -9,9 +9,9 @@ if nargin < 1
 end
 
 options.stats.mode = 'modelbased';
-options.stats.design = 'precision';     
+options.stats.design = 'epsilon';     
 
-for optionsCell = {'placebo','ketamine'}
+for optionsCell = {'placebo','psilocybin'}
     options.condition = char(optionsCell);
 
     mnket_2ndlevel_singletrial_percondition(options);

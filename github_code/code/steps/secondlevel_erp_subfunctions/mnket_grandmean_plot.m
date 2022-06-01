@@ -30,7 +30,7 @@ switch flag
                 titleStr = [options.erp.type ' ERPs at ' chanName];
         end
 
-        condNames = {'placebo', 'ketamine'};
+        condNames = {'placebo', 'psilocybin'};
         lineColors = [cols.darkgray; cols.medgray];
         lineWidth = 2;
         saveName = fullfile(paths.erpdiffold, ['ga_sem_' options.erp.type '_' chanName '.fig']);
@@ -46,7 +46,7 @@ switch flag
                 lineColors = [cols.medgray; cols.lightred];
                 lineWidth = 2;
             case {'lowhighEpsi2', 'lowhighEpsi3'}
-                condNames = {'low', 'high'};
+                condNames = {'low', 'high','diff'};
                 lineColors = [cols.medgray; cols.lightred; cols.lightgreen];
                 lineWidth = 3;   
             case {'lowhighPihat2', 'lowhighPihat3','lowhighPihat1'}

@@ -159,7 +159,7 @@ switch options.condition
     case 'placebo'
         rawsuffix = '_2_pla';
     case 'ketamine'
-        rawsuffix = '_1_ket';
+        rawsuffix = '_2_ket';
     case 'psilocybin'
         rawsuffix = '_2_psi';
 end

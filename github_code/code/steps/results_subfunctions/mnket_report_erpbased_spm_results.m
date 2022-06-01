@@ -45,7 +45,7 @@ switch flag
     case 'drugdiff'
         spmRoot = paths.erpstatdifffold;
         pngFiles = fullfile(spmRoot,'mmn', 'scalpmaps_*.png');
-        contrastTitle = 'Pla > Ket in ';
+        contrastTitle = 'Pla > Psi in ';
         contrastIdx = 1;
         nVoxMin = 1;
 end

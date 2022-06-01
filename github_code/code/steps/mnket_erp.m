@@ -84,7 +84,7 @@ catch
             condlist = mnket_lowhighPE_conditions(design.epsilon2, ...
                 '\epsilon_2', options);
             savefig([details.lowhighPEfigs '_epsi2.fig']);  
-            if strcmp(id, '4534') && strcmp(options.condition, 'ketamine') 
+            if strcmp(id, '4534') && strcmp(options.condition, 'psilocybin') 
                 % special case for subject 4534 in ketamine condition
                 condlist(1) = [];
             end
@@ -93,7 +93,7 @@ catch
             condlist = mnket_lowhighPE_conditions(design.epsilon3, ...
                 '\epsilon_3', options);
             savefig([details.lowhighPEfigs '_epsi3.fig']);
-            if strcmp(id, '4534') && strcmp(options.condition, 'ketamine') 
+            if strcmp(id, '4534') && strcmp(options.condition, 'psilocybin') 
                 % special case for subject 4534 in ketamine condition
                 condlist(1) = [];
             end

@@ -34,13 +34,13 @@ for r = 1:numel(regressors)
     
     switch options.eeg.stats.mode
         case 'modelbased'
-            if  regressor == 'epsilon2'
+            if  regressor == 'pihat3'
                 fname = fullfile('beta_0003.nii'); % Chose regressor +1 (since first regressor is the mean)
                 for i = 1:numel(icell)
                     files(i).scans = fullfile(icell(i).scans, fname);
                 end
-            elseif  regressor == 'epsilon3'
-                fname = fullfile('beta_0003.nii'); % Chose regressor +1 (since first regressor is the mean)
+            elseif  regressor == 'pihat1'
+                fname = fullfile('beta_0004.nii'); % Chose regressor +1 (since first regressor is the mean)
                 for i = 1:numel(icell)
                     files(i).scans = fullfile(icell(i).scans, fname);
                 end

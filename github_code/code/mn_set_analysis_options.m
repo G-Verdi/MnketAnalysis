@@ -129,7 +129,7 @@ options.conversion.smooKernel   = [16 16 0];
 options.stats.subjectIDs    = options.subjects.all;
 options.stats.overwrite     = 1; % whether to overwrite any previous stats
 options.stats.mode          = 'modelbased'; %'ERPs', 'modelbased', 'mERPs', 'diffWaves'
-options.stats.design        = 'precision'; % 'epsilon', 'HGF', 'epsilonS', 'plustime', 'prediction'
+options.stats.design        = 'epsilon'; % 'epsilon', 'HGF', 'epsilonS', 'plustime', 'prediction'
 switch options.stats.design
     case 'epsilon'
         options.stats.regressors = {'epsi2', 'epsi3'};

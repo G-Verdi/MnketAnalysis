@@ -47,6 +47,7 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%
 
 legend(plotHandles, condNames{:});
+% ylim([-2 1.5]);
 ylim([-2 1.5]);
 ylabel('Field intensity (in \muV)');
 xlim([timeAxis(1) timeAxis(end)]);

@@ -34,6 +34,8 @@ mnket_dcm_stats_report;
 %Group by condition analysis
 mn_2ndlevel_singletrial_groupxcond('epsilon', options);
 
-
-
+% Plot SPM contrast with new figures
+% contrast_idx = 11;
+% regressor = 'epsilon3';
+% mnCHR_plot_blobs(contrast_idx, regressor, options);
 

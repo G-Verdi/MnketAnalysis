@@ -6,12 +6,14 @@ function mnCHR_plot_blobs(contrast_idx, regressor, options)
 
 %% Defaults
 if nargin < 1
-    options = mnCHR_set_analysis_options();
+    options = mn_set_analysis_options();
 end
 
+% paths and files
+[~, paths] = mn_subjects(options);
 
 %% Set options
-spm_root = fullfile(options.roots.model, options.condition, regressor);
+spm_root = fullfile(paths.grouproot, regressor);
 
 
 %% Load SPM file
@@ -34,7 +36,7 @@ temp.thresDesc = 'none';  % Threshold description: 'none' (cluster) or 'FWE' (pe
 max_stat = max(xSPM.Z);     % Get maximum stats value
 stat_thresh = xSPM.u;       % Get critical stats threshold
 stat = xSPM.STAT;           % Get statistic (F or T);
-clear xSPM
+% clear xSPM
 
 % Get peak-level results
 temp.u = 0.05;            % Significance threshold: 0.001 (cluster) or 0.05 (peak)
@@ -43,7 +45,7 @@ temp.thresDesc = 'FWE';   % Threshold description: 'none' (cluster) or 'FWE' (pe
 [~, xSPM] = spm_getSPM(temp);   % Load SPM results structure
 
 stat_thresh_contour = xSPM.u;   % Get critical stats threshold for contour
-clear xSPM temp
+% clear xSPM temp
 
 
 %% Smooth SPM file for plotting
@@ -152,12 +154,12 @@ c = colorbar;
 axis off
 caxis([0 max_stat])
 if ~strcmp(color_mode, 'no_thresh')
-    c.Limits = [stat_thresh+0.1 max_stat];
+    c.Limits = [stat_thresh+0.1 max_stat]; 
 end
 c.FontSize = 25;
 c.Location = 'South'; %South - horizontal; East - vertical 
 save_fname = 'checkreg_colorbar.png';
 exportgraphics(cb_fig,fullfile(save_root, save_fname),'Resolution',100)
-clear cb_fig; close all;
+% clear cb_fig; close all;
 
 end
