@@ -102,9 +102,9 @@ catch
     % Covariates
     %----------------------------------------------------------------------
     % read in covariate information
-%     covariates = perez_get_covariate_labels(IDs, options);
-%     % Z-transform age
-%     covariates.age = (covariates.age-mean(covariates.age))/std(covariates.age);
+    covariates = perez_get_covariate_labels(IDs, options);
+    % Z-transform age
+    covariates.age = (covariates.age-mean(covariates.age))/std(covariates.age);
          
     
     %----------------------------------------------------------------------
@@ -112,7 +112,7 @@ catch
     %----------------------------------------------------------------------
     % compute the effect of the single-trial regressors on the second level
     % one way ANOVA
-     mn_full_factorial_modelbased(icell, scndlvlroot,idx_design, options, 0);
+     mn_full_factorial_modelbased(icell, scndlvlroot,covariates,idx_design, options, 0);
     
 %     tnueeg_2ndlevel_singletrial_groupdiff_paired(scndlvlroot, imagePaths, ...
 %         regressorNames, conditions, options)

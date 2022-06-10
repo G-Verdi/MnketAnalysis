@@ -13,7 +13,7 @@ end
 [~, paths] = mn_subjects(options);
 
 %% Set options
-spm_root = fullfile(paths.grouproot, regressor);
+spm_root = fullfile(paths.erpstatroot, regressor);
 
 
 %% Load SPM file

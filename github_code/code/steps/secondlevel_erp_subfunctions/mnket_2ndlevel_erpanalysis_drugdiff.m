@@ -45,9 +45,9 @@ catch
         options.condition = 'placebo';
         [~, paths] = mn_subjects(options);
         pla = load(paths.erpgafiles{iCh});
-        options.condition = 'psilocybin';
+        options.condition = 'ketamine';
         [~, paths] = mn_subjects(options);
-        psi = load(paths.erpgafiles{iCh});
+        ket = load(paths.erpgafiles{iCh});
 
         % compute the difference waves condition-wise
 %         diff.time = pla.ga.time;
@@ -64,13 +64,13 @@ catch
                 diff.psilocybin.electrode = pla.ga.deviant.electrode;
             case {'lowhighEpsi2', 'lowhighEpsi3'}
                 diff.nsubjects = size(pla.ga.low.data, 1);
-                diffwavesPla = pla.ga.high.data - pla.ga.low.data;
-                diffwavesPsi = psi.ga.high.data - psi.ga.low.data;
+                diffwavesPla= pla.ga.high.data - pla.ga.low.data;
+                diffwavesKet = ket.ga.high.data - ket.ga.low.data;
                 % Added by Colleen
                 diff.placebo.time = pla.ga.high.time;
                 diff.placebo.electrode = pla.ga.high.electrode;
-                diff.psilocybin.time = pla.ga.high.time;
-                diff.psilocybin.electrode = pla.ga.high.electrode;
+                diff.ketamine.time = pla.ga.high.time;
+                diff.ketamine.electrode = pla.ga.high.electrode;
             case {'lowhighPihat2', 'lowhighPihat3','lowhighPihat1'}
                 diff.nsubjects = size(pla.ga.low.data, 1);
                 diffwavesPla = pla.ga.high.data - pla.ga.low.data;
@@ -83,12 +83,12 @@ catch
             case 'tone'
                 diff.nsubjects = size(pla.ga.tone.data, 1);
                 diffwavesPla = pla.ga.tone.data;
-                diffwavesPsi = psi.ga.tone.data;
+                diffwavesKet = ket.ga.tone.data;
                 % Added by Colleen
                 diff.placebo.time = pla.ga.tone.time;
                 diff.placebo.electrode = pla.ga.tone.electrode;
-                diff.psilocybin.time = pla.ga.tone.time;
-                diff.psilocybin.electrode = pla.ga.tone.electrode;
+                diff.ketamine.time = pla.ga.tone.time;
+                diff.ketamine.electrode = pla.ga.tone.electrode;
         end        
         
         diff.placebo.mean = mean(diffwavesPla);
@@ -96,10 +96,10 @@ catch
         diff.placebo.error  = std(diffwavesPla)/sqrt(diff.nsubjects);
         diff.placebo.data = diffwavesPla;
 
-        diff.psilocybin.mean = mean(diffwavesPsi);
-        diff.psilocybin.sd  = std(diffwavesPsi);
-        diff.psilocybin.error  = std(diffwavesPsi)/sqrt(diff.nsubjects);
-        diff.psilocybin.data = diffwavesPsi;
+        diff.ketamine.mean = mean(diffwavesKet);
+        diff.ketamine.sd  = std(diffwavesKet);
+        diff.ketamine.error  = std(diffwavesKet)/sqrt(diff.nsubjects);
+        diff.ketamine.data = diffwavesKet;
 
         save(paths.diffgafiles{iCh}, 'diff');
         

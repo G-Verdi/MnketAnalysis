@@ -30,7 +30,7 @@ switch flag
                 titleStr = [options.erp.type ' ERPs at ' chanName];
         end
 
-        condNames = {'placebo', 'psilocybin'};
+        condNames = {'placebo', 'ketamine'};
         lineColors = [cols.darkgray; cols.medgray];
         lineWidth = 2;
         saveName = fullfile(paths.erpdiffold, ['ga_sem_' options.erp.type '_' chanName '.fig']);

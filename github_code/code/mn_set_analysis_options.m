@@ -13,10 +13,10 @@ switch uid(1: end-1)
         error(['Undefined user. Please specify a user in mn_set_analysis_options ' ...
             'and provide the path to the data']);
 end
-options.workdir = fullfile(options.maindir,'test_mnpsi');
+options.workdir = fullfile(options.maindir,'test_mnket');
 options.rawdir  = fullfile(options.maindir, 'raw');
 options.codedir = '/Users/mypc/Documents/mnketAnalysis';
-options.analysis = 'MNPSI';% analysis type
+options.analysis = 'MNKET';% analysis type
 %% Specify default option functions --------------------------------------%
 options.funs.details = @mn_subjects; % specify paths
 options.funs.subjects = @mn_set_subject_groups; % specify subject groups 
@@ -27,7 +27,7 @@ options= feval(options.funs.eeg, options);
 
 %-- condition info -------------------------------------------------------% 
 options.condition   = 'placebo'; % 'placebo', 'ketamine','psilocybin','drugdiff'
-options.conditions  = {'placebo','psilocybin'};
+options.conditions  = {'placebo','ketamine'};
 %-- preparation ----------------------------------------------------------%
 options.prepare.subjectIDs  = options.subjects.all; % data preparation (tone sequences)
 options.prepare.overwrite   = 1; % whether to overwrite any previous prep

@@ -12,9 +12,9 @@ options = mn_set_analysis_options;
 options.conversion.mode = 'diffWaves';
 options.stats.mode = 'diffWaves';
 
-% for optionsCell = {'placebo','psilocybin'}
+% for optionsCell = {'placebo','ketamine'}
 %     options.condition = char(optionsCell);
-%     
+% %     
 %     % tones definition
 %     options.erp.type = 'tone';
 %     mnket_2ndlevel_erpanalysis_percondition(options);
@@ -32,7 +32,7 @@ options.stats.mode = 'diffWaves';
 %     mnket_2ndlevel_erpstats_percondition_diffERP(options);
 %     
 %   % lowhighPihat1 definition
-%     options.erp.type = 'lowhighPihat1';
+%     options.erp.type = 'lowhighEpsi3';
 %     mnket_2ndlevel_erpanalysis_percondition(options);
 %     mnket_2ndlevel_erpstats_percondition_highlowERP(options);
 %     mnket_2ndlevel_erpstats_percondition_diffERP(options);
@@ -44,18 +44,18 @@ mnket_2ndlevel_erpanalysis_drugdiff(options);
 
 
 %lowhighMuhat2
-options.erp.type = 'lowhighPihat2';
-mnket_2ndlevel_erpanalysis_drugdiff(options);
-mnket_2ndlevel_erpstats_drugdiff(options);
-
-
-%lowhighMuhat3
-options.erp.type = 'lowhighPihat3';
-mnket_2ndlevel_erpanalysis_drugdiff(options);
-mnket_2ndlevel_erpstats_drugdiff(options);
+% options.erp.type = 'lowhighPihat2';
+% mnket_2ndlevel_erpanalysis_drugdiff(options);
+% mnket_2ndlevel_erpstats_drugdiff(options);
+% 
+% 
+% %lowhighMuhat3
+% options.erp.type = 'lowhighPihat3';
+% mnket_2ndlevel_erpanalysis_drugdiff(options);
+% mnket_2ndlevel_erpstats_drugdiff(options);
 
 %lowhighPihat
-options.erp.type = 'lowhighPihat1';
+options.erp.type = 'lowhighEpsi3';
 mnket_2ndlevel_erpanalysis_drugdiff(options);
 mnket_2ndlevel_erpstats_drugdiff(options);
 

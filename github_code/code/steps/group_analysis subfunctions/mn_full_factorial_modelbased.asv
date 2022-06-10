@@ -1,4 +1,4 @@
-function mn_full_factorial_modelbased(icell, scndlvlroot,covariates,design, options, doDeleteExisting)
+function mn_full_factorial_modelbased(icell, scndlvlroot,design, options, doDeleteExisting)
 %--------------------------------------------------------------------------
 % Description goes here.
 %
@@ -88,17 +88,17 @@ for r = 1:numel(regressors)
     job{1}.spm.stats.factorial_design.des.fd.icell(4).levels = [2,2];
     
     
-    % Load covariate
-    job{1}.spm.stats.factorial_design.cov(1).c = covariates.OB; 
-    job{1}.spm.stats.factorial_design.cov(1).cname = 'ASC_OB';
-    job{1}.spm.stats.factorial_design.cov(1).iCFI = 1;
-    job{1}.spm.stats.factorial_design.cov(1).iCC = 1;
-    job{1}.spm.stats.factorial_design.cov(2).c = covariates.VR;
-    job{1}.spm.stats.factorial_design.cov(2).cname = 'ASC_VR';
-    job{1}.spm.stats.factorial_design.cov(2).iCFI = 2;
-    job{1}.spm.stats.factorial_design.cov(2).iCC = 1;
-    job{1}.spm.stats.factorial_design.multi_cov = struct('files', {}, 'iCFI', {}, 'iCC', {});
-        
+%     % Load covariate
+%     job{1}.spm.stats.factorial_design.cov(1).c = covariates.OB; 
+%     job{1}.spm.stats.factorial_design.cov(1).cname = 'ASC_OB';
+%     job{1}.spm.stats.factorial_design.cov(1).iCFI = 1;
+%     job{1}.spm.stats.factorial_design.cov(1).iCC = 1;
+%     job{1}.spm.stats.factorial_design.cov(2).c = covariates.VR;
+%     job{1}.spm.stats.factorial_design.cov(2).cname = 'ASC_VR';
+%     job{1}.spm.stats.factorial_design.cov(2).iCFI = 2;
+%     job{1}.spm.stats.factorial_design.cov(2).iCC = 1;
+%     job{1}.spm.stats.factorial_design.multi_cov = struct('files', {}, 'iCFI', {}, 'iCC', {});
+%        
     job{1}.spm.stats.factorial_design.masking.tm.tm_none = 1;
     job{1}.spm.stats.factorial_design.masking.im = 1;
     job{1}.spm.stats.factorial_design.masking.em = {''};  % explicit mask
@@ -119,13 +119,13 @@ for r = 1:numel(regressors)
     %----------------------------------------------------------------------
     % Covariates
     %----------------------------------------------------------------------
-    job{3}.spm.stats.con.consess{4}.fcon.name = 'ASC_OB';
-    job{3}.spm.stats.con.consess{4}.fcon.convec = [0 0 0 0 0 0 0 0 0 1]; 
-    job{3}.spm.stats.con.consess{4}.fcon.sessrep = 'none';
-    job{3}.spm.stats.con.consess{5}.fcon.name = ['ASC_VR'];
-    job{3}.spm.stats.con.consess{5}.fcon.convec = [0 0 0 0 0 0 0 0 0 0 1 1 1];
-    job{3}.spm.stats.con.consess{5}.fcon.sessrep = 'none';
-    job{3}.spm.stats.con.delete = 1;
+%     job{3}.spm.stats.con.consess{4}.fcon.name = 'sex';
+%     job{3}.spm.stats.con.consess{4}.fcon.convec = [0 0 0 0 0 0 0 0 0 1]; 
+%     job{3}.spm.stats.con.consess{4}.fcon.sessrep = 'none';
+%     job{3}.spm.stats.con.consess{5}.fcon.name = ['group x age'];
+%     job{3}.spm.stats.con.consess{5}.fcon.convec = [0 0 0 0 0 0 0 0 0 0 1 1 1];
+%     job{3}.spm.stats.con.consess{5}.fcon.sessrep = 'none';
+%     job{3}.spm.stats.con.delete = 1;
     %----------------------------------------------------------------------
     % Follow-up all designs
     %----------------------------------------------------------------------
