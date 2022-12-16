@@ -5,11 +5,11 @@ function loop_mnket_quality_check( options )
 %   OUT:    -
 
 if nargin < 1
-    options = mnket_set_analysis_options;
+    options = mnpsi_set_analysis_options;
 end
 
 % perform quality check for subject analysis in both conditions
-for cond = options.conditions
+for cond ={'placebo','psilocybin'}
     options.condition = char(cond);
 
     mnket_quality_check(options);

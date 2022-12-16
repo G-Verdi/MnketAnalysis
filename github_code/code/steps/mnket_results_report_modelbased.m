@@ -4,16 +4,21 @@ function mnket_results_report_modelbased
 %   IN:     --
 %   OUT:    --
 
-options = mnket_set_analysis_options;
+options = mn_set_analysis_options;
 
-options.stats.mode = 'erpbased';
-options.stats.design = 'prediction';    
-options.stats.pValueMode = 'peakFWE';
+options.stats.mode = 'modelbased';
+options.stats.design = 'epsilon';    
+options.stats.pValueMode = 'clusterFWE';
 
 for optionsCell = {'placebo', 'ketamine'}
     options.condition = char(optionsCell);
 
+<<<<<<< HEAD
+    mnket_report_spm_results(options,'groupdiff');
+=======
     mnket_report_spm_results(options, options.condition);
+>>>>>>> 2a43813668028e4b08931b96c29959ee0bf0c35d
+   
 end
 
 mnket_report_spm_results(options, 'drugdiff');

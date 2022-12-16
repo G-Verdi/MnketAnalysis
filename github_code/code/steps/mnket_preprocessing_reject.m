@@ -7,17 +7,17 @@ function D = mnket_preprocessing_reject(id, options)
 
 % general analysis options
 if nargin < 2
-    options = mnket_set_analysis_options;
+    options = mn_set_analysis_options;
 end
 
 options.preproc.eyeblinktreatment = 'reject';
 
 % paths and files
-[details, paths] = mnket_subjects(id, options);
+[details, paths] = mn_subjects(id, options);
 
 % record what we're doing
 diary(details.logfile);
-tnueeg_display_analysis_step_header('preprocessing_reject', 'mnket', id, options.preproc);
+tnueeg_display_analysis_step_header('preprocessing_reject', 'mnpsi', id, options.preproc);
 
 % check destination folder
 if ~exist(details.preproot, 'dir')
@@ -43,7 +43,7 @@ catch
     spm('defaults', 'eeg');
     spm_jobman('initcfg');
 
-    % convert bdf 
+    % convert bdf
     D = tnueeg_convert(details.rawfile);
     fprintf('\nConversion done.\n\n');
     
@@ -89,11 +89,11 @@ catch
     switch id
         case '4458'
             switch options.condition
-                case 'ketamine'
+                case 'psilocybin'
                     D = mnket_remove_incorrect_first_trial(D);
             end
     end
-    
+        
     %-- eye blink detection -----------------------------------------------------------------------%
     % subject-specific EB detection thresholds (are always applied to both sessions of the same 
     % participant to ensure compatibility).
@@ -153,11 +153,13 @@ catch
     disp('   ');
    
     
+<<<<<<< HEAD
+=======
 %------tone sequence extraction---------------------------------------%
 %      mnCHR_binary_trialDef(D,details);
-end
 
 
+>>>>>>> 2a43813668028e4b08931b96c29959ee0bf0c35d
 cd(options.workdir);
 close all
 

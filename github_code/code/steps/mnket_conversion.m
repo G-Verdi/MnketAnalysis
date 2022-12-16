@@ -6,11 +6,11 @@ function mnket_conversion(id, options)
 
 % general analysis options
 if nargin < 2
-    options = mnket_set_analysis_options;
+    options = mn_set_analysis_options;
 end
 
 % paths and files
-[details, ~] = mnket_subjects(id, options);
+[details, ~] = mn_subjects(id, options);
 
 % record what we're doing
 diary(details.logfile);
@@ -46,7 +46,7 @@ catch
         case 'modelbased'
             % in the modelbased analysis, we have to remove the first EEG trial because the model 
             % only defines PEs starting from the 2nd tone (1st observed transition)            
-            if strcmp(id, '4534') && strcmp(options.condition, 'ketamine')
+            if strcmp(id, '4534') && strcmp(options.condition, 'psilocybin')
                 % special case for subject 4534 in ketamine condition: first 29 trials were not 
                 % recorded in the EEG, therefore we don't need to correct the EEG for the 1st trial. 
                 D = spm_eeg_load(details.prepfile);

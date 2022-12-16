@@ -2,7 +2,7 @@ function mnket_setup_analysis_folder(options)
 %MNKET_SETUP_ANALYSIS_FOLDER Creates project directory tree and collects data for the MNKET project
 
 if nargin < 1
-    options = mnpsi_set_analysis_options;
+    options = mn_set_analysis_options;
 end
 
 %-- create folder tree ----------------------------------------------------------------------------%

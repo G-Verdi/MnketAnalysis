@@ -8,11 +8,11 @@ function design = mnket_model(id, options)
 
 % general analysis options
 if nargin < 2
-    options = mnket_set_analysis_options;
+    options = mn_set_analysis_options;
 end
 
 % paths and files
-details = mnket_subjects(id, options);
+details = mn_subjects(id, options);
 
 % record what we're doing
 diary(details.logfile);
@@ -45,6 +45,19 @@ catch
     
     %-- calculate trial-by-trial PEs --------------------------------------------------------------%
     sim = mnket_calculate_regressors(sim);
+    switch id
+        case {'4421'}
+            switch options.condition
+                case {'psilocybin'}
+                    sim.reg.pihat2 = [sim.reg.pihat2(3:end)];
+                    sim.reg.pihat3 = [sim.reg.pihat3(3:end)];
+                    sim.reg.pihat1 = [sim.reg.pihat1(3:end)];
+                    sim.reg.epsi2 = [sim.reg.epsi2(3:end)];
+                    sim.reg.epsi3 = [sim.reg.epsi3(3:end)];
+            end
+    end
+    
+                    
     save(details.simfilepost, 'sim');
     fprintf('\nPE calculation done.\n\n');
     

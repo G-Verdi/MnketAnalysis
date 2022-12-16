@@ -5,7 +5,7 @@ function loop_mnket_subject_analysis( options )
 %   OUT:    -
 
 if nargin < 1 
-    options = mnpsi_set_analysis_options;
+    options = mn_set_analysis_options;
 end
 
 for idCell = options.subjects.all

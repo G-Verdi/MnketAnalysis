@@ -4,7 +4,7 @@ function [ paper ] = mnket_pull_paper_data( options )
 %   OUT:    ppr         - a struct with paper results
 
 if nargin < 1 
-    options = mnket_set_analysis_options;
+    options = mn_set_analysis_options;
 end
 
 mkdir(fullfile(options.workdir, 'paperdata'));
@@ -71,22 +71,22 @@ paper.suppl.tableS1 = mnket_table_s2(options, suppath);
 
 %% Other data reported in the paper
 % Methods: Trial statistics (Section EXPERIMENTAL PROCEDURE AND DATA PREPROCESSING)
-[~, paths] = mnket_subjects(options);
+[~, paths] = mn_subjects(options);
 trialStatsAll = getfield(load(paths.trialstats_summary_all), 'summary1');
 paper.methods.nGoodTrials.Placebo = trialStatsAll.nGoodTrialsTone.mean(1);
-paper.methods.nGoodTrials.Ketamine = trialStatsAll.nGoodTrialsTone.mean(2);
+paper.methods.nGoodTrials.Psilocybin = trialStatsAll.nGoodTrialsTone.mean(2);
 paper.methods.nGoodTrials.sd_Placebo = trialStatsAll.nGoodTrialsTone.sd(1);
-paper.methods.nGoodTrials.sd_Ketamine = trialStatsAll.nGoodTrialsTone.sd(2);
+paper.methods.nGoodTrials.sd_Psilocybin = trialStatsAll.nGoodTrialsTone.sd(2);
 
 % Supplementary methods: Bad channels (Section Preprocessing of EEG data)
 options.condition = 'placebo';
-[~, paths] = mnket_subjects(options);
+[~, paths] = mn_subjects(options);
 load(paths.trialstatstab);
 paper.supplmethods.nBadChannels.Placebo = trialStatsTable.nBadChannels;
-options.condition = 'ketamine';
-[~, paths] = mnket_subjects(options);
+options.condition = 'psilocybin';
+[~, paths] = mn_subjects(options);
 load(paths.trialstatstab);
-paper.supplmethods.nBadChannels.Ketamine = trialStatsTable.nBadChannels;
+paper.supplmethods.nBadChannels.psilocybin = trialStatsTable.nBadChannels;
 
 
 %% save everything
