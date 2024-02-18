@@ -1,0 +1,20 @@
+This readme describes the way we deal with the first trial of the tone sequence in the MNKET study.
+
+In this study, we model how participants infer on transition probabilities between the 7 different 
+tones they were exposed to. The first tone therefore has no update or prediction error with it, as 
+the first observation of a transition only occurs with the second tone.
+
+In the modeling, we therefore start the model only at the second tone. The first tone is however 
+saved in the r.u_orig field and also used to define the first transition in the main loop over 
+trials (in the file tapas_hgf_transition).
+
+In the modelbased EEG analysis, we can either:
+- append our trace of PE estimates with one 'dummy' value in the beginning (e.g., repeat the second
+entry) - this should not lead to changes of a meaningful size in our results, as it affects only 1 
+trial out of ~1700. 
+- remove the first EEG trial from the final preprocessed EEG file, as we cannnot assign a meaningful
+value to this trial from the modeling perspective. In this case, we first need to check whether the
+first trial has anyway been removed already due to artefacts, and if not, we mark it as bad before 
+the conversion to images.
+
+Up to Jan 30, 2018: option 1. From then on: we choose option 2, as it is more principled. 

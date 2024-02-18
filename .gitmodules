@@ -1,0 +1,9 @@
+[submodule "code/tnueeg"]
+	path = code/tnueeg
+	url = https://tnurepository.ethz.ch/lilweber/tnueegToolbox
+[submodule "code/spm"]
+	path = code/spm
+	url = https://tnurepository.ethz.ch/SPM/spm12
+[submodule "github_code/code/spm12"]
+	path = github_code/code/spm12
+	url = https://github.com/spm/spm12.git
