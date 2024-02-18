@@ -51,7 +51,9 @@ end
 con.swd     = xSPM.swd;
 con.name    = [titleStr ' ' xSPM.title];
 con.stat    = xSPM.STAT;
+
 con.statMax = max(xSPM.Z);
+
 con.conIdx  = xSPM.Ic;
 con.imgFile = fullfile(con.swd, ...
     ['spm' con.stat '_000' num2str(con.conIdx) '.nii']);

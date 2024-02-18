@@ -5,7 +5,9 @@ function mnket_summarize_step( stepStr, options )
 %           options - the struct that holds all analysis options
 %   OUT:    -
 
+
 [~, paths] = mn_subjects(options);
+
 
 qualityRoot = paths.qualityfold;
 stepRoot    = fullfile(qualityRoot, stepStr);
@@ -18,7 +20,9 @@ end
 
 for iSub = 1: numel(options.subjects.all)
     id = char(options.subjects.all{iSub});
+
     details = mn_subjects(id, options);
+
 
     figureTitle = ['MNKET subject ' id];
     switch lower(stepStr)
@@ -39,6 +43,7 @@ for iSub = 1: numel(options.subjects.all)
                 stepRoot, 'png');
             % tnueeg_add_title_to_figure([details.regressorplots '_pihat3.fig'], figureTitle, ...
             %     stepRoot, 'png');
+
         case {'mask', 'firstlevelmask'}
             tnueeg_add_title_to_figure(details.firstlevelmaskfig, figureTitle, stepRoot, 'png');
     end

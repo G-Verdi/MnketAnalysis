@@ -14,7 +14,6 @@ rawdatadest     = fullfile(options.workdir, 'subjects');
 destprefix      = 'MMN_';
 destsubfolder   = 'eeg';
 
-
 % loop over conditions and subjects
 for condCell    = conditions
     cond        = char(condCell);
@@ -35,5 +34,7 @@ for condCell    = conditions
         disp(['Copied raw EEG data for subject ' id ' in condition ' cond]);
     end
 end
+
+
 
 

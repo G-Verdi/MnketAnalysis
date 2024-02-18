@@ -8,6 +8,7 @@ function [covars] = perez_get_covariate_labels(IDs, options)
 % Read data
 [~, ~, raw] = xlsread("/Volumes/Expansion/Cognemo/MMN/MNPSI Project files /Q_data_summaryscores.xlsx");
 all_IDs = cellfun(@(x) erase(x,'E1'), raw(:,1), 'UniformOutput', false);
+
 IDs = cellfun(@(x) x(1:4), IDs, 'UniformOutput', false);
 
 
@@ -59,4 +60,5 @@ end
 
  covars = array2table([DE EU SP BS IN CP EI CI AV ICC AX GASC]);
  covars.Properties.VariableNames = {'DE' 'EU' 'SP' 'BS' 'IN' 'CP' 'EI' 'CI' 'AV' 'ICC' 'AX' 'GASC'};
+
 

@@ -17,10 +17,10 @@ for optionsCell = {'placebo','ketamine'}
      mnket_report_spm_results(options,'groupdiff');
      %mnket_report_spm_results(options, options.condition);
 
-   
 end
 
   mnket_report_spm_results(options, 'drugdiff');
+
 
 end
 

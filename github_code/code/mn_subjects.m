@@ -1,4 +1,4 @@
- function [ details, paths ] = mn_subjects( id, options )
+function [ details, paths ] = mn_subjects( id, options )
 %MNKET_SUBJECTS Function that sets all filenames and paths
 %   IN:     EITHER (for quering both general and subject-specific paths:
 %           id                  - the subject number as a string, e.g. '0001'
@@ -19,7 +19,6 @@ elseif ischar(id) && nargin < 2
 end
 
 %-- general paths and files -----------------------------------------------------------------------%
-
 paths.confroot      = fullfile(options.workdir, 'config');
 paths.tonesroot     = fullfile(options.workdir, 'tones');
 paths.erproot       = fullfile(options.workdir, 'erp');
@@ -57,6 +56,7 @@ paths.statfold      = fullfile(paths.statroot, options.condition);
 paths.statdifffold  = fullfile(paths.statroot, 'drugdiff');
 
 % Groupxcond stats folders
+<<<<<<< HEAD
 %paths.groupfold = fullfile(paths.grouproot, options.condition);
 paths.groupfold = fullfile(paths.grouproot);
 % erp stats folders
@@ -117,8 +117,6 @@ switch options.condition
 end
 
         
-
-
 % EB detection threshold
 switch id
     case {'4497', '4447', '4478'}
@@ -153,7 +151,7 @@ switch options.condition
             otherwise
                 details.windowForEyeblinkdetection = 3;
         end
-        
+
 end
 
 % bad channels before EB confound estimation (only needed for SSP eyeblink correction)
@@ -219,7 +217,6 @@ switch options.conversion.mode
         details.convroot = fullfile(details.erproot, ...
             [options.conversion.convPrefix '_' details.mergfilename]);
 end
-
 
 % files
 details.logfile     = fullfile(details.subjectroot, [details.subjectname '.log']);

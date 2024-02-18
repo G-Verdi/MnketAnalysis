@@ -37,4 +37,6 @@ end
 
 [images, outroot] = spm_eeg_convert2images(S);
 
+
 end
+

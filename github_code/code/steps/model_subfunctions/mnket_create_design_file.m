@@ -33,6 +33,7 @@ switch designType
         design.epsilon3 = sim.reg.epsi3;
         design.shannon = sim.reg.shannon;
         
+
     case 'precision'
         design.pihat1 = sim.reg.pihat1;
         design.pihat2 = sim.reg.pihat2;
@@ -43,7 +44,7 @@ switch designType
         design.muhat2 = sim.reg.muhat2;
         design.muhat3 = sim.reg.muhat3;
         design.pihat = sim.reg.pihat;
-        
+
     
 end
 

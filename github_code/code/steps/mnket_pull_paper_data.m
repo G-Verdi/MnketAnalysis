@@ -78,15 +78,18 @@ paper.methods.nGoodTrials.ketamine = trialStatsAll.nGoodTrialsTone.mean(2);
 paper.methods.nGoodTrials.sd_Placebo = trialStatsAll.nGoodTrialsTone.sd(1);
 paper.methods.nGoodTrials.sd_ketamine = trialStatsAll.nGoodTrialsTone.sd(2);
 
+
 % Supplementary methods: Bad channels (Section Preprocessing of EEG data)
 options.condition = 'placebo';
 [~, paths] = mn_subjects(options);
 load(paths.trialstatstab);
 paper.supplmethods.nBadChannels.Placebo = trialStatsTable.nBadChannels;
+
 options.condition = 'ketamine';
 [~, paths] = mn_subjects(options);
 load(paths.trialstatstab);
 paper.supplmethods.nBadChannels.ketamine = trialStatsTable.nBadChannels;
+
 
 
 %% save everything

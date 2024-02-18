@@ -4,6 +4,7 @@ function [ data ] = mnket_figure_4( options, savePath )
 %   IN:     options     - the struct that holds all analysis options
 %           savePath    - where to save the images and data
 
+
 [~, paths] = mn_subjects(options);
 
 figPath = fullfile(savePath, 'figure_4');
@@ -41,6 +42,7 @@ end
 copyfile([fileName '.png'], figDir);
 load(fullfile(resultsDir, 'peakTvalue.mat'));
 
+
 data.pihat1.peak = peak;
 data.pihat1.tmax = tMax;
 
@@ -64,6 +66,7 @@ con = getfield(load(fullfile(resultsDir, 'con_T_peakFWE.mat')), 'con');
 
 data.pihat2.peak     = con.clusters.peak;
 data.pihat2.timewin  = con.clusters.timewin;
+
 
 
 % save all paper-relevant data for this figure

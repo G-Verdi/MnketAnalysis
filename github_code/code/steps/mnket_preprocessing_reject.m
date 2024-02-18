@@ -104,7 +104,7 @@ catch
     [Dm, trialStats.numEyeblinks] = tnueeg_eyeblink_detection_spm(D, options);
     savefig(details.ebdetectfig);
     fprintf('\nEye blink detection done.\n\n');
-    
+
     %--trial definition --------------------------------------------------------------------------%
     if ~exist(paths.trialdef, 'file')
         trialdef = mnket_trial_definition(options, paths);

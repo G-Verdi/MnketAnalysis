@@ -32,4 +32,5 @@ group2 = char(grouplabels{2});
 job = tnueeg_getjob_2ndlevel_paired_ttest(scndlvlroot, pairs, factorName, group1, group2);
 spm_jobman('run', job);
 
+
 end

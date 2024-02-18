@@ -7,12 +7,14 @@ function [] = mnket_report_spm_results( options, flag )
 
 % general analysis options
 if nargin < 1
+
     options = mn_set_analysis_options;
     flag = options.condition;
 end
 if ischar(options)
     flag = options;
     options = mn_set_analysis_options;
+
 end
 % sanity check
 if ismember(flag, options.conditions) && ~strcmp(flag, options.condition)
@@ -24,7 +26,9 @@ end
 spm('Defaults', 'EEG');
 
 % paths and files
+
 [~, paths] = mn_subjects(options);
+
 
 % record what we're doing
 diary(paths.logfile);
@@ -33,8 +37,10 @@ mnket_display_analysis_step_header(['results report: ' flag], ...
 
 % names of the single-trial regressors
 
+
 %regressorNames = options.stats.regressors;
 regressorNames = options.eeg.stats.regressors{3};
+
 
 
 % scalpmap images of first regressor
@@ -61,6 +67,7 @@ switch flag
 
 
         
+
 end
 
 try
@@ -169,4 +176,6 @@ end
 cd(options.workdir);
 
 diary OFF
+
 end
+

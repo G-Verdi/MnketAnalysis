@@ -13,6 +13,7 @@ end
 if ischar(options)
     flag = options;
     options = mn_set_analysis_options;
+
 end
 % sanity check
 if ismember(flag, options.conditions) && ~strcmp(flag, options.condition)
@@ -25,6 +26,7 @@ spm('Defaults', 'EEG');
 
 % paths and files
 [~, paths] = mn_subjects(options);
+
 
 % record what we're doing
 diary(paths.logfile);

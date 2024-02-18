@@ -1,6 +1,7 @@
-% --- Analysis script for MMN ketamine/psilocybin EEG dataset --- %
 
-% set up Matlab environment
+% --- Analysis script for MMN ketamine EEG dataset --- %
+
+% % set up Matlab environment
 % mnket_setup_paths;
 
 % set all analysis options and provide the path to the data
@@ -43,5 +44,6 @@ mn_plot_covar_vs_sensor_betas(peakCoord, 'epsi3', 'epsilon', covariate, options)
 contrast_idx = 1;
 regressor = 'epsilon3';
 mnCHR_plot_blobs(contrast_idx, regressor, options);
+
 
 

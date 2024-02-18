@@ -231,6 +231,7 @@ catch
             copy(D, details.difffile);
             disp(['Computed the difference wave for subject ' id]);    
     
+
         case {'lowhighPihat1', 'lowhighPihat2','lowhighPihat3'}
             % preparation for computing the difference wave
             % determine condition order within the D object

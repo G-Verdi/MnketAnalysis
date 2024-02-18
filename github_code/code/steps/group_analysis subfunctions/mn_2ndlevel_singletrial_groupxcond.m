@@ -37,6 +37,7 @@ catch
         options.eeg.stats.design{idx_design}  ' design...']);
     
     % make sure we have a results directory
+
     scndlvlroot = fullfile(statspath, 'groupdiff', 'ANCOVA', 'no_placebo');
     if ~exist(scndlvlroot, 'dir')
         mkdir(scndlvlroot);
@@ -108,6 +109,7 @@ catch
     %----------------------------------------------------------------------
     % compute the effect of the single-trial regressors on the second level
     % one way ANOVA
+
       mn_full_factorial_modelbased(icell, scndlvlroot,covariates, idx_design, options, 0);
     
      % tnueeg_2ndlevel_singletrial_groupdiff_paired(scndlvlroot, imagePaths, ...

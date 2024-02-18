@@ -7,3 +7,4 @@ options.eeg.stats.regressors  = {{'muhat2', 'muhat3','pihat'}; {'epsilon2','epsi
 options.eeg.stats.secondlevel.secondlevelDir.classical = {'/Volumes/Expansion/Cognemo/MMN/data/prj_epsi/group_analysis','/Volumes/Expansion/Cognemo/MMN/data/prj_epsi/group_analysis','/Volumes/Expansion/Cognemo/MMN/data/prj_epsi/group_analysis'}; 
 
 
+

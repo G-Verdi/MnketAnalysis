@@ -32,6 +32,7 @@ else
     tickMax = floor(maxStatValue/tickDist)*tickDist;
 end
 
+
 % choose one subject ID for plotting electrode locations
 id = options.stats.exampleID;
 details = mn_subjects(id, options);

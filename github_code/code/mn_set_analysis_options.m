@@ -14,6 +14,7 @@ switch uid(1: end-1)
         error(['Undefined user. Please specify a user in mn_set_analysis_options ' ...
             'and provide the path to the data']);
 end
+
 options.workdir = fullfile(options.preprocdir,'test_mnket');
 options.rawdir  = fullfile(options.maindir, 'raw');
 options.codedir = '/Users/gabriellea/Documents/MMN_code/Mnket_files_misc/mnketAnalysis';

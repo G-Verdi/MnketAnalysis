@@ -78,6 +78,7 @@ for i = 1: numel(factors)
     job{4}.spm.stats.results.conspec(i).mask = struct('contrasts', {}, 'thresh', {}, 'mtype', {});
 end
 
+
 job{4}.spm.stats.results.units = 2;  
 job{4}.spm.stats.results.print = [];
 job{4}.spm.stats.results.write.none = 1;

@@ -6,6 +6,7 @@ function mnket_compare_trial_stats( options )
 %   OUT:    -
 
 if nargin < 1
+
     options = mn_set_analysis_options;
 end
 
@@ -15,6 +16,7 @@ placebo = getfield(load(paths.trialstatstab), 'trialStatsTable');
 
 options.condition = 'psilocybin';
 [~, paths] = mn_subjects(options);
+
 psilocybin= getfield(load(paths.trialstatstab), 'trialStatsTable');
 
 % Summarize with all participants

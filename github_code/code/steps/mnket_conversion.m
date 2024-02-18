@@ -46,6 +46,7 @@ catch
         case 'modelbased'
             % in the modelbased analysis, we have to remove the first EEG trial because the model 
             % only defines PEs starting from the 2nd tone (1st observed transition)            
+
             if strcmp(id, '4534') && strcmp(options.condition, 'ketamine')
                 % special case for subject 4534 in ketamine condition: first 29 trials were not 
                 % recorded in the EEG, therefore we don't need to correct the EEG for the 1st trial. 

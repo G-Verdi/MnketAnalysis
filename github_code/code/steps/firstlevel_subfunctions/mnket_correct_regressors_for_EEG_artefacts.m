@@ -1,4 +1,5 @@
 function finaldesign = mnket_correct_regressors_for_EEG_artefacts(details, options)
+
 %MNKET_CORRECT_REGRESSORS_FOR_EEG_ARTEFACTS  Corrects modelbased regressors for EEG artefacts before
 %applying the firstlevel statistics for one subject in the MNKET study. 
 %   IN:     details     - the struct that holds all subject-specific paths and filenames     

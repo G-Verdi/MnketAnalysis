@@ -5,6 +5,7 @@ function loop_mnket_quality_check( options )
 %   OUT:    -
 
 if nargin < 1
+
     options = mn_set_analysis_options;
 end
 

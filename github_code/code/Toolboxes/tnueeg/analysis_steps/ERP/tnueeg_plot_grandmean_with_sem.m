@@ -55,7 +55,7 @@ xlabel('Time (ms after tone onset)');
 grid on;
 
 title(titleStr);
-   
+
 savefig(h, saveName);
 
 

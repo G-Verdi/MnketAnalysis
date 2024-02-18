@@ -10,6 +10,7 @@ end
 
 [~, paths] = mn_subjects(options);
 
+
 if ~exist(paths.qualityroot, 'dir')
     mkdir(paths.qualityroot);
 end

@@ -7,6 +7,7 @@ function mnket_2ndlevel_erpstats_drugdiff(options)
 
 % general analysis options
 if nargin < 1
+
     options = mn_set_analysis_options;
 end
 

@@ -7,7 +7,9 @@ function mnket_report_step_posthoc( stepStr, options )
 
 for iSub = 1: numel(options.subjects.all)
     id = char(options.subjects.all{iSub});
+
     details = mn_subjects(id, options);
+
 
     switch lower(stepStr)
         case {'ebcorr', 'ebcorrection', 'eyeblinkcorrection'}

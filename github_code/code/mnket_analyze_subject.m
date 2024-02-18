@@ -35,6 +35,7 @@ for optionsCell = options.conditions
     % options.erp.type = 'lowhighPihat3';
     % mnket_erp(id, options);
 
+
     %%%%% This part is not needed for the paper. %%%%%
     
     % ERP analysis (up until conversion): roving definition
@@ -43,7 +44,7 @@ for optionsCell = options.conditions
 %     
 %     options.conversion.mode = 'diffWaves';
 %     mnket_conversion(id, options);
-%     =
+
 %     % ERP analysis (up until conversion): MMN definition
 %     options.erp.type = 'mmnad';
 %     mnket_erp(id, options);

@@ -4,6 +4,7 @@ function [ data ] = mnket_figure_3( options, savePath )
 %   IN:     options     - the struct that holds all analysis options
 %           savePath    - where to save the images and data
 
+
 [~, paths] = mn_subjects(options);
 
 figPath = fullfile(savePath, 'figure_3');
@@ -49,11 +50,13 @@ copyfile(fullfile(resultsDir, 'conF_scalpmaps', 'scalpmaps_spmF_0003_ft_cluster1
 
 con = getfield(load(fullfile(resultsDir, 'con_F_peakFWE.mat')), 'con');
 
+
 % data.pihat2.peak1      = con.clusters(3).peak;
 % data.pihat2.timewin1   = con.clusters(3).timewin;
 
 data.pihat2.peak2      = con.clusters(1).peak;
 data.pihat2.timewin2   = con.clusters(1).timewin;
+
 
 save(fullfile(figPath, 'figdata.mat'), 'data');
 

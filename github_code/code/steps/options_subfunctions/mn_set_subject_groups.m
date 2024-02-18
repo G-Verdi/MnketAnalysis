@@ -19,8 +19,6 @@ switch options.analysis
         '4532', '4497', '4534', '4459', ...
         '4507', '4422', '4478'};
 
-     
-
         % Return subjects that should be included in analysis
         options.subjects.all = setdiff(subjects, exclude, 'stable');
 

@@ -7,11 +7,13 @@ function mnket_2ndlevel_singletrial_percondition(options)
 
 % general analysis options
 if nargin < 1
+
     options = mn_set_analysis_options;
 end
 
 % paths and files
 [~, paths] = mn_subjects(options);
+
 
 % record what we're doing
 diary(paths.logfile);
@@ -55,7 +57,9 @@ catch
     imagePaths = cell(nSubjects, 1);
     for sub = 1: nSubjects
         subID = char(options.stats.subjectIDs{sub});
+
         details = mn_subjects(subID, options);
+
         imagePaths{sub, 1} = details.statroot;
     end
     

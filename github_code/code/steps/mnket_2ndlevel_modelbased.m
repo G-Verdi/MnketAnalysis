@@ -11,7 +11,9 @@ end
 options.stats.mode = 'modelbased';
 options.stats.design = 'epsilon';     
 
+
 for optionsCell = {'placebo','ketamine'}
+
     options.condition = char(optionsCell);
 
     mnket_2ndlevel_singletrial_percondition(options);

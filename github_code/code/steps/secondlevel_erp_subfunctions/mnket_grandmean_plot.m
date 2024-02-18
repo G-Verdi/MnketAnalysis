@@ -14,7 +14,6 @@ if nargin < 3
 end
 
 [~, paths] = mn_subjects(options);
-
 cols = mnket_define_colors;
 
 switch flag
@@ -22,6 +21,7 @@ switch flag
         
         % Gather plotting info
         switch options.erp.type
+
             case {'mmnad', 'roving', 'lowhighEpsi2', 'lowhighEpsi3','lowhighPihat2', 'lowhighPihat3','lowhighPihat1'}
                 titleStr = [options.erp.type ' difference waves at ' chanName];
                 lineColors = [cols.darkgreen; cols.lightgreen];
