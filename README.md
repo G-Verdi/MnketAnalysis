@@ -1,7 +1,6 @@
-<<<<<<< HEAD
+
 # mnketAnalysis
  Latest code for the MMN Ketamine study. Includes two new codes for DCM analysis (mnket_dcm_gather_parameters and mnket_dcm_stats_report).
-=======
 # Members of the project
 Supervisor: Dr. Andreea Diaconescu 
 Contributors: Milad Soltanzadeh, Gabrielle Allohverdi, Colleen Charlton
@@ -21,4 +20,3 @@ Please clone this repo using the recursive options, since it contains the SPM ve
 `git clone --recursive git@github.com:G-Verdi/MnketAnalysis.git`
 
 
->>>>>>> 765825a99c36aa1a835988f19eff315581169a09
