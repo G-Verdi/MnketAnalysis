@@ -3,7 +3,7 @@
  Latest code for the MMN Ketamine study. Includes two new codes for DCM analysis (mnket_dcm_gather_parameters and mnket_dcm_stats_report).
 # Members of the project
 Supervisor: Dr. Andreea Diaconescu 
-Contributors: Milad Soltanzadeh, Gabrielle Allohverdi, Colleen Charlton
+Contributors: Milad Soltanzadeh, Gabrielle Allohverdi
 
 
 This repository contains the code for

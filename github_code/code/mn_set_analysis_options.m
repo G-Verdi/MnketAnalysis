@@ -41,7 +41,7 @@ options.model.overwrite     = 1; % whether to overwrite any previous model
 
 %-- preprocessing --------------------------------------------------------%
 options.preproc.subjectIDs      = options.subjects.all;
-options.preproc.overwrite       = 0; % whether to overwrite any prev. prepr
+options.preproc.overwrite       = 1; % whether to overwrite any prev. prepr
 options.preproc.keep            = 1;  % whether to keep intermediate data
 
 % swap channel option: this is where we decide what to do about the data sets with apparently

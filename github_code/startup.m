@@ -9,10 +9,7 @@ if strcmp(getenv('MNKETROOT'), '')
     pathProject = fullfile(fileparts(mfilename('fullpath')), 'code');
     % add project path with all sub-paths 
     addpath(genpath(pathProject));
-<<<<<<< HEAD
-    
-=======
->>>>>>> 765825a99c36aa1a835988f19eff315581169a09
+
 else
    if ~isdir(getenv('MNKETROOT'))
        warning('MNKETROOT is not a directory');

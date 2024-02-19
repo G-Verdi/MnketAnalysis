@@ -56,7 +56,6 @@ paths.statfold      = fullfile(paths.statroot, options.condition);
 paths.statdifffold  = fullfile(paths.statroot, 'drugdiff');
 
 % Groupxcond stats folders
-<<<<<<< HEAD
 %paths.groupfold = fullfile(paths.grouproot, options.condition);
 paths.groupfold = fullfile(paths.grouproot);
 % erp stats folders

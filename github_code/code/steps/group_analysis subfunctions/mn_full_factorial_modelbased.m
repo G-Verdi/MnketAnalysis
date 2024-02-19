@@ -186,7 +186,7 @@ for r = 1:numel(regressors)
     % Covariates
     %----------------------------------------------------------------------
 
-<<<<<<< HEAD
+
     job{3}.spm.stats.con.consess{1}.fcon.name = 'DE';
     job{3}.spm.stats.con.consess{1}.fcon.convec = [0 0 0 0 1]; 
     job{3}.spm.stats.con.consess{1}.fcon.sessrep = 'none';
@@ -330,7 +330,7 @@ for r = 1:numel(regressors)
      actual_job = {job{1},job{2},job{3},job{4}};
     
     % Execute actual_job
-    spm_jobman('run', actual_job);
+    spm_jobman('interactive', actual_job);
 
  %----------------------------------------------------------------------%
  %      Merge pdfs 

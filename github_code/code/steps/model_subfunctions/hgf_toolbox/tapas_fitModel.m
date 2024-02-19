@@ -454,11 +454,7 @@ end
 % Calculate the log-likelihood of observed responses given the perceptual trajectories,
 % under the observation model
 trialLogLls = obs_fun(r, infStates, ptrans_obs);
-<<<<<<< HEAD
 logLl = sum(trialLogLls);
-=======
-logLl = nansum(trialLogLls);
->>>>>>> 765825a99c36aa1a835988f19eff315581169a09
 negLogLl = -logLl;
 
 % Calculate the log-prior of the perceptual parameters.
