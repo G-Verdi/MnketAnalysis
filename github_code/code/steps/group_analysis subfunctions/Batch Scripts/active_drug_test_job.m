@@ -89,7 +89,7 @@ matlabbatch{1}.spm.stats.factorial_design.cov(1).c = [72.6667
                                                       15.3333];
 %%
 matlabbatch{1}.spm.stats.factorial_design.cov(1).cname = 'DE';
-matlabbatch{1}.spm.stats.factorial_design.cov(1).iCFI = 1;
+matlabbatch{1}.spm.stats.factorial_design.cov(1).iCFI = 2;
 matlabbatch{1}.spm.stats.factorial_design.cov(1).iCC = 1;
 %%
 matlabbatch{1}.spm.stats.factorial_design.cov(2).c = [94
@@ -129,7 +129,7 @@ matlabbatch{1}.spm.stats.factorial_design.cov(2).c = [94
                                                       68.3333];
 %%
 matlabbatch{1}.spm.stats.factorial_design.cov(2).cname = 'EI';
-matlabbatch{1}.spm.stats.factorial_design.cov(2).iCFI = 1;
+matlabbatch{1}.spm.stats.factorial_design.cov(2).iCFI = 2;
 matlabbatch{1}.spm.stats.factorial_design.cov(2).iCC = 1;
 %%
 matlabbatch{1}.spm.stats.factorial_design.cov(3).c = [50.4286
@@ -169,7 +169,7 @@ matlabbatch{1}.spm.stats.factorial_design.cov(3).c = [50.4286
                                                       50.5714];
 %%
 matlabbatch{1}.spm.stats.factorial_design.cov(3).cname = 'ICC';
-matlabbatch{1}.spm.stats.factorial_design.cov(3).iCFI = 1;
+matlabbatch{1}.spm.stats.factorial_design.cov(3).iCFI = 2;
 matlabbatch{1}.spm.stats.factorial_design.cov(3).iCC = 1;
 matlabbatch{1}.spm.stats.factorial_design.multi_cov = struct('files', {}, 'iCFI', {}, 'iCC', {});
 matlabbatch{1}.spm.stats.factorial_design.masking.tm.tm_none = 1;
@@ -183,20 +183,23 @@ matlabbatch{2}.spm.stats.fmri_est.write_residuals = 0;
 matlabbatch{2}.spm.stats.fmri_est.method.Classical = 1;
 matlabbatch{3}.spm.stats.con.spmmat(1) = cfg_dep('Model estimation: SPM.mat File', substruct('.','val', '{}',{2}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
 matlabbatch{3}.spm.stats.con.consess{1}.fcon.name = 'DE';
-matlabbatch{3}.spm.stats.con.consess{1}.fcon.weights = [0 0 1];
+matlabbatch{3}.spm.stats.con.consess{1}.fcon.weights = [0 0 1 1 0 0 0 0];
 matlabbatch{3}.spm.stats.con.consess{1}.fcon.sessrep = 'none';
 matlabbatch{3}.spm.stats.con.consess{2}.fcon.name = 'EI';
-matlabbatch{3}.spm.stats.con.consess{2}.fcon.weights = [0 0 0 1];
+matlabbatch{3}.spm.stats.con.consess{2}.fcon.weights = [0 0 0 0 1 1 0 0];
 matlabbatch{3}.spm.stats.con.consess{2}.fcon.sessrep = 'none';
 matlabbatch{3}.spm.stats.con.consess{3}.fcon.name = 'ICC';
-matlabbatch{3}.spm.stats.con.consess{3}.fcon.weights = [0 0 0 0 1];
+matlabbatch{3}.spm.stats.con.consess{3}.fcon.weights = [0 0 0 0 0 0 1 1];
 matlabbatch{3}.spm.stats.con.consess{3}.fcon.sessrep = 'none';
-matlabbatch{3}.spm.stats.con.consess{4}.tcon.name = 'epsilon3: ket > psi';
-matlabbatch{3}.spm.stats.con.consess{4}.tcon.weights = [1 -1];
-matlabbatch{3}.spm.stats.con.consess{4}.tcon.sessrep = 'none';
-matlabbatch{3}.spm.stats.con.consess{5}.tcon.name = 'epsilon3: ket < psi';
-matlabbatch{3}.spm.stats.con.consess{5}.tcon.weights = [-1 1];
-matlabbatch{3}.spm.stats.con.consess{5}.tcon.sessrep = 'none';
+% matlabbatch{3}.spm.stats.con.consess{4}.tcon.name = 'epsilon3: ket > psi';
+% matlabbatch{3}.spm.stats.con.consess{4}.tcon.weights = [1 -1];
+% matlabbatch{3}.spm.stats.con.consess{4}.tcon.sessrep = 'none';
+% matlabbatch{3}.spm.stats.con.consess{5}.tcon.name = 'epsilon3: ket < psi';
+% matlabbatch{3}.spm.stats.con.consess{5}.tcon.weights = [-1 1];
+% matlabbatch{3}.spm.stats.con.consess{5}.tcon.sessrep = 'none';
+% matlabbatch{3}.spm.stats.con.consess{5}.tcon.name = 'Correlation in ketamine';
+% matlabbatch{3}.spm.stats.con.consess{5}.tcon.weights = [ 0 0 1 0...];
+% matlabbatch{3}.spm.stats.con.consess{5}.tcon.sessrep = 'none';
 
 matlabbatch{3}.spm.stats.con.delete = 1;
 matlabbatch{4}.spm.stats.results.spmmat(1) = cfg_dep('Contrast Manager: SPM.mat File', substruct('.','val', '{}',{3}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));

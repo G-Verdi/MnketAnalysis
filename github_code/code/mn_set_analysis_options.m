@@ -8,17 +8,17 @@ function options = mn_set_analysis_options
 [~, uid] = unix('whoami'); 
 switch uid(1: end-1)     
     case 'gabriellea'
-        options.preprocdir = '/Volumes/Expansion/Cognemo/MMN/data/prj_epsi';
+        options.preprocdir = '/Volumes/Expansion/Cognemo/MMN/data/prj_precision';
         options.maindir = '/Volumes/Expansion/Cognemo/MMN/data';
     otherwise
         error(['Undefined user. Please specify a user in mn_set_analysis_options ' ...
             'and provide the path to the data']);
 end
 
-options.workdir = fullfile(options.preprocdir,'test_mnket');
+options.workdir = fullfile(options.preprocdir,'test_mnpsi');
 options.rawdir  = fullfile(options.maindir, 'raw');
 options.codedir = '/Users/gabriellea/Documents/MMN_code/Mnket_files_misc/mnketAnalysis';
-options.analysis = 'MNKET';% analysis types
+options.analysis = 'MNPSI';% analysis types
 
 %% Specify default option functions --------------------------------------%
 options.funs.details = @mn_subjects; % specify paths
@@ -30,7 +30,7 @@ options.funs.eeg = @mn_prepare_eeg; %specify eeg options
 
 %-- condition info -------------------------------------------------------% 
 options.condition   = 'placebo'; % 'placebo', 'ketamine','psilocybin','drugdiff'
-options.conditions  = {'placebo','ketamine'};
+options.conditions  = {'placebo','psilocybin'};
 %-- preparation ----------------------------------------------------------%
 options.prepare.subjectIDs  = options.subjects.all; % data preparation (tone sequences)
 options.prepare.overwrite   =1; % whether to overwrite any previous prep

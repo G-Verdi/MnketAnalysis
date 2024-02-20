@@ -176,7 +176,7 @@ end
 % raw file names
 switch options.condition
     case 'placebo'
-        rawsuffix = '_1_pla';
+        rawsuffix = '_2_pla';
     case 'ketamine'
         rawsuffix = '_1_ket';
     case 'psilocybin'

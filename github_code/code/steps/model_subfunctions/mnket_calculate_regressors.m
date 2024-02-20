@@ -40,8 +40,8 @@ sim.reg.epsi3 = mnket_calculate_sumPE(eps3,tones);
 % sim.reg.sigma3 = mnket_calculate_transitionPE(sigma3,tones);
 
 % add priors / first trial for EEG
-% sim.reg.epsi2 = [sim.reg.epsi2(1); sim.reg.epsi2];
-% sim.reg.epsi3 = [sim.reg.epsi3(1); sim.reg.epsi3];
+sim.reg.epsi2 = [sim.reg.epsi2(1); sim.reg.epsi2];
+sim.reg.epsi3 = [sim.reg.epsi3(1); sim.reg.epsi3];
 % %
 % sim.reg.pihat2 = [sim.reg.pihat2(1); sim.reg.pihat2];
 % sim.reg.pihat3 = [sim.reg.pihat3(1); sim.reg.pihat3];
