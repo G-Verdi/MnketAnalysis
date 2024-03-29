@@ -29,7 +29,7 @@ numConditions = numel(conlist);
 
 plotHandles = [];
 h = figure; hold on;
-set(h, 'Visible', 'off'); 
+set(h, 'Visible', 'on'); 
 % loop over all conditions present in the EEG files
 for iCon = 1: numConditions
     conlabel = char(conlist{iCon});

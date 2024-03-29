@@ -8,7 +8,7 @@ function options = mn_set_analysis_options
 [~, uid] = unix('whoami'); 
 switch uid(1: end-1)     
     case 'gabriellea'
-        options.preprocdir = '/Volumes/Expansion/Cognemo/MMN/data/prj_precision'; 
+        options.preprocdir = '/Volumes/Expansion/Cognemo/MMN/data/prj_precision';
         options.maindir = '/Volumes/Expansion/Cognemo/MMN/data';
     otherwise
         error(['Undefined user. Please specify a user in mn_set_analysis_options ' ...
@@ -18,11 +18,11 @@ end
 options.workdir = fullfile(options.preprocdir,'test_mnket'); % 'test_mnpsi' 
 options.rawdir  = fullfile(options.maindir, 'raw');
 options.codedir = '/Users/gabriellea/Documents/MMN_code/Mnket_files_misc/mnketAnalysis';
-options.analysis = 'MNKET';% 'MNPSI', 'group_analysis' 
+options.analysis = 'MNKET';% Set analysis type: 'MNPSI', 'group_analysis' 
 %% Specify default option functions --------------------------------------%
 options.funs.details = @mn_subjects; % Specify paths
 options.funs.subjects = @mn_set_subject_groups; % Specify subjects groups 
-options.funs.eeg = @mn_prepare_eeg; % Specify eeg options
+options.funs.eeg = @mn_prepare_eeg; % Specify eeg options for gxc analysis
 %% Evaluate option functions
  options= feval(options.funs.subjects, options); % Get subject list
  options= feval(options.funs.eeg, options);

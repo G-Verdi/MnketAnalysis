@@ -45,8 +45,9 @@ catch
     
     %-- calculate trial-by-trial PEs --------------------------------------------------------------%
     sim = mnket_calculate_regressors(sim);
-    % Special case for subject 4421 in the psilocybin condition. The first two trials are were not recorded, so we
-    % begin at the 3rd trajectory in the sequence
+    % Special case for subject 4421 in the psilocybin condition. Stimulus begins at the 3rd tone in the 
+    % sequence so we 
+    %
     switch id
         case {'4421'}
             switch options.condition

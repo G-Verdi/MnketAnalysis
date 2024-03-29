@@ -62,7 +62,7 @@ if ~setLevel
 end
 
 switch pValueMode
-    case {'uncorr', 'peakFWE'}
+    case {'peakFWE'}
         % do nothing
     case 'clusterFWE'
         % only keep clusters that survive cluster-level threshold of 0.05
@@ -192,6 +192,20 @@ if ~isempty(locs)
             redTab.Properties.VariableNames{'redDat5'} = 'lastSigVox';
         
         case 'clusterFWE'
+            % only keep cluster-FWE pvalue, k, xyz of peak, and time window
+            if setLevel
+                redDat(:, [1:2]) = [];
+            end
+            redDat(:, [2 4:9]) = [];
+            
+            redTab = array2table(redDat);
+            redTab.Properties.VariableNames{'redDat1'} = 'pFWEcluster';
+            redTab.Properties.VariableNames{'redDat2'} = 'clusterExtent';
+            redTab.Properties.VariableNames{'redDat3'} = 'xyz';
+            redTab.Properties.VariableNames{'redDat4'} = 'firstSigVox';
+            redTab.Properties.VariableNames{'redDat5'} = 'lastSigVox';
+
+        case 'uncorr'   %%%%% Added by GA %%%%%%%%
             % only keep cluster-FWE pvalue, k, xyz of peak, and time window
             if setLevel
                 redDat(:, [1:2]) = [];

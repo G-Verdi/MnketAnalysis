@@ -47,7 +47,7 @@ switch flag
     case 'drugdiff'
         spmRoot = paths.erpstatdifffold;
         pngFiles = fullfile(spmRoot,'mmn', 'scalpmaps_*.png');
-        contrastTitle = 'Pla > Ket in ';
+        contrastTitle = 'Pla > Psi in ';
         contrastIdx = 1;
         nVoxMin = 1;
 end
@@ -87,7 +87,7 @@ catch
     % go through all regressors
     for iReg = 1: numel(regressorNames)
         switch flag 
-            case {'placebo','ketamine'}
+            case {'placebo','psilocybin'}
             
                 xSPM = struct;
                 xSPM.swd      = fullfile(spmRoot,'high');

@@ -6,12 +6,13 @@ function sim = mnket_calculate_regressors( sim )
 
 % collect data
 tones = sim.u_orig;
-eps2 = squeeze(sim.traj.epsi(:, 2, :, :));
-eps3 = squeeze(sim.traj.epsi(:, 3, :, :));
+% eps2 = squeeze(sim.traj.epsi(:, 2, :, :));
+% eps3 = squeeze(sim.traj.epsi(:, 3, :, :));
 
-% pihat2 = squeeze(1./sim.traj.sahat(:,2,:,:));
-% pihat3 = squeeze(1./sim.traj.sahat(:,3,:,:));
-% pihat1 = squeeze(1./sim.traj.sahat(:,1,:,:));
+pihat1 = squeeze(1./sim.traj.sahat(:,1,:,:));
+pihat2 = squeeze(1./sim.traj.sahat(:,2,:,:));
+pihat3 = squeeze(1./sim.traj.sahat(:,3,:,:));
+
 
 % sahat2 = squeeze(sim.traj.sahat(:,2,:,:));
 % sahat3 = squeeze(sim.traj.sahat(:,3,:,:));
@@ -23,12 +24,12 @@ eps3 = squeeze(sim.traj.epsi(:, 3, :, :));
 % sigma3 = squeeze(sim.traj.sa(:,3,:,:));
 
 % calculate regressors
-sim.reg.epsi2 = mnket_calculate_transitionPE(eps2,tones);
-sim.reg.epsi3 = mnket_calculate_sumPE(eps3,tones);
+% sim.reg.epsi2 = mnket_calculate_transitionPE(eps2,tones);
+% sim.reg.epsi3 = mnket_calculate_sumPE(eps3,tones);
 
-% sim.reg.pihat2 = mnket_calculate_transitionPE(pihat2,tones);
-% sim.reg.pihat1 = mnket_calculate_transitionPE(pihat1,tones);
-% sim.reg.pihat3 = pihat3(:,1);
+sim.reg.pihat1 = mnket_calculate_transitionPE(pihat1,tones);
+sim.reg.pihat2 = mnket_calculate_transitionPE(pihat2,tones);
+sim.reg.pihat3 = pihat3(:,1);
 
 % sim.reg.delta1 = mnket_calculate_transitionPE(delta1,tones);
 % sim.reg.delta2 = mnket_calculate_sumPE(delta2,tones);
@@ -39,13 +40,16 @@ sim.reg.epsi3 = mnket_calculate_sumPE(eps3,tones);
 % sim.reg.sigma2 = mnket_calculate_transitionPE(sigma2,tones);
 % sim.reg.sigma3 = mnket_calculate_transitionPE(sigma3,tones);
 
-% add priors / first trial for EEG
-sim.reg.epsi2 = [sim.reg.epsi2(1); sim.reg.epsi2];
-sim.reg.epsi3 = [sim.reg.epsi3(1); sim.reg.epsi3];
-% %
+% add priors / first trial for EEG (Note: needs to be added when
+% running psilocybin study subjects)
+
+% sim.reg.epsi2 = [sim.reg.epsi2(1); sim.reg.epsi2];
+% sim.reg.epsi3 = [sim.reg.epsi3(1); sim.reg.epsi3];
+% % %
+% sim.reg.pihat1 = [sim.reg.pihat1(1); sim.reg.pihat1];
 % sim.reg.pihat2 = [sim.reg.pihat2(1); sim.reg.pihat2];
 % sim.reg.pihat3 = [sim.reg.pihat3(1); sim.reg.pihat3];
-% sim.reg.pihat1 = [sim.reg.pihat1(1); sim.reg.pihat1];
+
 
 
 end

@@ -45,12 +45,14 @@ conf.img = con.imgFile;
 map = colormap('jet');
 conf.cfg.colormap = map;
 conf.cfg.colorbar = 'yes';
+%Added by G.A.
+conf.colorbar.location = 'southoutside';
 
 conf.cfg.marker = 'on'; % 'on', 'labels'
 conf.cfg.markersymbol       = '.';
 conf.cfg.markercolor        = [0 0 0];
-conf.cfg.markersize         = 20;
-conf.cfg.markerfontsize     = 12;
+conf.cfg.markersize         = 20; 
+conf.cfg.markerfontsize     = 20;
 conf.cfg.comment            = 'xlim';
 
 if ~isempty(peakSens)

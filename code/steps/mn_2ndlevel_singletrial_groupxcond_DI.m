@@ -1,4 +1,4 @@
-function mn_2ndlevel_singletrial_groupxcond(design, options)
+function mn_2ndlevel_singletrial_groupxcond_DI(design, options)
 %--------------------------------------------------------------------------
 % Computes the second-level contrast images for differences in the effects 
 % of single-trial (modelbased) regressors between groups (healthy controls,
@@ -39,7 +39,7 @@ catch
     
     % make sure we have a results directory
 
-    scndlvlroot = fullfile(statspath, 'groupdiff', 'ANOVA');
+    scndlvlroot = fullfile(statspath, 'groupdiff', 'ANOVA_DifIM', 'pla-drug');
     if ~exist(scndlvlroot, 'dir')
         mkdir(scndlvlroot);
     end
@@ -104,7 +104,7 @@ catch
     % Covariates
     %----------------------------------------------------------------------
     % read in covariate information
-        covariates = perez_get_covariate_labels(IDs, options);
+         covariates = perez_get_covariate_labels(IDs, options);
  
     %----------------------------------------------------------------------
     % Second level: Group differences
@@ -112,7 +112,7 @@ catch
     % compute the effect of the single-trial regressors on the second level
     % one way ANOVA
 
-      mn_full_factorial_modelbased(icell, scndlvlroot,covariates, idx_design, options, 0);
+      mn_full_factorial_modelbased_DI(icell, scndlvlroot,covariates, idx_design, options, 0);
     
      % tnueeg_2ndlevel_singletrial_groupdiff_paired(scndlvlroot, imagePaths, ...
          % regressorNames, conditions, options)
@@ -122,6 +122,3 @@ end
 %cd(options.codedir);
 
 end
-
-
-

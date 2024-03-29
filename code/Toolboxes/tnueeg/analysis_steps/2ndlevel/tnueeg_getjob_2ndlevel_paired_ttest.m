@@ -73,7 +73,7 @@ job{4}.spm.stats.results.conspec(2).mask = ...
 
 
 job{4}.spm.stats.results.units = 2;
-job{4}.spm.stats.results.print = []; % Disable PDF output, (GA 16/11/2023)
+job{4}.spm.stats.results.print = 'pdf'; % Disable PDF output, (GA 16/11/2023) % Renabled (GA 24/02/2024)
 job{4}.spm.stats.results.write.none = 1;
 
 

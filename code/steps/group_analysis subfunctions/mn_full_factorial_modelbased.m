@@ -35,41 +35,38 @@ for r = 1:numel(regressors)
     
     switch options.eeg.stats.mode
         case 'modelbased'
-            if  regressor == 'epsilon2'
-                fname = fullfile('beta_0002.nii'); % Chose regressor +1 (since first regressor is the mean)
-                for i = 1:numel(icell)
-                    files(i).scans = fullfile(icell(i).scans, fname);
-                end
-            elseif  regressor == 'epsilon3'
+            switch regressor 
+                case  'epsilon2'
+                    fname = fullfile('beta_0002.nii'); % Chose regressor +1 (since first regressor is the mean)
+                    for i = 1:numel(icell)
+                        files(i).scans = fullfile(icell(i).scans, fname);
+                    end
+                case 'epsilon3'
                      fname = fullfile('beta_0003.nii'); % Chose regressor +1 (since first regressor is the mean)
                      for i = 1:numel(icell)
                          files(i).scans = fullfile(icell(i).scans, fname);
                      end
+                case 'pihat1'
+                    fname = fullfile('beta_0002.nii'); % Chose regressor +1 (since first regressor is the mean)
+                    for i = 1:numel(icell)
+                        files(i).scans = fullfile(icell(i).scans, fname);
+                    end
+                 case 'pihat2'
+                     fname = fullfile('beta_0003.nii'); % Chose regressor +1 (since first regressor is the mean)
+                     for i = 1:numel(icell)
+                         files(i).scans = fullfile(icell(i).scans, fname);
+                     end
+
+                 case'pihat3'
+                     fname = fullfile('beta_0004.nii'); % Chose regressor +1 (since first regressor is the mean)
+                     for i = 1:numel(icell)
+                         files(i).scans = fullfile(icell(i).scans, fname);
+                     end
+            end
             end
     end
 
-%     switch options.eeg.stats.mode
-%         case 'modelbased'
-%             if  regressor == 'pihat1'
-%                 fname = fullfile('beta_0004.nii'); % Chose regressor +1 (since first regressor is the mean)
-%                 for i = 1:numel(icell)
-%                     files(i).scans = fullfile(icell(i).scans, fname);
-%                 end
-%             elseif  regressor == 'pihat2'
-%                      fname = fullfile('beta_0002.nii'); % Chose regressor +1 (since first regressor is the mean)
-%                      for i = 1:numel(icell)
-%                          files(i).scans = fullfile(icell(i).scans, fname);
-%                      end
-% 
-%             elseif  regressor == 'pihat3'
-%                      fname = fullfile('beta_0003.nii'); % Chose regressor +1 (since first regressor is the mean)
-%                      for i = 1:numel(icell)
-%                          files(i).scans = fullfile(icell(i).scans, fname);
-%                      end
-%             end
-%         
-%     end     
-  
+
   
        
 
@@ -115,10 +112,10 @@ for r = 1:numel(regressors)
     
     % Load covariate
 
-     job{1}.spm.stats.factorial_design.cov(1).c = covariates.DE; 
-     job{1}.spm.stats.factorial_design.cov(1).cname = 'DE';
-     job{1}.spm.stats.factorial_design.cov(1).iCFI = 1;
-     job{1}.spm.stats.factorial_design.cov(1).iCC = 1;
+%      job{1}.spm.stats.factorial_design.cov(1).c = covariates.DE; 
+%      job{1}.spm.stats.factorial_design.cov(1).cname = 'DE';
+%      job{1}.spm.stats.factorial_design.cov(1).iCFI = 1;
+%      job{1}.spm.stats.factorial_design.cov(1).iCC = 1;
      % job{1}.spm.stats.factorial_design.cov(2).c = covariates.EU;
      % job{1}.spm.stats.factorial_design.cov(2).cname = 'EU';
      % job{1}.spm.stats.factorial_design.cov(2).iCFI = 1;
@@ -139,10 +136,10 @@ for r = 1:numel(regressors)
      % job{1}.spm.stats.factorial_design.cov(6).cname = 'CP';
      % job{1}.spm.stats.factorial_design.cov(6).iCFI = 1;
      % job{1}.spm.stats.factorial_design.cov(6).iCC = 1;
-     job{1}.spm.stats.factorial_design.cov(2).c = covariates.EI;
-     job{1}.spm.stats.factorial_design.cov(2).cname = 'EI';
-     job{1}.spm.stats.factorial_design.cov(2).iCFI = 1;
-     job{1}.spm.stats.factorial_design.cov(2).iCC = 1;
+%      job{1}.spm.stats.factorial_design.cov(2).c = covariates.EI;
+%      job{1}.spm.stats.factorial_design.cov(2).cname = 'EI';
+%      job{1}.spm.stats.factorial_design.cov(2).iCFI = 1;
+%      job{1}.spm.stats.factorial_design.cov(2).iCC = 1;
      % job{1}.spm.stats.factorial_design.cov(8).c = covariates.CI;
      % job{1}.spm.stats.factorial_design.cov(8).cname = 'CI';
      % job{1}.spm.stats.factorial_design.cov(8).iCFI = 1;
@@ -151,10 +148,10 @@ for r = 1:numel(regressors)
      % job{1}.spm.stats.factorial_design.cov(9).cname = 'AV';
      % job{1}.spm.stats.factorial_design.cov(9).iCFI = 1;
      % job{1}.spm.stats.factorial_design.cov(9).iCC = 1;
-     job{1}.spm.stats.factorial_design.cov(3).c = covariates.ICC;
-     job{1}.spm.stats.factorial_design.cov(3).cname = 'ICC';
-     job{1}.spm.stats.factorial_design.cov(3).iCFI = 1;
-     job{1}.spm.stats.factorial_design.cov(3).iCC = 1;
+%      job{1}.spm.stats.factorial_design.cov(3).c = covariates.ICC;
+%      job{1}.spm.stats.factorial_design.cov(3).cname = 'ICC';
+%      job{1}.spm.stats.factorial_design.cov(3).iCFI = 1;
+%      job{1}.spm.stats.factorial_design.cov(3).iCC = 1;
      % job{1}.spm.stats.factorial_design.cov(11).c = covariates.AX;
      % job{1}.spm.stats.factorial_design.cov(11).cname = 'AX';
      % job{1}.spm.stats.factorial_design.cov(11).iCFI = 1;
@@ -187,15 +184,15 @@ for r = 1:numel(regressors)
     %----------------------------------------------------------------------
 
 
-    job{3}.spm.stats.con.consess{1}.fcon.name = 'DE';
-    job{3}.spm.stats.con.consess{1}.fcon.convec = [0 0 0 0 1]; 
-    job{3}.spm.stats.con.consess{1}.fcon.sessrep = 'none';
-    job{3}.spm.stats.con.consess{2}.fcon.name = 'EI';
-    job{3}.spm.stats.con.consess{2}.fcon.convec = [0 0 0 0 0 1];
-    job{3}.spm.stats.con.consess{2}.fcon.sessrep = 'none';
-    job{3}.spm.stats.con.consess{3}.fcon.name = 'ICC';
-    job{3}.spm.stats.con.consess{3}.fcon.convec = [0 0 0 0 0 0 1];
-    job{3}.spm.stats.con.consess{3}.fcon.sessrep = 'none';
+%     job{3}.spm.stats.con.consess{1}.fcon.name = 'DE';
+%     job{3}.spm.stats.con.consess{1}.fcon.convec = [0 0 0 0 1]; 
+%     job{3}.spm.stats.con.consess{1}.fcon.sessrep = 'none';
+%     job{3}.spm.stats.con.consess{2}.fcon.name = 'EI';
+%     job{3}.spm.stats.con.consess{2}.fcon.convec = [0 0 0 0 0 1];
+%     job{3}.spm.stats.con.consess{2}.fcon.sessrep = 'none';
+%     job{3}.spm.stats.con.consess{3}.fcon.name = 'ICC';
+%     job{3}.spm.stats.con.consess{3}.fcon.convec = [0 0 0 0 0 0 1];
+%     job{3}.spm.stats.con.consess{3}.fcon.sessrep = 'none';
     % job{3}.spm.stats.con.consess{4}.fcon.name = 'BS';
     % job{3}.spm.stats.con.consess{4}.fcon.convec = [0 0 0 0 0 0 0 1];
     % job{3}.spm.stats.con.consess{4}.fcon.sessrep = 'none';
@@ -225,7 +222,7 @@ for r = 1:numel(regressors)
     % job{3}.spm.stats.con.consess{12}.fcon.sessrep = 'none';
 
 
-     job{3}.spm.stats.con.delete = 1;
+%      job{3}.spm.stats.con.delete = 1;
     %----------------------------------------------------------------------
     % Follow-up all designs
     %----------------------------------------------------------------------
@@ -264,53 +261,53 @@ for r = 1:numel(regressors)
     % job{3}.spm.stats.con.consess{10}.tcon.sessrep = 'none';
 
     % % T-test: Increase ket -> psi
-    job{3}.spm.stats.con.consess{4}.tcon.name = [regressor ': ket > psi'];
-    job{3}.spm.stats.con.consess{4}.tcon.convec = [1 1 -1 -1];
-    job{3}.spm.stats.con.consess{4}.tcon.sessrep = 'none';
+    job{3}.spm.stats.con.consess{1}.tcon.name = [regressor ': ket > psi'];
+    job{3}.spm.stats.con.consess{1}.tcon.convec = [1 1 -1 -1];
+    job{3}.spm.stats.con.consess{1}.tcon.sessrep = 'none';
     % T-test: Decrease ket -> psi
-    job{3}.spm.stats.con.consess{5}.tcon.name = [regressor ': ket < psi'];
-    job{3}.spm.stats.con.consess{5}.tcon.convec = [-1 -1 1 1];
-    job{3}.spm.stats.con.consess{5}.tcon.sessrep = 'none';
+    job{3}.spm.stats.con.consess{2}.tcon.name = [regressor ': ket < psi'];
+    job{3}.spm.stats.con.consess{2}.tcon.convec = [-1 -1 1 1];
+    job{3}.spm.stats.con.consess{2}.tcon.sessrep = 'none';
     % T-tests: Pairwise comparisons
-    job{3}.spm.stats.con.consess{6}.tcon.name = [regressor ': drug > placebo'];
-    job{3}.spm.stats.con.consess{6}.tcon.convec = [-1 1 -1 1];
+    job{3}.spm.stats.con.consess{3}.tcon.name = [regressor ': drug > placebo'];
+    job{3}.spm.stats.con.consess{3}.tcon.convec = [-1 1 -1 1];
+    job{3}.spm.stats.con.consess{3}.tcon.sessrep = 'none';
+    job{3}.spm.stats.con.consess{4}.tcon.name = [regressor ': placebo > drug'];
+    job{3}.spm.stats.con.consess{4}.tcon.convec = [1 -1 1 -1];
+    job{3}.spm.stats.con.consess{4}.tcon.sessrep = 'none';
+    job{3}.spm.stats.con.consess{5}.tcon.name = [regressor ': placebo > ket'];
+    job{3}.spm.stats.con.consess{5}.tcon.convec = [1 -1 0 0];
+    job{3}.spm.stats.con.consess{5}.tcon.sessrep = 'none';
+    job{3}.spm.stats.con.consess{6}.tcon.name = [regressor ': placebo > psi'];
+    job{3}.spm.stats.con.consess{6}.tcon.convec = [0 0 1 -1];
     job{3}.spm.stats.con.consess{6}.tcon.sessrep = 'none';
-    job{3}.spm.stats.con.consess{7}.tcon.name = [regressor ': placebo > drug'];
-    job{3}.spm.stats.con.consess{7}.tcon.convec = [1 -1 1 -1];
+    job{3}.spm.stats.con.consess{7}.tcon.name = [regressor ': [placebo - ket] > [placebo - psi]'];
+    job{3}.spm.stats.con.consess{7}.tcon.convec = [-1 1 1 -1];
     job{3}.spm.stats.con.consess{7}.tcon.sessrep = 'none';
-    job{3}.spm.stats.con.consess{8}.tcon.name = [regressor ': placebo > ket'];
-    job{3}.spm.stats.con.consess{8}.tcon.convec = [1 -1 0 0];
+    job{3}.spm.stats.con.consess{8}.tcon.name = [regressor ': [ket - placebo] < [psi - placebo]']; 
+    job{3}.spm.stats.con.consess{8}.tcon.convec = [1 -1 -1 1];
     job{3}.spm.stats.con.consess{8}.tcon.sessrep = 'none';
-    job{3}.spm.stats.con.consess{9}.tcon.name = [regressor ': placebo > psi'];
-    job{3}.spm.stats.con.consess{9}.tcon.convec = [0 0 1 -1];
+    job{3}.spm.stats.con.consess{9}.tcon.name = [regressor ': psilocybin > placebo'];
+    job{3}.spm.stats.con.consess{9}.tcon.convec = [0 0 -1 1];
     job{3}.spm.stats.con.consess{9}.tcon.sessrep = 'none';
-    job{3}.spm.stats.con.consess{10}.tcon.name = [regressor ': [placebo - ket] > [placebo - psi]'];
-    job{3}.spm.stats.con.consess{10}.tcon.convec = [-1 1 1 -1];
+    job{3}.spm.stats.con.consess{10}.tcon.name = [regressor ': psilocybin < placebo'];
+    job{3}.spm.stats.con.consess{10}.tcon.convec = [0 0 1 -1];
     job{3}.spm.stats.con.consess{10}.tcon.sessrep = 'none';
-    job{3}.spm.stats.con.consess{11}.tcon.name = [regressor ': [ket - placebo] < [psi - placebo]']; 
-    job{3}.spm.stats.con.consess{11}.tcon.convec = [1 -1 -1 1];
-    job{3}.spm.stats.con.consess{11}.tcon.sessrep = 'none';
-    job{3}.spm.stats.con.consess{12}.tcon.name = [regressor ': psilocybin > placebo'];
-    job{3}.spm.stats.con.consess{12}.tcon.convec = [0 0 -1 1];
-    job{3}.spm.stats.con.consess{12}.tcon.sessrep = 'none';
-    job{3}.spm.stats.con.consess{13}.tcon.name = [regressor ': psilocybin < placebo'];
-    job{3}.spm.stats.con.consess{13}.tcon.convec = [0 0 1 -1];
-    job{3}.spm.stats.con.consess{13}.tcon.sessrep = 'none';
 
-    job{3}.spm.stats.con.consess{14}.tcon.name = [regressor ': positive DE'];
-    job{3}.spm.stats.con.consess{14}.tcon.convec = [0 0 0 0 1];
-    job{3}.spm.stats.con.consess{14}.tcon.sessrep = 'none';
-    job{3}.spm.stats.con.consess{15}.tcon.name = [regressor ': DE in ket'];
-    job{3}.spm.stats.con.consess{15}.tcon.convec = [1 -1 0 0 1];
-    job{3}.spm.stats.con.consess{15}.tcon.sessrep = 'none';
-    job{3}.spm.stats.con.consess{16}.tcon.name = [regressor ': positive EI'];
-    job{3}.spm.stats.con.consess{16}.tcon.convec = [0 0 0 0 0 1];
-    job{3}.spm.stats.con.consess{17}.tcon.name = [regressor ': EI in psi'];
-    job{3}.spm.stats.con.consess{17}.tcon.convec = [0 0 -1 1 0 1];
-    job{3}.spm.stats.con.consess{17}.tcon.sessrep = 'none';
-    job{3}.spm.stats.con.consess{12}.tcon.name = [regressor ': ICC in Ket'];
-    job{3}.spm.stats.con.consess{12}.tcon.convec = [1 -1 0 0 0 0 1];
-    job{3}.spm.stats.con.consess{12}.tcon.sessrep = 'none';
+%     job{3}.spm.stats.con.consess{14}.tcon.name = [regressor ': positive DE'];
+%     job{3}.spm.stats.con.consess{14}.tcon.convec = [0 0 0 0 1];
+%     job{3}.spm.stats.con.consess{14}.tcon.sessrep = 'none';
+%     job{3}.spm.stats.con.consess{15}.tcon.name = [regressor ': DE in ket'];
+%     job{3}.spm.stats.con.consess{15}.tcon.convec = [1 -1 0 0 1];
+%     job{3}.spm.stats.con.consess{15}.tcon.sessrep = 'none';
+%     job{3}.spm.stats.con.consess{16}.tcon.name = [regressor ': positive EI'];
+%     job{3}.spm.stats.con.consess{16}.tcon.convec = [0 0 0 0 0 1];
+%     job{3}.spm.stats.con.consess{17}.tcon.name = [regressor ': EI in psi'];
+%     job{3}.spm.stats.con.consess{17}.tcon.convec = [0 0 -1 1 0 1];
+%     job{3}.spm.stats.con.consess{17}.tcon.sessrep = 'none';
+%     job{3}.spm.stats.con.consess{12}.tcon.name = [regressor ': ICC in Ket'];
+%     job{3}.spm.stats.con.consess{12}.tcon.convec = [1 -1 0 0 0 0 1];
+%     job{3}.spm.stats.con.consess{12}.tcon.sessrep = 'none';
 
   
     %job{4}.spm.stats.con.spmmat(1) = cfg_dep('Model estimation: SPM.mat File', substruct('.','val', '{}',{2}, '.','val', '{}',{1}), substruct('.','spmmat'));
@@ -323,14 +320,14 @@ for r = 1:numel(regressors)
     job{4}.spm.stats.results.conspec.conjunction = 1;
     job{4}.spm.stats.results.conspec.mask.none = 1;
     job{4}.spm.stats.results.units = 2;
-    job{4}.spm.stats.results.print = [];
+    job{4}.spm.stats.results.print = 'pdf';
     job{4}.spm.stats.results.write.none = 1;
     
     % Which modules really to include?
      actual_job = {job{1},job{2},job{3},job{4}};
     
     % Execute actual_job
-    spm_jobman('interactive', actual_job);
+    spm_jobman('run', actual_job);
 
  %----------------------------------------------------------------------%
  %      Merge pdfs 

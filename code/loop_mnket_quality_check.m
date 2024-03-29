@@ -10,7 +10,7 @@ if nargin < 1
 end
 
 % perform quality check for subject analysis in both conditions
-for cond ={'placebo','ketamine'}
+for cond ={'placebo','psilocybin'}
     options.condition = char(cond);
 
     mnket_quality_check(options);

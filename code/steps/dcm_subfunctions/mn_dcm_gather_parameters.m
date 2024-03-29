@@ -22,22 +22,22 @@ diary(paths.logfile);
 mnket_display_analysis_step_header('Reporting DCM Stats', ...
     'all', options.stats);
 
-%Gather parameters   
+% Gather parameters and save it a separatre matrix  
 
 options.erp.type='lowhighPihat';
-[pla_mat,ket_mat]=mn_dcm_loop(options);       
+[pla_mat,ket_mat]=mnket_dcm_loop(options);       
 results(1).pihat= pla_mat;
 results(2).pihat=ket_mat;
 
-% options.erp.type='lowhighMuhat2';
-% [pla_mat,ket_mat]=mnket_dcm_loop(options); 
-% results(1).muhat2= pla_mat;
-% results(2).muhat2=ket_mat;
-% 
-% options.erp.type='lowhighMuhat3';
-% [pla_mat,ket_mat]=mnket_dcm_loop(options);       
-% results(1).muhat3=pla_mat;
-% results(2).muhat3=ket_mat;
+options.erp.type='lowhighMuhat2';
+[pla_mat,ket_mat]=mnket_dcm_loop(options); 
+results(1).muhat2= pla_mat;
+results(2).muhat2=ket_mat;
+
+options.erp.type='lowhighMuhat3';
+[pla_mat,ket_mat]=mnket_dcm_loop(options);       
+results(1).muhat3=pla_mat;
+results(2).muhat3=ket_mat;
 
 
 save(paths.dcmroot, 'results');

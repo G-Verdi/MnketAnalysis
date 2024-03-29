@@ -67,6 +67,9 @@ switch xSPM.thresDesc
     case 'p<0.05 (FWE)'
         con.peak.correction     = 'FWE';
         con.peak.threshold      = 0.05;
+    case 'p<0.249 (FWE)' %Added by GA - change to max p-value of cluster of interest%
+        con.peak.correction     = 'FWE';
+        con.peak.threshold      = 0.249;
 end
         
 

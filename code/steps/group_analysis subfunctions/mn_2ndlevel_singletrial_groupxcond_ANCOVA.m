@@ -1,4 +1,4 @@
-function mn_2ndlevel_singletrial_groupxcond(design, options)
+function mn_2ndlevel_singletrial_groupxcond_ANCOVA(design, options)
 %--------------------------------------------------------------------------
 % Computes the second-level contrast images for differences in the effects 
 % of single-trial (modelbased) regressors between groups (healthy controls,
@@ -20,7 +20,7 @@ regressors = options.stats.regressors;
 % results file of first regressor
 statspath = options.eeg.stats.secondlevel.secondlevelDir.classical{idx_design};
 spmFile = fullfile(statspath,...
-    'groupdiff', 'pairedT',regressors{1}, 'SPM.mat');
+    'groupdiff', 'two sample t-test',regressors{1}, 'SPM.mat');
 
 try
     % check for previous statistics
@@ -39,7 +39,7 @@ catch
     
     % make sure we have a results directory
 
-    scndlvlroot = fullfile(statspath, 'groupdiff', 'ANOVA');
+    scndlvlroot = fullfile(statspath, 'groupdiff', 'ANCOVA','no_placebo');
     if ~exist(scndlvlroot, 'dir')
         mkdir(scndlvlroot);
     end
@@ -53,52 +53,52 @@ catch
     % but here, we only indicate the subject-specific directories of the 
     % beta images
     
-    % Cycle through groups
-    idx = 1;
-    IDs = cell(0);
-    for g = 1:numel(options.subjects.group_labels)
-        for c = 1:numel(options.subjects.condition_labels)
-            temp = options.groupxcond.IDs{g,c};
-            
-            % Collect subject beta image paths
-            for s = 1:numel(temp)
-                if c == 1  
-
-                    options.workdir = fullfile(options.preprocdir,'test_mnket');
-                    details = mn_subjects(temp{s}, options);
-                    % TODO: should be variable when source analysis is used and for ERP analysis
-                    icell(idx).scans{s, 1} = fullfile(details.statroot);
-                    if g==2
-                        options.condition ='ketamine';
-                        details = mn_subjects(temp{s}, options);
-                        % TODO: should be variable when source analysis is used and for ERP analysis
-                        icell(idx).scans{s, 1} = fullfile(details.statroot);
-                    end
-                    
-                elseif c==2
-                    options.workdir = fullfile(options.preprocdir,'test_mnpsi');
-                    details = mn_subjects(temp{s}, options);
-                    % TODO: should be variable when source analysis is used and for ERP analysis
-                    icell(idx).scans{s, 1} = fullfile(details.statroot);
-                    
-                    if g==2
-                        options.condition ='psilocybin';
-                        details = mn_subjects(temp{s}, options);
-                        % TODO: should be variable when source analysis is used and for ERP analysis
-                        icell(idx).scans{s, 1} = fullfile(details.statroot);
-                    end
-                    
-                   
-                end
+     %Cycle through groups
+        idx = 1;
+        IDs = cell(0);
+        for g = 1:numel(options.subjects.group_labels)
+            for c = 1:numel(options.subjects.condition_labels)
+                temp = options.groupxcond.IDs{g,c};
                 
-            end
-            icell(idx).levels = [g, c];
-            IDs = [IDs temp];
-            clear temp
-            idx = idx+1;
-        end
-    end
+                % Collect subject beta image paths
+                for s = 1:numel(temp)
+                    if c == 1  
     
+                        options.workdir = fullfile(options.preprocdir,'test_mnket');
+                        details = mn_subjects(temp{s}, options);
+                        % TODO: should be variable when source analysis is used and for ERP analysis
+                        icell(idx).scans{s, 1} = '';
+                        if g==2
+                            options.condition ='ketamine';
+                            details = mn_subjects(temp{s}, options);
+                            % TODO: should be variable when source analysis is used and for ERP analysis
+                            icell(idx).scans{s, 1} = fullfile(details.statroot);
+                        end
+                        
+                    elseif c==2
+                        options.workdir = fullfile(options.preprocdir,'test_mnpsi');
+                        details = mn_subjects(temp{s}, options);
+                        % TODO: should be variable when source analysis is used and for ERP analysis
+                        icell(idx).scans{s, 1} = '';
+                        
+                        if g==2
+                            options.condition ='psilocybin';
+                            details = mn_subjects(temp{s}, options);
+                            % TODO: should be variable when source analysis is used and for ERP analysis
+                            icell(idx).scans{s, 1} = fullfile(details.statroot);
+                        end
+                        
+                       
+                    end
+                    
+                end
+                icell(idx).levels = [g, c];
+                IDs = [IDs temp];
+                clear temp
+                idx = idx+1;
+            end
+        end
+        
     
     %----------------------------------------------------------------------
     % Covariates
@@ -112,7 +112,7 @@ catch
     % compute the effect of the single-trial regressors on the second level
     % one way ANOVA
 
-      mn_full_factorial_modelbased(icell, scndlvlroot,covariates, idx_design, options, 0);
+      mn_full_factorial_modelbased_ANCOVA(icell, scndlvlroot,covariates, idx_design, options, 0);
     
      % tnueeg_2ndlevel_singletrial_groupdiff_paired(scndlvlroot, imagePaths, ...
          % regressorNames, conditions, options)
@@ -120,8 +120,4 @@ catch
         'in the ' options.eeg.stats.design{idx_design} ' design.']);
 end
 %cd(options.codedir);
-
-end
-
-
 

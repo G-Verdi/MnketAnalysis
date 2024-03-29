@@ -31,9 +31,16 @@ switch flag
         end
 
         condNames = {'placebo', 'ketamine'};
-        lineColors = [cols.darkgray; cols.medgray];
+%         lineColors = [cols.darkgray; cols.medgray];
+        lineColors = [cols.darkgray; cols.darkgreen]; %%%%%% GA
         lineWidth = 2;
         saveName = fullfile(paths.erpdiffold, ['ga_sem_' options.erp.type '_' chanName '.fig']);
+
+%         condNames = {'placebo', 'psilocybin'};
+% %         lineColors = [cols.darkgray; cols.medgray];
+%         lineColors = [cols.darkgray; cols.darkorange]; %%%%%% Added by GA
+%         lineWidth = 3.5;
+%         saveName = fullfile(paths.erpdiffold, ['ga_sem_' options.erp.type '_' chanName '.fig']);
 
     otherwise
 

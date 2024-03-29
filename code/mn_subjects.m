@@ -175,8 +175,8 @@ end
     
 % raw file names
 switch options.condition
-    case 'placebo'
-        rawsuffix = '_2_pla';
+    case 'placebo'         
+        rawsuffix = '_1_pla';
     case 'ketamine'
         rawsuffix = '_1_ket';
     case 'psilocybin'
@@ -266,8 +266,7 @@ switch options.conversion.mode
         details.convCon{2} = 'standardplacebo';
         details.convCon{3} = 'deviantketamine';
         details.convCon{4} = 'standardketamine';
-        details.convCon{5} = 'deviantpsilocybin';
-        details.convCon{6} = 'standardpsilocybin';
+
 end
 
 for i = 1: length(details.convCon)

@@ -1,47 +1,42 @@
 function mn_plot_covar_vs_sensor_betas(peakCoord, regressor, design, covariate, options)
 % -------------------------------------------------------------------------
-% COMPI_PLOT_COVAR_VS_SENSOR_BETAS Plot first-level source betas against a
+% MN_PLOT_COVAR_VS_SENSOR_BETAS Plot first-level source betas against a
 % covariate of interest.
-%
+%  
 %   IN:     peakCoord       Peak coordinate in voxel space
 %           design          Regressor design 
 %           covariate       The covariate of interest (cell)
-%           options         Options structure as set by set_analysis_options()
+%           options         Options structure as set by mn_set_analysis_options()
+%  Shona. A
 % -------------------------------------------------------------------------
 
-     
-    % switch options.eeg.stats.mode
-    %     case 'modelbased'
-    %         if  regressor == 'pihat1'
-    %             fname = fullfile('beta_0004.nii'); % Chose regressor +1 (since first regressor is the mean)
-    % 
-    %         elseif  regressor == 'pihat2'
-    %                  fname = fullfile('beta_0002.nii'); % Chose regressor +1 (since first regressor is the mean)
-    % 
-    %         elseif  regressor == 'pihat3'
-    %                  fname = fullfile('beta_0003.nii'); % Chose regressor +1 (since first regressor is the mean)
-    % 
-    %         end
-    % end
-
-    switch options.eeg.stats.mode
+     switch options.eeg.stats.mode
         case 'modelbased'
-            if  regressor == 'epsi2'
-                fname = fullfile('beta_0002.nii'); % Chose regressor +1 (since first regressor is the mean)
+            switch regressor
+                case 'epsi2'
+                    fname = fullfile('beta_0002.nii'); % Chose regressor +1 (since first regressor is the mean)
 
-            elseif  regressor == 'epsi3'
+                case 'epsi3'
                      fname = fullfile('beta_0003.nii'); % Chose regressor +1 (since first regressor is the mean)
+
+                case 'pihat1'
+                    fname = fullfile('beta_0002.nii'); % Chose regressor +1 (since first regressor is the mean)
+    
+                case'pihat2'
+                     fname = fullfile('beta_0003.nii'); % Chose regressor +1 (since first regressor is the mean)
+    
+                case'pihat3'
+                     fname = fullfile('beta_0004.nii'); % Chose regressor +1 (since first regressor is the mean)
+    
 
             end
     end
 
 
- 
-
     % Create results directory
     idx_design = find(contains(options.eeg.stats.design, design));
     statspath = options.eeg.stats.secondlevel.secondlevelDir.classical{idx_design};
-    scndlvlroot = fullfile(statspath, 'groupdiff', 'ANCOVA','beta_plots');
+    scndlvlroot = fullfile(statspath, 'groupdiff', 'ANCOVA','no_placebo','beta_plots');
     if ~exist(scndlvlroot, 'dir')
         mkdir(scndlvlroot);
     end
@@ -141,25 +136,28 @@ function mn_plot_covar_vs_sensor_betas(peakCoord, regressor, design, covariate, 
         end
     end
 
-    % Append betas into one vector
+    % Append betas into a single vector
     betaAll=[betaAll_mnket;betaAll_mnpsi];
 
-    %Specify contrast vector
-    con_vec = [repelem(0,19) repelem(1,19) repelem(0,16) repelem(0,16)]';
+    %Specify contrast vector and apply to beta vector 
+    con_vec = [repelem(0,19) repelem(1,19) repelem(0,16) repelem(0,16)]'; 
 
     betaAll = betaAll.*con_vec;
    
-    % % adjust for difference in condition
+    % Specify placebo and drug betas
     pla_ket = betaAll(1:19,:);
     ket = betaAll(20:38,:);
-    % pla_psi = betaAll(39:54,:);
-    % psi    =  betaAll(55:70,:);
+    pla_psi = betaAll(39:54,:);
+    psi = betaAll(55:70,:);
 
-    betaAll_mnket = (pla_ket + ket);
+    % Adjust for difference in placebo and drug conditions
+    % 02/19/2024 This is removed since we are no longer including placebo data 
+    % betaAll_mnket = (pla_ket + ket); 
+
+    % grab the betas for the group(s) of interest
+    betaAll_mnket = [ket]; 
 
     betaAll = betaAll_mnket;
-
-
 
 
 
@@ -172,25 +170,32 @@ covars = perez_get_covariate_labels(IDs, options);
 ASC_Scores = table2array(covars(:,covariate));
 
 
-% adjust for difference in condition
+% Specify placebo and drug scores
     pla_ket = ASC_Scores(1:19,:);
     ket = ASC_Scores(20:38,:);
+    pla_psi = ASC_Scores(39:54,:);
+    psi= ASC_Scores(55:70,:);
+ 
 
+% Adjust for difference in placebo and drug conditions
+    % 02/19/2024 This is removed since we are no longer including placebo data 
+    % asc_mnket = (ket - pla_ket);
+    
 
-    asc_mnket = (ket - pla_ket);
-
-
+% grab the scores for the group(s) of interest
+    asc_mnket = [ket];
     ASC_Scores= asc_mnket;
 
 
 % Create scatter plot with solid black dots
 figure;
 %set(gcf,'position',[500,500,400,300])
-scatter(betaAll, ASC_Scores, 'filled', 'k', 'SizeData', 70);
-ylim([-50,50])
+scatter(betaAll, ASC_Scores, 'filled', 'k','LineWidth', 3.5, 'SizeData', 70);
+% ylim([-50,50])
+ylim([0,100])
 set(gca, 'FontSize', 30)
-xlim([-0.1,0.1])
-% xlim([-2,4])
+ xlim([-0.1,0.1])
+%    xlim([-1.5,1.5])
 xlabel('Beta Value', 'FontSize', 14);
 ylabel(covariate,'FontSize', 14);
 title('Mean Beta Value vs.', covariate);

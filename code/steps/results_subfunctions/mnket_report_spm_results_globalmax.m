@@ -1,4 +1,4 @@
-function [] = mnket_report_spm_results( options, flag )
+function [] = mnket_report_spm_results_globalmax(options, flag )
 %MNKET_REPORT_SPM_RESULTS
 %   IN:     options - the struct that holds all analysis options
 %           flag    - string indicating either the condition ('placebo',
@@ -37,38 +37,17 @@ mnket_display_analysis_step_header(['results report: ' flag], ...
 
 % names of the single-trial regressors
 
-
 % regressorNames = options.stats.regressors;
 regressorNames = options.eeg.stats.regressors{2};
 
-
-
 % scalpmap images of first regressor
-switch flag
-    case options.conditions
-        spmRoot = fullfile(paths.statfold);
-        pngFiles = fullfile(spmRoot, regressorNames{1}, 'scalpmaps_*.png');
-        contrastTitle = 'Effect of ';
-        contrastIdx = 3;
-        nVoxMin = 1;
-    case 'drugdiff'
-        spmRoot = paths.statdifffold;
-        pngFiles = fullfile(spmRoot, regressorNames{2}, 'scalpmaps_*.png');
-        contrastTitle = 'Pla > Ket in ';
-        contrastIdx = 1;
-        nVoxMin = 1;
 
-     case 'groupdiff'
-         spmRoot = fullfile(paths.grouproot,'ANCOVA','no_placebo'); 
-         pngFiles = fullfile(spmRoot, regressorNames, 'scalpmaps_*.png');
-         contrastTitle ='Epsi3: EI in psi';
-         contrastIdx = 22;
-         nVoxMin = 1;
-     
+ spmRoot = fullfile(paths.grouproot,'ANCOVA_DifIM','Drug-pla');
+ pngFiles = fullfile(spmRoot, regressorNames, 'scalpmaps_*.png');
+ contrastTitle ='Epsi3: EI in psi';
+%  contrastIdx = 22;
+%  nVoxMin = 1;
 
-        
-
-end
 
 try
     % check for previous results report
@@ -103,9 +82,10 @@ catch
 
     end
 
+    % go through all regressors 
 
-    % go through all regressors
      for iReg = 1: numel(regressorNames)
+
 
         xSPM = struct;
         xSPM.swd      = fullfile(spmRoot, regressorNames{iReg});
@@ -126,49 +106,7 @@ catch
         save(fullfile(xSPM.swd, ...
             ['xSPM_' xSPM.STAT '_' options.stats.pValueMode '.mat']), ...
             'xSPM');
-        
-        %-- significant clusters: info & plotting ------------------------%
-        locs = xSPM.XYZ;
-        % only continue if there are surviving voxels
-        if ~isempty(locs)
-            % extract all plotting-relevant contrast info 
-            con = tnueeg_extract_contrast_results(xSPM, ...
-                [options.condition ':',nVoxMin]);
-            
-            save(fullfile(con.swd, ...
-                ['con_' con.stat '_' options.stats.pValueMode '.mat']), ...
-                'con');
-
-            % plot all sections overlays 
-            cd(con.swd);
-            sectionsFolder = ['con' con.stat '_sections'];
-            contoursFolder = ['con' con.stat '_contours'];
-            scalpmapsFolder = ['con' con.stat '_scalpmaps'];
-            mkdir(sectionsFolder);
-            mkdir(contoursFolder);
-            mkdir(scalpmapsFolder);
-            cd(sectionsFolder);
-            
-            % reduce blobs in xSPM to the significant ones
-            sigIdx = [];
-            for iSigClus = 1: con.nClusters.sig
-                [~, iA] = intersect(xSPM.XYZ', con.clusters(iSigClus).allVox', 'rows');
-                sigIdx = [sigIdx; iA];
-            end
-            xSPM.XYZ = xSPM.XYZ(:, sigIdx);
-            xSPM.Z = xSPM.Z(sigIdx);
-            tnueeg_overlay_sections_per_cluster(xSPM, con);
-            cd('..');
-            cd(contoursFolder);
-            tnueeg_overlay_sections_per_cluster(xSPM, con);
-
-            % plot all scalpmaps 
-            cd('..');
-            cd(scalpmapsFolder);
-            %conf = mnket_configure_scalpmaps(con, options, options.stats.(flag).(regressorNames{iReg}).clbarlimits);
-            conf = mnket_configure_scalpmaps(con, options, xSPM.STAT, abs(max(xSPM.Z)));
-            tnueeg_scalpmaps_per_cluster(con, conf);
-        end
+       
     end
 end
 cd(options.workdir);
@@ -176,4 +114,10 @@ cd(options.workdir);
 diary OFF
 
 end
+
+
+
+
+  
+
 
