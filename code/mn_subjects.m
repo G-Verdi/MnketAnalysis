@@ -175,8 +175,14 @@ end
     
 % raw file names
 switch options.condition
-    case 'placebo'         
-        rawsuffix = '_1_pla';
+    case 'placebo'
+        if strcmp(options.analysis,'MNKET')
+            rawsuffix = '_1_pla';
+        else
+            if strcmp(options.analysis,'MNPSI')
+                rawsuffix = '_2_pla';
+            end
+        end
     case 'ketamine'
         rawsuffix = '_1_ket';
     case 'psilocybin'

@@ -17,11 +17,11 @@ switch id
         '4433','4460','4476',...
         '4502','4515','4518','4591','4592'} 
 
-        TXTtones = mnket_read_tones_from_txtfile(details.tonestxt);
+        TXTtones = mnket_read_tones_from_txtfile(details.tonestxt, options);
     
     % we have a text file and the paradigm struct for the rest:    
     otherwise 
-        TXTtones = mnket_read_tones_from_txtfile(details.tonestxt);
+        TXTtones = mnket_read_tones_from_txtfile(details.tonestxt, options);
         
         load(paths.paradigm)
         switch options.condition
@@ -42,7 +42,7 @@ tones = TXTtones;
 
 end
 
-function tones = mnket_read_tones_from_txtfile( fileName )
+function tones = mnket_read_tones_from_txtfile( fileName, options )
 %MNKET_READ_TONES_FROM_TXTFILE Reads the tone sequence of a subject as
 %saved in the subject's tones textfile.
 % IN:   id      - subject identifier string, e.g. '0001'
@@ -56,8 +56,10 @@ nTon = 0;
 fileID = fopen(fileName, 'r','n','UTF-8');
 A = fscanf(fileID, '%s');
 fclose(fileID);
+if strcmp(options.analysis, 'MNKET')
+    A(1: 11) = [];
+end
 
-A(1: 11) = [];
 
 for i = 1: length(A)
     if ~isempty(str2double(A(i))) && ~isnan(str2double(A(i)))
