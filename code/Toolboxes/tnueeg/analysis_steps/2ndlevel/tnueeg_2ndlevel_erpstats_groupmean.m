@@ -26,6 +26,6 @@ end
     
 % create and run the job
 job = tnueeg_getjob_2ndlevel_onesample_ttest(scndlvlroot, scans, factorName);
-spm_jobman('run', job);
+spm_jobman('interactive', job);
 
 end

@@ -23,7 +23,7 @@ mnket_display_analysis_step_header('secondlevel erpstats drugdiff', ...
 conditionName = 'mmn';
 
 % results file of first regressor
-spmFile = fullfile(paths.erpstatdifffold, conditionName, 'SPM.mat');
+spmFile = fullfile(paths.erpstatdifffold, conditionName,'SPM.mat');
 
 try
     % check for previous statistics
@@ -43,6 +43,7 @@ catch
     
     % make sure we have a results directory
     scndlvlroot = fullfile(paths.erpstatdifffold, conditionName);
+    %scndlvlroot = fullfile(paths.erpstatdifffold, conditionName, 'standard only');
     if ~exist(scndlvlroot, 'dir')
         mkdir(scndlvlroot);
     end
@@ -50,7 +51,7 @@ catch
     % smoothed images of averaged ERP data in each subject and each 
     % condition serve as input to 2nd level statistics, but here, we only 
     % indicate the subject-specific directories of the images
-    sessions = {'placebo', 'ketamine'};
+    sessions = {'placebo', 'psilocybin'};
     nSubjects = numel(options.erp.subjectIDs);
     imagePaths = cell(nSubjects, 2);
     for sub = 1: nSubjects
@@ -58,11 +59,11 @@ catch
         
         options.condition = 'placebo';
         details = mn_subjects(subID, options);
-        imagePaths{sub, 1} = details.convroot;
+        imagePaths{sub, 1} = details.convroot_time;
         
-        options.condition = 'ketamine';
+        options.condition = 'psilocybin';
         details = mn_subjects(subID, options);
-        imagePaths{sub, 2} = details.convroot;
+        imagePaths{sub, 2} = details.convroot_time;
     end
     
     % compute the drug difference on the MMN on the second level

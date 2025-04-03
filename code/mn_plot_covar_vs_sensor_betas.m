@@ -140,7 +140,7 @@ function mn_plot_covar_vs_sensor_betas(peakCoord, regressor, design, covariate, 
     betaAll=[betaAll_mnket;betaAll_mnpsi];
 
     %Specify contrast vector and apply to beta vector 
-    con_vec = [repelem(0,19) repelem(1,19) repelem(0,16) repelem(0,16)]'; 
+    con_vec = [repelem(0,19) repelem(1,19) repelem(0,16) repelem(1,16)]'; 
 
     betaAll = betaAll.*con_vec;
    
@@ -155,7 +155,7 @@ function mn_plot_covar_vs_sensor_betas(peakCoord, regressor, design, covariate, 
     % betaAll_mnket = (pla_ket + ket); 
 
     % grab the betas for the group(s) of interest
-    betaAll_mnket = [ket]; 
+    betaAll_mnket = [ket; psi]; 
 
     betaAll = betaAll_mnket;
 
@@ -183,7 +183,7 @@ ASC_Scores = table2array(covars(:,covariate));
     
 
 % grab the scores for the group(s) of interest
-    asc_mnket = [ket];
+    asc_mnket = [ket;psi];
     ASC_Scores= asc_mnket;
 
 

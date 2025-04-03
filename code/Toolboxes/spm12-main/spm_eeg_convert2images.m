@@ -230,6 +230,7 @@ end
 %-Create the output folder
 %--------------------------------------------------------------------------
 outroot    = [S.prefix spm_file(D.fname, 'basename')];
+
 [sts, msg] = mkdir(D.path, outroot);
 if ~sts,     error(msg); end
 outroot     = fullfile(D.path, outroot);

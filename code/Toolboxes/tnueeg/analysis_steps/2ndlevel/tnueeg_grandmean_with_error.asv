@@ -48,7 +48,7 @@ end
 if numConditions > 2   
     % calculate the high low wave difference and do averaging
     %diffwaves = ga.high.data - ga.low.data;
-    diffwaves = ga.standard.data - ga.deviant.data;
+    diffwaves = ga.deviant.data - ga.stnad.data;
     %diffwaves = ga.standard.data;
     nsubjects = size(ga.deviant.data, 1);
     ga.diff.data = diffwaves;

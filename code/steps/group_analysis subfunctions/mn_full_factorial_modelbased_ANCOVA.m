@@ -176,7 +176,7 @@ for r = 1:numel(regressors)
     job{1}.spm.stats.factorial_design.cov(2).iCFI = 2;
     job{1}.spm.stats.factorial_design.cov(2).iCC = 1;
 %     %%
-    job{1}.spm.stats.factorial_design.cov(3).c = [50.4286
+    job{1}.spm.stats.factorial_design.cov(3).c = [50.428
                                                           37.8571
                                                           30.7143
                                                           1.14286
@@ -309,6 +309,10 @@ for r = 1:numel(regressors)
     job{3}.spm.stats.con.consess{25}.tcon.name = [regressor 'Negative: ICC in psi'];
     job{3}.spm.stats.con.consess{25}.tcon.weights = [0 0 0 0 0 0 0 -1];
     job{3}.spm.stats.con.consess{25}.tcon.sessrep = 'none'; 
+    job{3}.spm.stats.con.consess{26}.tcon.name = [regressor 'EI'];
+    job{3}.spm.stats.con.consess{26}.tcon.weights = [0 0 0 0 1 1 0 0];
+    job{3}.spm.stats.con.consess{26}.tcon.sessrep = 'none'; 
+    
 
 
     
@@ -330,7 +334,7 @@ for r = 1:numel(regressors)
      actual_job = {job{1},job{2},job{3},job{4}};
     
     % Execute actual_job
-    spm_jobman('run', actual_job);
+    spm_jobman('interactive', actual_job);
 
 
         

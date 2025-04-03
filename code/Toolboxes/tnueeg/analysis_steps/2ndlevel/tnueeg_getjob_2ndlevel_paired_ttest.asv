@@ -424,7 +424,7 @@ job{1}.spm.stats.factorial_design.cov(1).c = [0
     job{1}.spm.stats.factorial_design.cov(11).iCFI = 2;
     job{1}.spm.stats.factorial_design.cov(11).iCC = 1;
 
-    job{1}.spm.stats.factorial_design.cov(12).c = [0
+    job{1}.spm.stats.factorial_design.cov(13).c = [0
 28.5
 0
 5.75
@@ -457,12 +457,12 @@ job{1}.spm.stats.factorial_design.cov(1).c = [0
 1.5
 12];
 
-    job{1}.spm.stats.factorial_design.cov(12).cname = 'PDP';
-    job{1}.spm.stats.factorial_design.cov(12).iCFI = 2;
-    job{1}.spm.stats.factorial_design.cov(12).iCC = 1;
+    job{1}.spm.stats.factorial_design.cov(13).cname = 'PDP';
+    job{1}.spm.stats.factorial_design.cov(13).iCFI = 2;
+    job{1}.spm.stats.factorial_design.cov(13).iCC = 1;
 
 % 
-    job{1}.spm.stats.factorial_design.cov(13).c = [0
+    job{1}.spm.stats.factorial_design.cov(14).c = [0
 27.37878764
 0
 38.00822473
@@ -494,9 +494,9 @@ job{1}.spm.stats.factorial_design.cov(1).c = [0
 44.30649309
 1.205627364
 0];
-    job{1}.spm.stats.factorial_design.cov(13).cname = 'GASC';
-    job{1}.spm.stats.factorial_design.cov(13).iCFI = 2;
-    job{1}.spm.stats.factorial_design.cov(13).iCC = 1;
+    job{1}.spm.stats.factorial_design.cov(14).cname = 'GASC';
+    job{1}.spm.stats.factorial_design.cov(14).iCFI = 2;
+    job{1}.spm.stats.factorial_design.cov(14).iCC = 1;
 
 
 
@@ -573,10 +573,10 @@ job{3}.spm.stats.con.spmmat(1) = ...
     substruct('.','val', '{}',{2}, '.','val', '{}',{1}, '.','val', '{}',{1}), ...
     substruct('.','spmmat'));
 job{3}.spm.stats.con.consess{1}.tcon.name = [factorName ': ' label1 ' > ' label2];
-job{3}.spm.stats.con.consess{1}.tcon.weights = [1 -1 0 0 0 0 0 0 0 0 0 0 0 0 0];
+job{3}.spm.stats.con.consess{1}.tcon.weights = [1 -1 0 0 0 0 0 0 0 0 0 0 0 0 0 0];
 job{3}.spm.stats.con.consess{1}.tcon.sessrep = 'none';
 job{3}.spm.stats.con.consess{2}.tcon.name = [factorName ': ' label1 ' < ' label2];
-job{3}.spm.stats.con.consess{2}.tcon.weights = [-1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 ];
+job{3}.spm.stats.con.consess{2}.tcon.weights = [-1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0];
 job{3}.spm.stats.con.consess{2}.tcon.sessrep = 'none';
 job{3}.spm.stats.con.delete = 0;
 

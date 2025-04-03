@@ -39,6 +39,9 @@ catch
     if ~exist(scndlvlroot, 'dir')
         mkdir(scndlvlroot);
     end
+
+    
+
     
     %%% ADDED BY COLLEEN %%%
     % create images for conversion.mode = 'diffWaves'
@@ -59,6 +62,7 @@ catch
         subID = char(options.erp.subjectIDs{sub});
         details = mn_subjects(subID, options);
         imagePaths{sub, 1} = details.convroot;
+       
     end
     
     % compute the drug difference on the MMN on the second level

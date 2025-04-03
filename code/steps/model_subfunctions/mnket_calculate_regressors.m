@@ -6,12 +6,12 @@ function sim = mnket_calculate_regressors( sim )
 
 % collect data
 tones = sim.u_orig;
-% eps2 = squeeze(sim.traj.epsi(:, 2, :, :));
-% eps3 = squeeze(sim.traj.epsi(:, 3, :, :));
+eps2 = squeeze(sim.traj.epsi(:, 2, :, :));
+eps3 = squeeze(sim.traj.epsi(:, 3, :, :));
 
-pihat1 = squeeze(1./sim.traj.sahat(:,1,:,:));
-pihat2 = squeeze(1./sim.traj.sahat(:,2,:,:));
-pihat3 = squeeze(1./sim.traj.sahat(:,3,:,:));
+% pihat1 = squeeze(1./sim.traj.sahat(:,1,:,:));
+% pihat2 = squeeze(1./sim.traj.sahat(:,2,:,:));
+% pihat3 = squeeze(1./sim.traj.sahat(:,3,:,:));
 
 
 % sahat2 = squeeze(sim.traj.sahat(:,2,:,:));
@@ -24,12 +24,12 @@ pihat3 = squeeze(1./sim.traj.sahat(:,3,:,:));
 % sigma3 = squeeze(sim.traj.sa(:,3,:,:));
 
 % calculate regressors
-% sim.reg.epsi2 = mnket_calculate_transitionPE(eps2,tones);
-% sim.reg.epsi3 = mnket_calculate_sumPE(eps3,tones);
+sim.reg.epsi2 = mnket_calculate_transitionPE(eps2,tones);
+sim.reg.epsi3 = mnket_calculate_sumPE(eps3,tones);
 
-sim.reg.pihat1 = mnket_calculate_transitionPE(pihat1,tones);
-sim.reg.pihat2 = mnket_calculate_transitionPE(pihat2,tones);
-sim.reg.pihat3 = pihat3(:,1);
+% sim.reg.pihat1 = mnket_calculate_transitionPE(pihat1,tones);
+% sim.reg.pihat2 = mnket_calculate_transitionPE(pihat2,tones);
+% sim.reg.pihat3 = pihat3(:,1);
 
 % sim.reg.delta1 = mnket_calculate_transitionPE(delta1,tones);
 % sim.reg.delta2 = mnket_calculate_sumPE(delta2,tones);

@@ -762,7 +762,7 @@ if STAT ~= 'P'
         else
             [up,Pp] = spm_uc_peakFDR(0.05,df,STAT,R,n,Zum,XYZum,u,G);
         end
-    end
+     end
     
     %-Cluster FDR
     %----------------------------------------------------------------------

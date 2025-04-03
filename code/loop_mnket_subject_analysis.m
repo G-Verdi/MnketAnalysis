@@ -8,7 +8,6 @@ if nargin < 1
     options = mn_set_analysis_options;
 end
 
-
 for idCell = options.subjects.all
     id = char(idCell);
 

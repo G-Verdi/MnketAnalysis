@@ -43,7 +43,7 @@ catch
     disp(['Converting subject ' id ' ...']);
     
     switch options.conversion.mode
-        case 'modelbased'
+        case 'modelbased' 
             % in the modelbased analysis, we have to remove the first EEG trial because the model 
             % only defines PEs starting from the 2nd tone (1st observed transition)            
 
@@ -52,11 +52,28 @@ catch
                 % recorded in the EEG, therefore we don't need to correct the EEG for the 1st trial. 
                 D = spm_eeg_load(details.prepfile);
                 D = copy(D, details.prepfile_modelbased);
-%                 clear D;
-                prepfile = details.prepfile_modelbased;
+%                    prepfile = details.prepfile_modelbased;
+             clear D;
+         
             else
                 prepfile = mnket_remove_first_EEG_trial(details, options);
             end
+        case 'diffWaves' 
+            % in the modelbased analysis, we have to remove the first EEG trial because the model 
+            % only defines PEs starting from the 2nd tone (1st observed transition)            
+
+            if strcmp(id, '4534') && strcmp(options.condition, 'ketamine')
+                % special case for subject 4534 in ketamine condition: first 29 trials were not 
+                % recorded in the EEG, therefore we don't need to correct the EEG for the 1st trial. 
+                D = spm_eeg_load(details.prepfile);
+                D = copy(D, details.prepfile_modelbased);
+%                    prepfile = details.prepfile_modelbased;
+             clear D;
+         
+            else
+                prepfile = mnket_remove_first_EEG_trial(details, options);
+            end
+ 
     end
     
     % try whether this file exists
