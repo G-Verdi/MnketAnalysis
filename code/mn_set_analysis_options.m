@@ -8,17 +8,17 @@ function options = mn_set_analysis_options
 [~, uid] = unix('whoami'); 
 switch uid(1: end-1)     
     case 'gabriellea'
-        options.preprocdir = '/Volumes/Expansion/Cognemo/MMN/data/prj_precision'; 
-        options.maindir = '/Volumes/Expansion/Cognemo/MMN/data';
+        options.preprocdir = '/Volumes/T7/Cognemo/MMN/data/prj_roving'; 
+        options.maindir = '/Volumes/T7/Cognemo/MMN/data';
     otherwise
         error(['Undefined user. Please specify a user in mn_set_analysis_options ' ...
             'and provide the path to the data']);
 end
 
-options.workdir = fullfile(options.preprocdir,'test_mnket'); % 'test_mnpsi' 
+options.workdir = fullfile(options.preprocdir,'test_mnpsi'); % 'test_mnpsi' 
 options.rawdir  = fullfile(options.maindir, 'raw');
 options.codedir = '/Users/gabriellea/Documents/MMN_code/Mnket_files_misc/mnketAnalysis';
-options.analysis = 'MNKET';% 'MNPSI', 'group_analysis' 
+options.analysis = 'MNPSI';% 'MNKET','MNPSI','group_analysis' 
 %% Specify default option functions --------------------------------------%
 options.funs.details = @mn_subjects; % Specify paths
 options.funs.subjects = @mn_set_subject_groups; % Specify subjects groups 
@@ -29,7 +29,7 @@ options.funs.eeg = @mn_prepare_eeg; % Specify eeg options
 
 %-- condition info -------------------------------------------------------% 
 options.condition   = 'placebo'; % 'placebo', 'ketamine','psilocybin','drugdiff'
-options.conditions  = {'placebo','ketamine'};
+options.conditions  = {'placebo','psilocybin'};
 %-- preparation ----------------------------------------------------------%
 options.prepare.subjectIDs  = options.subjects.all; % data preparation (tone sequences)
 options.prepare.overwrite   =1; % whether to overwrite any previous prep
@@ -115,23 +115,23 @@ options.erp.contrastName        = 'mmn';
 options.erp.channels            = {'C4','C3', 'C1', 'C2','Cz', ...
                                     'FC1', 'FC2', 'FCz', ...
                                     'F1', 'F2', 'Fz', ...
-                                    'P7', 'P8', 'P9', 'P10', ...
+                                    'P7', 'P8', 'P9', 'P10','Pz' ...
                                     'TP7'};
 
 %-- conversion2images ----------------------------------------------------%
 options.conversion.subjectIDs   = options.subjects.all;
 options.conversion.overwrite    = 1; % whether to overwrite any prev. conv.
-options.conversion.mode         = 'modelbased'; %'ERPs', 'modelbased', 'mERPs', 'diffWaves'
+options.conversion.mode         = 'diffWaves'; %'ERPs', 'modelbased', 'mERPs', 'diffWaves'
 options.conversion.space        = 'sensor';
 options.conversion.convPrefix   = 'whole'; 
 options.conversion.convTimeWindow = [100 400];
-options.conversion.smooKernel   = [16 16 0];
+options.conversion.smooKernel   = [16 16 16];
 
 %-- stats ----------------------------------------------------------------%
 options.stats.subjectIDs    = options.subjects.all;
 options.stats.overwrite     = 1; % whether to overwrite any previous stats
-options.stats.mode          = 'modelbased'; %'ERPs', 'modelbased', 'mERPs', 'diffWaves'
-options.stats.design        = 'precision'; % 'epsilon', 'HGF', 'epsilonS', 'plustime', 'prediction', 'precision'
+options.stats.mode          = 'diffWaves'; %'ERPs', 'modelbased', 'mERPs', 'diffWaves'
+options.stats.design        = 'roving'; % 'epsilon', 'HGF', 'epsilonS', 'plustime', 'prediction', 'precision', 'roving'
 switch options.stats.design
     case 'epsilon'
         options.stats.regressors = {'epsi2','epsi3'};
@@ -141,6 +141,9 @@ switch options.stats.design
         options.stats.regressors = {'pihat1','pihat2','pihat3'};
     case 'HGF'
         options.stats.regressors = {'delta1','sigma2','delta2', 'sigma3'};
+    case'roving'
+        options.stats.regressors = {'roving'};
+  
         
 end
 options.stats.pValueMode    = 'clusterFWE';

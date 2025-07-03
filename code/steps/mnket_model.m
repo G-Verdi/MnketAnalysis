@@ -60,8 +60,9 @@ catch
                             sim.reg.epsi2 = [sim.reg.epsi2(3:end)];
                             sim.reg.epsi3 = [sim.reg.epsi3(3:end)];
                     end
-                    
+         
             end
+
     end
     
                     
@@ -96,7 +97,7 @@ catch
 end
 
 cd(options.workdir);
-close all
+%close all
 
 diary OFF
 end

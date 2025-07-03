@@ -11,7 +11,6 @@ function conditions = mnket_roving_conditions(tones)
 %   Other trials        - all other tones in the sequence
 
 conditions = cell(1, length(tones));
-
 conditions{1} = 'other';
 stacnt = 1;
 for i = 2: length(tones)
@@ -30,6 +29,7 @@ for i = 2: length(tones)
         end
         stacnt = 0;
     end
+
 end 
 
 end

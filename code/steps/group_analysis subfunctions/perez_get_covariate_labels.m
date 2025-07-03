@@ -6,7 +6,7 @@ function [covars] = perez_get_covariate_labels(IDs, options)
 
 %% Main
 % Read data
-[~, ~, raw] = xlsread("/Volumes/Expansion/Cognemo/MMN/MNPSI Project files /Q_data_summaryscores.xlsx");
+[~, ~, raw] = xlsread("/Volumes/Expansion/Cognemo/MMN/MNPSI Project files/Q_data_summaryscores.xlsx");
 all_IDs = cellfun(@(x) erase(x,'E1'), raw(:,1), 'UniformOutput', false);
 
 IDs = cellfun(@(x) x(1:4), IDs, 'UniformOutput', false);

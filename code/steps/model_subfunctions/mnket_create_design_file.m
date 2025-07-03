@@ -2,7 +2,7 @@ function design = mnket_create_design_file( sim, designType )
 %MNKET_CREATE_DESIGN_FILE Creates the design file which holds the subject-specific EEG regressors
 %(before removing artifactual trials) from the belief simulation for this subject
 %   IN:     sim         - the struct which is the output of the HGF simulation and already holds the
-%                       relevant regressors
+%                       relevant regresso
 %           designType  - string indicating which design to use
 %   OUT:    design      - a struct with as many fields as regressors in the first level modelbased
 %                       analysis
@@ -12,10 +12,14 @@ switch designType
         design.epsilon2 = sim.reg.epsi2;
         design.epsilon3 = sim.reg.epsi3;
         
+    case 'roving'
+        design.roving = sim.u;
+
     case 'plustime'
         design.epsilon2 = sim.reg.bayesian;
         design.epsilon3 = sim.reg.epsi3;
         design.time = [1: length(design.epsilon3)]';
+   
         
     case 'HGF'
         design.delta1 = sim.reg.delta1;

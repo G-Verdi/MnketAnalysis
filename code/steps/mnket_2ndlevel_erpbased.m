@@ -12,58 +12,67 @@ options = mn_set_analysis_options;
 options.conversion.mode = 'diffWaves';
 options.stats.mode = 'diffWaves';
 
-for optionsCell = {'placebo','ketamine'}
+for optionsCell = {'placebo', 'psilocybin'}
     options.condition = char(optionsCell);
-     
-    % tones definition
-    options.erp.type = 'tone';
+
+    % % tones definition
+      % options.erp.type = 'tone';
+      % mnket_2ndlevel_erpanalysis_percondition(options);
+    % 
+    %  % lowhighMuhat2 definition
+    % options.erp.type = 'lowhighPihat1';
+    % mnket_2ndlevel_erpanalysis_percondition(options);
+    % mnket_2ndlevel_erpstats_percondition_highlowERP(options);
+    % mnket_2ndlevel_erpstats_percondition_diffERP(options);
+    % 
+    % % lowhighMuhat3 definition
+    % options.erp.type = 'lowhighPihat2';
+    % mnket_2ndlevel_erpanalysis_percondition(options);
+    % mnket_2ndlevel_erpstats_percondition_highlowERP(options);
+    % mnket_2ndlevel_erpstats_percondition_diffERP(options);
+    % 
+    % % lowhighPihat1 definition
+    % options.erp.type = 'lowhighPihat3';
+    % mnket_2ndlevel_erpanalysis_percondition(options);
+    % mnket_2ndlevel_erpstats_percondition_highlowERP(options);
+    % mnket_2ndlevel_erpstats_percondition_diffERP(options);
+
+    % roving definition
+    options.erp.type = 'roving';
     mnket_2ndlevel_erpanalysis_percondition(options);
-   
-     % lowhighMuhat2 definition
-    options.erp.type = 'lowhighPihat1';
-    mnket_2ndlevel_erpanalysis_percondition(options);
-    mnket_2ndlevel_erpstats_percondition_highlowERP(options);
-    mnket_2ndlevel_erpstats_percondition_diffERP(options);
-    
-    % lowhighMuhat3 definition
-    options.erp.type = 'lowhighPihat2';
-    mnket_2ndlevel_erpanalysis_percondition(options);
-    mnket_2ndlevel_erpstats_percondition_highlowERP(options);
-    mnket_2ndlevel_erpstats_percondition_diffERP(options);
-    
-    % lowhighPihat1 definition
-    options.erp.type = 'lowhighPihat3';
-    mnket_2ndlevel_erpanalysis_percondition(options);
-    mnket_2ndlevel_erpstats_percondition_highlowERP(options);
+    %mnket_2ndlevel_erpstats_percondition_highlowERP(options);
     mnket_2ndlevel_erpstats_percondition_diffERP(options);
 
-end
+    %roving deinftion: standards only analysis
+
+
+ end
 
 
 % tones definition
-options.erp.type = 'tone';
-mnket_2ndlevel_erpanalysis_drugdiff(options);
+% options.erp.type = 'tone';
+% mnket_2ndlevel_erpanalysis_drugdiff(options);
 
-%lowhighMuhat2
-options.erp.type = 'lowhighPihat1';
-mnket_2ndlevel_erpanalysis_drugdiff(options);
-mnket_2ndlevel_erpstats_drugdiff(options);
-
-%lowhighMuhat3
-options.erp.type = 'lowhighPihat2';
-mnket_2ndlevel_erpanalysis_drugdiff(options);
-mnket_2ndlevel_erpstats_drugdiff(options);
- 
-% %lowhighPihat
-options.erp.type = 'lowhighPihat3';
-mnket_2ndlevel_erpanalysis_drugdiff(options);
-mnket_2ndlevel_erpstats_drugdiff(options);
-
-
-% MMN AD definition
-% options.erp.type = 'mmnad';
+% %lowhighMuhat2
+% options.erp.type = 'lowhighPihat1';
+% mnket_2ndlevel_erpanalysis_drugdiff(options);
+% mnket_2ndlevel_erpstats_drugdiff(options);
+% e 
+% %lowhighMuhat3
+% options.erp.type = 'lowhighPihat2';
+% mnket_2ndlevel_erpanalysis_drugdiff(options);
+% mnket_2ndlevel_erpstats_drugdiff(options);
+% 
+% % %lowhighPihat
+% options.erp.type = 'lowhighPihat3';
 % mnket_2ndlevel_erpanalysis_drugdiff(options);
 % mnket_2ndlevel_erpstats_drugdiff(options);
 
-end
+
+% % % MMN AD definition
+options.erp.type = 'roving';
+mnket_2ndlevel_erpanalysis_drugdiff(options);
+mnket_2ndlevel_erpstats_drugdiff(options);
+% 
+ end
 

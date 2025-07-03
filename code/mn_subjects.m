@@ -37,12 +37,26 @@ paths.trialdef      = fullfile(paths.confroot, ['mnket_trialdef_' options.prepro
 % erp analysis folders
 paths.erpfold       = fullfile(paths.erproot, options.erp.type, options.condition);
 paths.erpdiffold    = fullfile(paths.erproot, options.erp.type, 'drugdiff');
+paths.erpstddiffold    = fullfile(paths.erproot, options.erp.type,'drugdiff','standards');
+paths.erpstdtimediffold    = fullfile(paths.erproot, options.erp.type,'drugdiff','time_standards');
+paths.erpdevdiffold    = fullfile(paths.erproot, options.erp.type,'drugdiff', 'deviants');
 paths.erpgafold     = fullfile(paths.erpfold, 'GA');
+paths.erpgastdfold  = fullfile(paths.erpfold,'standard', 'GA');
+paths.erpgatimestdfold = fullfile(paths.erpfold,'time_standard', 'GA');
+paths.erpgadevfold  = fullfile(paths.erpfold,'deviant', 'GA');
 paths.erpspmfold    = fullfile(paths.erpfold, 'SPM');
+paths.erpspmstdfold    = fullfile(paths.erpfold,'standard', 'SPM');
+paths.erpspmdevfold    = fullfile(paths.erpfold,'deviant', 'SPM');
 
 % erp analysis files
 for iCh = 1: numel(options.erp.channels)
     paths.erpgafiles{iCh} = fullfile(paths.erpgafold,['tnu_ga_' options.condition ...
+        '_' options.erp.type '_' options.erp.channels{iCh} '.mat']);
+    paths.erpgastdfiles{iCh} = fullfile(paths.erpgastdfold,['tnu_ga_std' options.condition ...
+        '_' options.erp.type '_' options.erp.channels{iCh} '.mat']);
+    paths.erpgastdtimefiles{iCh} = fullfile(paths.erpgatimestdfold,['tnu_ga_std_time' options.condition ...
+        '_' options.erp.type '_' options.erp.channels{iCh} '.mat']);
+    paths.erpgadevfiles{iCh} = fullfile(paths.erpgadevfold,['tnu_ga_dev' options.condition ...
         '_' options.erp.type '_' options.erp.channels{iCh} '.mat']);
     paths.diffgafiles{iCh} = fullfile(paths.erpdiffold, ['tnu_ga_diffwaves_' options.erp.type ...
         '_' options.erp.channels{iCh} '.mat']);                
@@ -178,10 +192,16 @@ switch options.condition
     case 'placebo'
         if strcmp(options.analysis,'MNKET')
             rawsuffix = '_1_pla';
-        else
-            if strcmp(options.analysis,'MNPSI')
+        elseif strcmp(options.analysis,'MNPSI')
                 rawsuffix = '_2_pla';
+        elseif strcmp(options.analysis,'group_analysis')
+            switch options.workdir
+                case '/Volumes/T7/Cognemo/MMN/data/prj_precision/test_mnket' %to-do: change placebo for correct group
+                    rawsuffix = '_1_pla';
+                case '/Volumes/T7/Cognemo/MMN/data/prj_precision/test_mnpsi'
+                    rawsuffix = '_2_pla';
             end
+
         end
     case 'ketamine'
         rawsuffix = '_1_ket';
@@ -215,6 +235,8 @@ switch options.conversion.mode
     case 'diffWaves'
         details.convroot = fullfile(details.erproot, ...    
             [options.conversion.convPrefix '_diff_' details.erpfilename]);
+        details.convroot_time = fullfile(details.erproot, ...    
+            [options.conversion.convPrefix 'time' '_diff_' details.erpfilename]);
     case 'ERPs'
         details.convroot = fullfile(details.erproot, ...
             [options.conversion.convPrefix '_' details.erpfilename]);
@@ -264,21 +286,36 @@ switch options.conversion.mode
         details.convCon{1} = 'tone';
     case 'diffWaves' 
         details.convCon{1} = 'mmn';
+        details.convCon{2} = 'mmn_time';
     case 'ERPs'
         details.convCon{1} = 'standard';
         details.convCon{2} = 'deviant';
-    case 'mERPs'
-        details.convCon{1} = 'deviantplacebo';
-        details.convCon{2} = 'standardplacebo';
-        details.convCon{3} = 'deviantketamine';
-        details.convCon{4} = 'standardketamine';
+    case 'mERPs' % to -do
+        switch options.analysis 
+            case 'MNKET'
+                details.convCon{1} = 'deviantplacebo';
+                details.convCon{2} = 'standardplacebo';
+                details.convCon{3} = 'deviantketamine';
+                details.convCon{4} = 'standardketamine';
+            case 'MNPSI'
+                details.convCon{1} = 'deviantplacebo';
+                details.convCon{2} = 'standardplacebo';
+                details.convCon{3} = 'deviantpsilocybin';
+                details.convCon{4} = 'standardpsilocybin';
+        end
+     
+
 
 end
 
 for i = 1: length(details.convCon)
     details.convfile{i} = fullfile(details.convroot, ['condition_' details.convCon{i} '.nii,']);
     details.smoofile{i} = fullfile(details.convroot, ['smoothed_condition_' details.convCon{i} '.nii,']);
+
 end
+
+
+
 
 details.spmfile = fullfile(details.statroot, 'SPM.mat');
 

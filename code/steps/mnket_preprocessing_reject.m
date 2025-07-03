@@ -158,7 +158,7 @@ catch
 %      mnCHR_binary_trialDef(D,details);
 
 cd(options.workdir);
-close all
+%close all
 
 diary OFF
 end

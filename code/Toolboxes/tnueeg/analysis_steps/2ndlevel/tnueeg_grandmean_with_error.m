@@ -47,12 +47,14 @@ for iCon = 1: numConditions
 end
 if numConditions > 2   
     % calculate the high low wave difference and do averaging
-    diffwaves = ga.high.data - ga.low.data;
-    nsubjects = size(ga.low.data, 1);
+    %diffwaves = ga.high.data - ga.low.data;
+    diffwaves = ga.standard.data - ga.deviant.data;
+    %diffwaves = ga.standard.data;
+    nsubjects = size(ga.deviant.data, 1);
     ga.diff.data = diffwaves;
     ga.diff.mean = mean(diffwaves);
     ga.diff.sd  = std(diffwaves);
     ga.diff.error  = std(diffwaves)/sqrt(nsubjects);
-    ga.diff.time = ga.high.time;
-    ga.diff.electrode = ga.high.electrode;
+    ga.diff.time = ga.standard.time;
+    ga.diff.electrode = ga.standard.electrode;
 end 

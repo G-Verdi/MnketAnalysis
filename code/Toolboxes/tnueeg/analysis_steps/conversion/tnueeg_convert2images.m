@@ -14,7 +14,9 @@ switch options.conversion.space
         S.timewin = options.conversion.convTimeWindow;
         %S.freqwin = ;
         S.channels = 'EEG';
-        S.prefix = [options.conversion.convPrefix '_'];
+        %S.prefix = [options.conversion.convPrefix '_']; changed for
+        %temporal smoothing
+        S.prefix = [options.conversion.convPrefix 'time' '_'];
         
         
         

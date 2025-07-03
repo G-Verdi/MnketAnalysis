@@ -11,17 +11,21 @@ function job = tnueeg_getjob_singletrial_1stlevel( facdir, scans, design )
 %   OUT:    job     - the job for the 1st level statistics that can be run
 %                    using the spm_jobman
 
+
 factors = fieldnames(design);
+
 
 % job 1: factorial design
 job{1}.spm.stats.factorial_design.dir = {facdir};
 job{1}.spm.stats.factorial_design.des.mreg.scans = scans;
+
 
 for i = 1: numel(factors)
     job{1}.spm.stats.factorial_design.des.mreg.mcov(i).c = design.(factors{i});
     job{1}.spm.stats.factorial_design.des.mreg.mcov(i).cname = factors{i};
     job{1}.spm.stats.factorial_design.des.mreg.mcov(i).iCC = 1;
 end
+
 
 job{1}.spm.stats.factorial_design.des.mreg.incint = 1;
 job{1}.spm.stats.factorial_design.cov = ...
@@ -32,6 +36,8 @@ job{1}.spm.stats.factorial_design.masking.em = {''};
 job{1}.spm.stats.factorial_design.globalc.g_omit = 1;
 job{1}.spm.stats.factorial_design.globalm.gmsca.gmsca_no = 1;
 job{1}.spm.stats.factorial_design.globalm.glonorm = 1;
+
+
 
 
 % job 2: estimate factorial design
@@ -51,6 +57,8 @@ job{3}.spm.stats.con.spmmat(1) = ...
     substruct('.','spmmat'));
 
 
+
+
 % job 3: specify contrasts
 for i = 1:numel(factors)
     job{3}.spm.stats.con.consess{i}.fcon.name    = factors{i};
@@ -61,6 +69,8 @@ end
 job{3}.spm.stats.con.delete = 1;
 
 
+
+
 % job 4: print results
 job{4}.spm.stats.results.spmmat(1) = ...
     cfg_dep('Contrast Manager: SPM.mat File', ...
@@ -68,6 +78,7 @@ job{4}.spm.stats.results.spmmat(1) = ...
             '.','val', '{}',{1}, ...
             '.','val', '{}',{1}), ...
             substruct('.','spmmat'));
+
 
 for i = 1: numel(factors)
     job{4}.spm.stats.results.conspec(i).titlestr = factors{i};
@@ -79,9 +90,11 @@ for i = 1: numel(factors)
 end
 
 
-job{4}.spm.stats.results.units = 2;  
+job{4}.spm.stats.results.units = 2;
 job{4}.spm.stats.results.print = 'pdf';
 job{4}.spm.stats.results.write.none = 1;
 
+
 end
+
 

@@ -32,12 +32,15 @@ try
 catch
     disp(['Computing grand averages of ' options.erp.type  ' ERPs...']);
     
-    % make sure we have a results directory
+    % make sure we have a results directory 
     GAroot = paths.erpgafold;
+    %GAroot = paths.erpgastdfold;
+    %GAroot =  paths.erpgatimestdfold;
     if ~exist(GAroot, 'dir')
         mkdir(GAroot);
     end
-    
+
+
     % averaged ERP data in one condition in each subject
     % serve as input to 2nd level grand averages 
     nSubjects = numel(options.erp.subjectIDs);
@@ -54,6 +57,9 @@ catch
         channel = char(options.erp.channels{iCh});
         ga = tnueeg_grandmean_with_error(erpfiles, options.erp.channels{iCh}, 1);
         save(paths.erpgafiles{iCh}, 'ga');
+        %save(paths.erpgastdfiles{iCh}, 'ga');
+        %save(paths.erpgastdfiles{iCh}, 'ga');
+        save()
         
         mnket_grandmean_plot(ga, channel, options);
     end

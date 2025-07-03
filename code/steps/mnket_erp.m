@@ -74,6 +74,16 @@ catch
             condlist = conditions(D);
         case 'roving'
             condlist = mnket_roving_conditions(tones);
+            % special case for subject 4421 in psilocybin condition, tone series begins
+            % at 3rd trial
+            switch id
+                case {'4421'}
+                    switch options.condition
+                        case {'psilocybin'}
+                            condlist = condlist(3:end);
+                    end
+            end
+
         case 'mmnad'
             condlist = mnket_mmnad_conditions(tones);
         case 'memory'
@@ -165,6 +175,7 @@ catch
         case {'roving', 'mmnad'}
             triallist = {'standard', 'Standard Tones', [0 0 1]; ...
                         'deviant', 'Deviant Tones', [1 0 0]};
+
         case {'lowhighEpsi2', 'lowhighEpsi3'}
             triallist = {'low', 'Lowest 20 %', [0 0 1]; ...
                         'high', 'Highest 20 %', [1 0 0]};

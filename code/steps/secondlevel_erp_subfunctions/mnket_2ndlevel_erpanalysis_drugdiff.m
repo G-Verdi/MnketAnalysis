@@ -38,9 +38,11 @@ catch
         mkdir(GAroot);
     end
     
+    
     % data from both conditions serve as input for drug differences in
     % difference waves
     cd(options.workdir);
+
     for iCh = 1:numel(options.erp.channels)
         diff = struct();
     
@@ -77,7 +79,81 @@ catch
     
         save(paths.diffgafiles{iCh}, 'diff');
         mnket_grandmean_plot(diff, diff.(options.conditions{1}).electrode, options, 'drugdiff');
-    end
+
+%     for iCh = 1: numel(options.erp.channels)
+%         options.condition = 'placebo';
+%         [~, paths] = mn_subjects(options);
+%         pla = load(paths.erpgafiles{iCh});
+%         options.condition = 'psilocybin';
+%         [~, paths] = mn_subjects(options);
+%         psi = load(paths.erpgafiles{iCh});
+
+%         % compute the difference waves condition-wise
+% %         diff.time = pla.ga.time;
+% %         diff.electrode = pla.ga.electrode;
+%         switch options.erp.type
+%             case {'roving', 'mmnad'}
+%                 diff.nsubjects = size(pla.ga.standard.data, 1);
+%                 diffwavesPla = pla.ga.deviant.data - pla.ga.standard.data;
+%                 diffwavesPsi = psi.ga.deviant.data - psi.ga.standard.data;
+%                 % Added by Colleen
+%                 diff.placebo.time = pla.ga.deviant.time;
+%                 diff.placebo.electrode = pla.ga.deviant.electrode;
+%                 diff.psilocybin.time = pla.ga.deviant.time;
+%                 diff.psilocybin.electrode = pla.ga.deviant.electrode;
+%             case {'roving', 'mmnad'}
+%                 % diff.nsubjects = size(pla.ga.standard.data, 1);
+%                 % diffwavesPla = pla.ga.standard.data;
+%                 % diffwavesPsi = psi.ga.standard.data;
+%                 % % Added by Colleen
+%                 % diff.placebo.time = pla.ga.standard.time;
+%                 % diff.placebo.electrode = pla.ga.standard.electrode;
+%                 % diff.psilocybin.time = pla.ga.standard.time;
+%                 % diff.psilocybin.electrode = pla.ga.standard.electrode;
+%             case {'lowhighEpsi2', 'lowhighEpsi3'}
+%                 diff.nsubjects = size(pla.ga.low.data, 1);
+%                 diffwavesPla= pla.ga.high.data - pla.ga.low.data;
+%                 diffwavesPsi = psi.ga.high.data - psi.ga.low.data;
+%                 % Added by Colleen
+%                 diff.placebo.time = pla.ga.high.time;
+%                 diff.placebo.electrode = pla.ga.high.electrode;
+%                 diff.psilocybin.time = pla.ga.high.time;
+%                 diff.psilocybin.electrode = pla.ga.high.electrode;
+%             case {'lowhighPihat2', 'lowhighPihat3','lowhighPihat1'}
+%                 diff.nsubjects = size(pla.ga.low.data, 1);
+%                 diffwavesPla = pla.ga.high.data - pla.ga.low.data;
+%                 diffwavesPsi = psi.ga.high.data - psi.ga.low.data;
+%                 % Added by Colleen
+%                 diff.placebo.time = pla.ga.high.time;
+%                 diff.placebo.electrode = pla.ga.high.electrode;
+%                 diff.psilocybin.time = pla.ga.high.time;
+%                 diff.psilocybin.electrode = pla.ga.high.electrode;
+%             case 'tone'
+%                 diff.nsubjects = size(pla.ga.tone.data, 1);
+%                 diffwavesPla = pla.ga.tone.data;
+%                 diffwavesPsi = psi.ga.tone.data;
+%                 % Added by Colleen
+%                 diff.placebo.time = pla.ga.tone.time;
+%                 diff.placebo.electrode = pla.ga.tone.electrode;
+%                 diff.psilocybin.time = pla.ga.tone.time;
+%                 diff.psilocybin.electrode = pla.ga.tone.electrode;
+%         end        
+        
+%         diff.placebo.mean = mean(diffwavesPla);
+%         diff.placebo.sd  = std(diffwavesPla);
+%         diff.placebo.error  = std(diffwavesPla)/sqrt(diff.nsubjects);
+%         diff.placebo.data = diffwavesPla;
+
+%         diff.psilocybin.mean = mean(diffwavesPsi);
+%         diff.psilocybin.sd  = std(diffwavesPsi);
+%         diff.psilocybin.error  = std(diffwavesPsi)/sqrt(diff.nsubjects);
+%         diff.psilocybin.data = diffwavesPsi;
+
+%         save(paths.diffgafiles{iCh},'diff');
+        
+%         mnket_grandmean_plot(diff, diff.placebo.electrode, options, 'drugdiff');
+% >>>>>>> main
+%    end
 
 
     disp(['Computed drug differences in ' options.erp.type ' ERPs.']);

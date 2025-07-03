@@ -30,17 +30,14 @@ switch flag
                 titleStr = [options.erp.type ' ERPs at ' chanName];
         end
 
-        condNames = {'placebo', 'ketamine'};
+        condNames = {'placebo', 'psilocybin'};
 %         lineColors = [cols.darkgray; cols.medgray];
-        lineColors = [cols.darkgray; cols.darkgreen]; %%%%%% GA
+        lineColors = [cols.darkgray; cols.darkgreen]; %%%%%% 
+        %lineColors = [cols.darkgray; cols.darkorange];
         lineWidth = 2;
-        saveName = fullfile(paths.erpdiffold, ['ga_sem_' options.erp.type '_' chanName '.fig']);
-
-%         condNames = {'placebo', 'psilocybin'};
-% %         lineColors = [cols.darkgray; cols.medgray];
-%         lineColors = [cols.darkgray; cols.darkorange]; %%%%%% Added by GA
-%         lineWidth = 3.5;
-%         saveName = fullfile(paths.erpdiffold, ['ga_sem_' options.erp.type '_' chanName '.fig']);
+        %lineWidth = 3.5;
+        %saveName = fullfile(paths.erpstddiffold,['ga_sem_' options.erp.type '_' chanName '.fig']);
+        saveName = fullfile(paths.erpdiffold,['ga_sem_' options.erp.type '_' chanName '.fig']);
 
     otherwise
 
@@ -49,9 +46,13 @@ switch flag
 
         switch options.erp.type
             case {'mmnad', 'roving'}
-                condNames = {'standard', 'deviant'};
+                condNames = {'deviant','standard'};
                 lineColors = [cols.medgray; cols.lightred];
                 lineWidth = 2;
+            % case {'mmnad', 'roving'} 
+            %     condNames = {'standard'};
+            %     lineColors = [cols.lightred];
+            %     lineWidth = 2;
             case {'lowhighEpsi2', 'lowhighEpsi3'}
                 condNames = {'low', 'high','diff'};
                 lineColors = [cols.medgray; cols.lightred; cols.lightgreen];
@@ -66,7 +67,8 @@ switch flag
                 lineWidth = 2;
         end
 
-        saveName = fullfile(paths.erpfold, ['ga_sem_' options.erp.type '_' chanName '.fig']);
+        saveName = fullfile(paths.erpfold,['ga_sem_' options.erp.type '_' chanName '.fig']);
+       
 end
 
 % Call tnueeg plot function

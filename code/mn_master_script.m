@@ -33,14 +33,14 @@ mnket_results_report_erpbased;
 % ANOVA/ANCOVA Factorial analysis
 mn_2ndlevel_singletrial_groupxcond('precision', options);
 mn_2ndlevel_singletrial_groupxcond_ANCOVA('precision', options)
-mn_2ndlevel_singletrial_groupxcond_DI('epsilon',options);
+%mn_2ndlevel_singletrial_groupxcond_DI('epsilon',options);
 
 % DCM analysis (not needed for paper)
 mn_dcm_gather_parameters(options);
 mn_dcm_stats_report;
 
 % Plot covariates against 1st level sensor betas
-mn_plot_covar_vs_sensor_betas(peakCoord, 'epsi3', 'epsilon', covariate, options); % Peak coord should be in rounded voxel space
+mn_plot_covar_vs_sensor_betas(peakCoord, 'pihat3', 'precision', covariate, options); % Peak coord should be in rounded voxel space
 
 % Plot SPM contrast with new topomap style
 contrast_idx = 22;

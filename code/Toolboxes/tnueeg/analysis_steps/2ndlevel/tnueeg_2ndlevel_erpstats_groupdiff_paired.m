@@ -28,9 +28,10 @@ end
 group1 = char(grouplabels{1});
 group2 = char(grouplabels{2});
 
+
 % create and run the job - one test per regressor
-job = tnueeg_getjob_2ndlevel_paired_ttest(scndlvlroot, pairs, factorName, group1, group2);
-spm_jobman('run', job);
+job = tnueeg_getjob_2ndlevel_paired_ttest(scndlvlroot, pairs, factorName, group1, group2);% GA: Including ASC scores
+spm_jobman('interactive', job);
 
 
 end
