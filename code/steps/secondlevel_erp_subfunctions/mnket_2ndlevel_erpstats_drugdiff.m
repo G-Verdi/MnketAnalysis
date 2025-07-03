@@ -50,19 +50,17 @@ catch
     % smoothed images of averaged ERP data in each subject and each 
     % condition serve as input to 2nd level statistics, but here, we only 
     % indicate the subject-specific directories of the images
-    sessions = {'placebo', 'ketamine'};
+    sessions = options.conditions;
     nSubjects = numel(options.erp.subjectIDs);
     imagePaths = cell(nSubjects, 2);
     for sub = 1: nSubjects
         subID = char(options.erp.subjectIDs{sub});
-        
-        options.condition = 'placebo';
-        details = mn_subjects(subID, options);
-        imagePaths{sub, 1} = details.convroot;
-        
-        options.condition = 'ketamine';
-        details = mn_subjects(subID, options);
-        imagePaths{sub, 2} = details.convroot;
+        for ic = 1:numel(options.conditions)
+            cond = options.conditions{ic};
+            options.condition = cond;
+            details = mn_subjects(subID, options);
+            imagePaths{sub, ic} = details.convroot;
+        end
     end
     
     % compute the drug difference on the MMN on the second level

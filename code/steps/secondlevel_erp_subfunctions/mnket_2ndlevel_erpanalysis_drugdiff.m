@@ -41,70 +41,44 @@ catch
     % data from both conditions serve as input for drug differences in
     % difference waves
     cd(options.workdir);
-    for iCh = 1: numel(options.erp.channels)
-        options.condition = 'placebo';
-        [~, paths] = mn_subjects(options);
-        pla = load(paths.erpgafiles{iCh});
-        options.condition = 'ketamine';
-        [~, paths] = mn_subjects(options);
-        ket = load(paths.erpgafiles{iCh});
-
-        % compute the difference waves condition-wise
-%         diff.time = pla.ga.time;
-%         diff.electrode = pla.ga.electrode;
-        switch options.erp.type
-            case {'roving', 'mmnad'}
-                diff.nsubjects = size(pla.ga.standard.data, 1);
-                diffwavesPla = pla.ga.deviant.data - pla.ga.standard.data;
-                diffwavesKet = ket.ga.deviant.data - ket.ga.standard.data;
-                % Added by Colleen
-                diff.placebo.time = pla.ga.deviant.time;
-                diff.placebo.electrode = pla.ga.deviant.electrode;
-                diff.ketamine.time = pla.ga.deviant.time;
-                diff.ketamine.electrode = pla.ga.deviant.electrode;
-            case {'lowhighEpsi2', 'lowhighEpsi3'}
-                diff.nsubjects = size(pla.ga.low.data, 1);
-                diffwavesPla= pla.ga.high.data - pla.ga.low.data;
-                diffwavesKet = ket.ga.high.data - ket.ga.low.data;
-                % Added by Colleen
-                diff.placebo.time = pla.ga.high.time;
-                diff.placebo.electrode = pla.ga.high.electrode;
-                diff.ketamine.time = pla.ga.high.time;
-                diff.ketamine.electrode = pla.ga.high.electrode;
-            case {'lowhighPihat2', 'lowhighPihat3','lowhighPihat1'}
-                diff.nsubjects = size(pla.ga.low.data, 1);
-                diffwavesPla = pla.ga.high.data - pla.ga.low.data;
-                diffwavesKet = ket.ga.high.data - ket.ga.low.data;
-                % Added by Colleen
-                diff.placebo.time = pla.ga.high.time;
-                diff.placebo.electrode = pla.ga.high.electrode;
-                diff.ketamine.time = pla.ga.high.time;
-                diff.ketamine.electrode = pla.ga.high.electrode;
-            case 'tone'
-                diff.nsubjects = size(pla.ga.tone.data, 1);
-                diffwavesPla = pla.ga.tone.data;
-                diffwavesKet = ket.ga.tone.data;
-                % Added by Colleen
-                diff.placebo.time = pla.ga.tone.time;
-                diff.placebo.electrode = pla.ga.tone.electrode;
-                diff.ketamine.time = pla.ga.tone.time;
-                diff.ketamine.electrode = pla.ga.tone.electrode;
-        end        
-        
-        diff.placebo.mean = mean(diffwavesPla);
-        diff.placebo.sd  = std(diffwavesPla);
-        diff.placebo.error  = std(diffwavesPla)/sqrt(diff.nsubjects);
-        diff.placebo.data = diffwavesPla;
-
-        diff.ketamine.mean = mean(diffwavesKet);
-        diff.ketamine.sd  = std(diffwavesKet);
-        diff.ketamine.error  = std(diffwavesKet)/sqrt(diff.nsubjects);
-        diff.ketamine.data = diffwavesKet;
-
+    for iCh = 1:numel(options.erp.channels)
+        diff = struct();
+    
+        for ic = 1:numel(options.conditions)
+            cond = options.conditions{ic};
+            options.condition = cond;
+            [~, paths] = mn_subjects(options);
+            dataFile = paths.erpgafiles{iCh};
+            S = load(dataFile);
+            ga = S.ga;
+    
+            switch options.erp.type
+                case {'roving','mmnad'}
+                    A = ga.deviant;   B = ga.standard;
+                case {'lowhighEpsi2','lowhighEpsi3','lowhighPihat1','lowhighPihat2','lowhighPihat3'}
+                    A = ga.high;      B = ga.low;
+                case 'tone'
+                    A = ga.tone;      B.data = 0;
+                otherwise
+                    error('Unknown ERP type %s', options.erp.type);
+            end
+    
+            diffWave = A.data - B.data;
+            nSub = size(A.data,1);
+    
+            diff.(cond).time = A.time;
+            diff.(cond).electrode = A.electrode;
+            diff.(cond).data = diffWave;
+            diff.(cond).mean = mean(diffWave);
+            diff.(cond).sd = std(diffWave);
+            diff.(cond).error = std(diffWave) / sqrt(nSub);
+            diff.(cond).nsubjects = nSub;
+        end
+    
         save(paths.diffgafiles{iCh}, 'diff');
-        
-        mnket_grandmean_plot(diff, diff.placebo.electrode, options, 'drugdiff');
+        mnket_grandmean_plot(diff, diff.(options.conditions{1}).electrode, options, 'drugdiff');
     end
+
 
     disp(['Computed drug differences in ' options.erp.type ' ERPs.']);
 end
